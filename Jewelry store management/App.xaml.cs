@@ -13,5 +13,7 @@ namespace Jewelry_store_management
     /// </summary>
     public partial class App : Application
     {
+
+        
     }
 }
