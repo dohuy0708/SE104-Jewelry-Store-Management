@@ -63,12 +63,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="HELPER\UserHelper.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MODELS\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -93,6 +95,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Styles\" />
+    <Folder Include="VIEWMODEL\" />
+    <Folder Include="VIEW\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Drawable\Icons\icon_back.png" />
+    <Resource Include="Drawable\Icons\icon_exit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Drawable\Images\Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Drawable\Images\Logo_intro.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
