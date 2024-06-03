@@ -78,11 +78,60 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="GUI\scrAccount.xaml.cs">
+      <DependentUpon>scrAccount.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\scrAddpro.xaml.cs">
+      <DependentUpon>scrAddpro.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\scrHome.xaml.cs">
+      <DependentUpon>scrHome.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\scrOrder.xaml.cs">
+      <DependentUpon>scrOrder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\scrService.xaml.cs">
+      <DependentUpon>scrService.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\scrSupplier.xaml.cs">
+      <DependentUpon>scrSupplier.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\scrWarehouse.xaml.cs">
+      <DependentUpon>scrWarehouse.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VIEWMODEL\BaseViewModel.cs" />
     <Compile Include="VIEWMODEL\TestViewModel.cs" />
     <Compile Include="VIEW\TestView.xaml.cs">
       <DependentUpon>TestView.xaml</DependentUpon>
     </Compile>
+    <Page Include="GUI\scrAccount.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\scrAddpro.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\scrHome.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\scrOrder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\scrService.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\scrSupplier.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\scrWarehouse.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -145,6 +194,21 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Drawable\Images\Logo_intro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Drawable\Icons\icon_home.png" />
+    <Resource Include="Drawable\Icons\icon_order.png" />
+    <Resource Include="Drawable\Icons\icon_service.png" />
+    <Resource Include="Drawable\Icons\icon_warehouse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Drawable\Icons\icon_addPro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Drawable\Icons\icon_admin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Drawable\Icons\icon_supplier.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
