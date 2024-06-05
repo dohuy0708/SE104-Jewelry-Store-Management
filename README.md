@@ -3,6 +3,7 @@
 <p align="center">
   <img src="https://www.uit.edu.vn/sites/vi/files/banner_uit.png" alt="Alt text">
 </p>
+
 ## About Jewelry Store Management: 
 
 ## Contributors:
