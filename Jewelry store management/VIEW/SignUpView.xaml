@@ -8,14 +8,15 @@
              xmlns:viewmodel="clr-namespace:Jewelry_store_management.VIEWMODEL"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="395">
-    <UserControl.DataContext>
-        <viewmodel:SignUpViewModel/>
-    </UserControl.DataContext>
+
     <StackPanel Background="White">
         <StackPanel Orientation="Horizontal">
-            <Button Margin="20 0 0 0" Style="{StaticResource MaterialDesignRaisedButton}"
-        md:ButtonAssist.CornerRadius="10" BorderBrush="Aqua"  Background="Aqua" 
-        Foreground="White" Content="Trở về" Command="{Binding BackCommand}"></Button>
+            <Button Margin="20 0 0 0" Command="{Binding BackCommand}" Background="Transparent" BorderBrush="Transparent" >
+                <Grid>
+                <Image Source = "/Drawable/Icons/icon_back.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="60"></Image>
+                </Grid>
+            </Button>
+            
             <TextBlock Text="ĐĂNG KÝ" Margin="20 20 60 0" Foreground="Black" TextAlignment="Center" FontSize="34" FontFamily="Times New Roman" ></TextBlock>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="20">

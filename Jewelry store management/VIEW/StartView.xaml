@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="StartView" Height="450" Width="800"
         DataContext="{StaticResource StartVM}">
-        
+       
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="385"/>
@@ -20,7 +20,7 @@
         <Grid Grid.Column="1">
 
             <ContentControl x:Name="Pages"
-                     Content="{Binding CurrentView}" />
+                     Content="{Binding CurrentView}" Margin="0,0,-349,-275" />
 
         </Grid>
     </Grid>

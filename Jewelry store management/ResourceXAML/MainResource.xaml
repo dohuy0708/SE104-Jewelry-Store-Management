@@ -16,4 +16,10 @@
     <DataTemplate DataType="{x:Type viewmodel:ForgetPasswordViewModel}">
         <view:ForgetPasswordView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodel:AddProductViewModel}">
+        <view:AddProductView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodel:AddSupplierViewModel}">
+        <view:AddSuppierView/>
+    </DataTemplate>
 </ResourceDictionary>

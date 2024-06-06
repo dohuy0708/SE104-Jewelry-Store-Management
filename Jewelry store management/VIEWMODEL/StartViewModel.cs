@@ -12,6 +12,7 @@ namespace Jewelry_store_management.VIEWMODEL
     {
         public SignInViewModel SignInView;
         public SignUpViewModel SignUpView;
+        
         public ForgetPasswordViewModel ForgetPasswordView;
         private int _nview=0;
         public int NView {
@@ -53,7 +54,7 @@ namespace Jewelry_store_management.VIEWMODEL
             SignInView = new SignInViewModel();
             SignUpView = new SignUpViewModel();
             ForgetPasswordView = new ForgetPasswordViewModel();
-            CurrentView = SignInView;
+            CurrentView = new AddSupplierViewModel();
         }
     }
 }
