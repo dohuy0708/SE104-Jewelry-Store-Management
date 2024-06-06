@@ -7,6 +7,8 @@
     
     <Application.Resources>
        
+        
         <ResourceDictionary Source="/ResourceXAML/MainResource.xaml"></ResourceDictionary>
+        
     </Application.Resources>
 </Application>

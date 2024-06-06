@@ -17,8 +17,6 @@ namespace Jewelry_store_management.VIEWMODEL
         // khai bao userhelper va khai bao list _users
         private UserHelper _userHelper;
         private ObservableCollection<User> _users;
-
-
        
         private string _name;
         private string _email;
