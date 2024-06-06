@@ -4,12 +4,109 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Jewelry_store_management"
+        xmlns:vm="clr-namespace:Jewelry_store_management.VIEWMODEL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <TextBlock Text="{Binding ConnectionStatus}" 
-                   HorizontalAlignment="Center" 
-                   VerticalAlignment="Center" 
-                   FontSize="16"/>
-    </Grid>
+        Title="H-Jewelry Management" Height="450" Width="800"
+        ResizeMode="NoResize">
+
+
+   
+    <Border CornerRadius="5" MouseDown="Border_MouseDown">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="195"/>
+                <ColumnDefinition Width="885"/>
+            </Grid.ColumnDefinitions>
+            <Border CornerRadius="10,0,0,10" Grid.Column="0">
+                <Border.Background>
+                    <SolidColorBrush Color="AliceBlue"/>
+                </Border.Background>
+                <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                    <StackPanel>
+                        <Border Height="75" Width="95">
+                            <Image Source="/Drawable/Images/Logo.png" Margin="-42,10,-50,0"/>
+                        </Border>
+
+
+
+                        <!-- Home -->
+                        <Button Command="{Binding MenuHomeCommand}" Cursor="Hand" Background="{Binding MenuHomeBackground}" BorderBrush="Transparent">
+                            <StackPanel Orientation="Horizontal">
+                                <Border Width="66">
+                                    <Image Source="/Drawable/Icons/icon_home.png" Margin="12,0,12,0" Height="27"/>
+                                </Border>
+                                <Label Content="Trang chủ" Background="Transparent" Height="40" FontSize="18" Width="123" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <!-- Order -->
+                        <Button Command="{Binding MenuOrderCommand}" Cursor="Hand" Background="{Binding MenuOrderBackground}" BorderBrush="Transparent">
+                            <StackPanel Orientation="Horizontal">
+                                <Border Width="66">
+                                    <Image Source="/Drawable/Icons/icon_order.png" Margin="12,0,12,0" Height="27"/>
+                                </Border>
+                                <Label Content="Đơn hàng" Background="Transparent" Height="40" FontSize="18" Width="123" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <!-- Service -->
+                        <Button Command="{Binding MenuServiceCommand}" Cursor="Hand" Background="{Binding MenuServiceBackground}" BorderBrush="Transparent">
+                            <StackPanel Orientation="Horizontal">
+                                <Border Width="66">
+                                    <Image Source="/Drawable/Icons/icon_service.png" Margin="12,0,12,0" Stretch="UniformToFill" Height="27" Width="30"/>
+                                </Border>
+                                <Label Content="Dịch vụ" Background="Transparent" Height="40" FontSize="18" Width="123" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <!-- Warehouse -->
+                        <Button Command="{Binding MenuWarehouseCommand}" Cursor="Hand" Background="{Binding MenuWarehouseBackground}" BorderBrush="Transparent">
+                            <StackPanel Orientation="Horizontal">
+                                <Border Width="66">
+                                    <Image Source="/Drawable/Icons/icon_warehouse.png" Margin="6,0,6,0" Height="27" Width="42"/>
+                                </Border>
+                                <Label Content="Kho hàng" Background="Transparent" Height="40" FontSize="18" Width="123" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <!-- Add Pro -->
+                        <Button Command="{Binding MenuAddproCommand}" Cursor="Hand" Background="{Binding MenuAddproBackground}" BorderBrush="Transparent">
+                            <StackPanel Orientation="Horizontal">
+                                <Border Width="66">
+                                    <Image Source="/Drawable/Icons/icon_addPro.png" Margin="6,0,6,0" Height="27" Width="42"/>
+                                </Border>
+                                <Label Content="Nhập hàng" Background="Transparent" Height="40" FontSize="18" Width="123" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <!-- Supplier -->
+                        <Button Command="{Binding MenuSupplierCommand}" Cursor="Hand" Background="{Binding MenuSupplierBackground}" BorderBrush="Transparent">
+                            <StackPanel Orientation="Horizontal">
+                                <Border Width="66">
+                                    <Image Source="/Drawable/Icons/icon_supplier.png" Margin="4,0,8,0" Height="27" Width="42"/>
+                                </Border>
+                                <Label Content="Nhà cung cấp" Background="Transparent" Height="40" FontSize="18" Width="123" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <!-- Account -->
+                        <Button Command="{Binding MenuAccountCommand}" Cursor="Hand" Background="{Binding MenuAccountBackground}" BorderBrush="Transparent">
+                            <StackPanel Orientation="Horizontal">
+                                <Border Width="66">
+                                    <Image Source="/Drawable/Icons/icon_admin.png" Margin="4,0,8,0" Height="27" Width="42"/>
+                                </Border>
+                                <Label Content="Tài khoản" Background="Transparent" Height="40" FontSize="18" Width="123" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+            <Border CornerRadius="0,5,5,0" Grid.Column="1">
+                <Border.Background>
+                    <SolidColorBrush Color="SkyBlue"/>
+                </Border.Background>
+                <ContentControl Content="{Binding}"/>
+            </Border>
+        </Grid>
+    </Border>
 </Window>
