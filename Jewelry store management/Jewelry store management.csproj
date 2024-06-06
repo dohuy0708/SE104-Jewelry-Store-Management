@@ -78,25 +78,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="GUI\scrAccount.xaml.cs">
+    <Compile Include="Command\RelayCommand.cs" />
+    <Compile Include="VIEWMODEL\MainWindowViewModel.cs" />
+    <Compile Include="VIEW\scrAccount.xaml.cs">
       <DependentUpon>scrAccount.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GUI\scrAddpro.xaml.cs">
+    <Compile Include="VIEW\scrAddpro.xaml.cs">
       <DependentUpon>scrAddpro.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GUI\scrHome.xaml.cs">
+    <Compile Include="VIEW\scrHome.xaml.cs">
       <DependentUpon>scrHome.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GUI\scrOrder.xaml.cs">
+    <Compile Include="VIEW\scrOrder.xaml.cs">
       <DependentUpon>scrOrder.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GUI\scrService.xaml.cs">
+    <Compile Include="VIEW\scrService.xaml.cs">
       <DependentUpon>scrService.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GUI\scrSupplier.xaml.cs">
+    <Compile Include="VIEW\scrSupplier.xaml.cs">
       <DependentUpon>scrSupplier.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GUI\scrWarehouse.xaml.cs">
+    <Compile Include="VIEW\scrWarehouse.xaml.cs">
       <DependentUpon>scrWarehouse.xaml</DependentUpon>
     </Compile>
     <Compile Include="VIEWMODEL\BaseViewModel.cs" />
@@ -104,31 +106,31 @@
     <Compile Include="VIEW\TestView.xaml.cs">
       <DependentUpon>TestView.xaml</DependentUpon>
     </Compile>
-    <Page Include="GUI\scrAccount.xaml">
+    <Page Include="VIEW\scrAccount.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="GUI\scrAddpro.xaml">
+    <Page Include="VIEW\scrAddpro.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="GUI\scrHome.xaml">
+    <Page Include="VIEW\scrHome.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="GUI\scrOrder.xaml">
+    <Page Include="VIEW\scrOrder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="GUI\scrService.xaml">
+    <Page Include="VIEW\scrService.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="GUI\scrSupplier.xaml">
+    <Page Include="VIEW\scrSupplier.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="GUI\scrWarehouse.xaml">
+    <Page Include="VIEW\scrWarehouse.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

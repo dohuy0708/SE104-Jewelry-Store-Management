@@ -4,5 +4,6 @@
                   >
     <viewmodel:BaseViewModel x:Key="BaseVM"></viewmodel:BaseViewModel>
     <viewmodel:TestViewModel x:Key="TestVM"></viewmodel:TestViewModel>
+    <viewmodel:MainWindowViewModel x:Key="MainWindowVM"></viewmodel:MainWindowViewModel>
     
 </ResourceDictionary>
