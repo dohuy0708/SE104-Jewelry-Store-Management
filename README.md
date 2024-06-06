@@ -9,7 +9,7 @@
 ## Contributors:
 
  
-### Supervisors:
+## Supervisors:
 
  
 
