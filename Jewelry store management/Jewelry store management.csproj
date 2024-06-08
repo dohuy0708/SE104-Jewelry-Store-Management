@@ -68,17 +68,15 @@
     <Reference Include="Google.Api.Gax.Rest, Version=4.8.0.0, Culture=neutral, PublicKeyToken=3ec5ea7f18953e47, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Api.Gax.Rest.4.8.0\lib\net462\Google.Api.Gax.Rest.dll</HintPath>
     </Reference>
-    <Reference Include="Google.Apis, Version=1.67.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Apis.1.67.0\lib\net462\Google.Apis.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Google.Apis, Version=1.68.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.68.0\lib\net462\Google.Apis.dll</HintPath>
     </Reference>
     <Reference Include="Google.Apis.Auth, Version=1.67.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Apis.Auth.1.67.0\lib\net462\Google.Apis.Auth.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Google.Apis.Core, Version=1.67.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Apis.Core.1.67.0\lib\net462\Google.Apis.Core.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Google.Apis.Core, Version=1.68.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Core.1.68.0\lib\net462\Google.Apis.Core.dll</HintPath>
     </Reference>
     <Reference Include="Google.Cloud.Firestore, Version=3.7.0.0, Culture=neutral, PublicKeyToken=185c282632e132a0, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Cloud.Firestore.3.7.0\lib\net462\Google.Cloud.Firestore.dll</HintPath>
@@ -438,6 +436,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="HELPER\FirebaseConfig.cs" />
+    <Compile Include="HELPER\ProductHelper.cs" />
+    <Compile Include="HELPER\PurchaseOrderHelper.cs" />
+    <Compile Include="HELPER\SaleOrderHelper.cs" />
+    <Compile Include="HELPER\ServiceOrderHelper.cs" />
+    <Compile Include="HELPER\SupplierHelper.cs" />
     <Compile Include="MODELS\Customer.cs" />
     <Compile Include="MODELS\Product.cs" />
     <Compile Include="MODELS\PurchaseOrder.cs" />

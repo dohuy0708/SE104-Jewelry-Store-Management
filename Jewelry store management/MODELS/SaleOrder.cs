@@ -36,5 +36,14 @@ namespace Jewelry_store_management.MODELS
             Pay=pay;
             ListSaleProduct=listSaleProduct;
         }
+
+        public void CalculateTotalPrice()
+        {
+            TotalPrice = ListSaleProduct.Sum(product => product.SalePrice);
+        }
+        public void CalculateCost()
+        {
+            Cost = TotalPrice - Voucher;
+        }
     }
 }
