@@ -15,13 +15,7 @@ namespace Jewelry_store_management.HELPER
 
         public UserHelper()
         {
-            var config = new FireSharp.Config.FirebaseConfig
-            {
-                AuthSecret = "ny46fjmoYlYZTyuW2P2M51BfrQDb5zibqXo2MNqC",
-                BasePath = "https://test-382ab-default-rtdb.firebaseio.com/"
-            };
-
-            _client = new FireSharp.FirebaseClient(config);
+            _client = FirebaseConfigSingleton.GetClient();
         }
 
         // thêm user
