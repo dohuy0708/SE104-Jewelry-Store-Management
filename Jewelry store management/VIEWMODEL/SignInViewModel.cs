@@ -11,6 +11,12 @@ namespace Jewelry_store_management.VIEWMODEL
     public class SignInViewModel{ 
         public ICommand SignUpCommand{ get; set; }
         public ICommand ForgetPasswordCommand { get; set; }
+      
+        public SignInViewModel()
+        {
+            SignUpCommand = new RelayCommand(_ => SignUpClick());
+            ForgetPasswordCommand = new RelayCommand(_ => ForgetPasswordClick());
+        }
         private void SignUpClick()
         {
             var window = Application.Current.MainWindow;
@@ -22,11 +28,6 @@ namespace Jewelry_store_management.VIEWMODEL
             var window = Application.Current.MainWindow;
             var viewModel = (window.DataContext as StartViewModel);
             viewModel.NView = 2;
-        }
-        public SignInViewModel()
-        {
-            SignUpCommand = new RelayCommand(_ => SignUpClick());
-            ForgetPasswordCommand = new RelayCommand(_ => ForgetPasswordClick());
         }
     }
 }

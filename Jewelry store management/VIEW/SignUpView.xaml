@@ -6,39 +6,47 @@
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:Jewelry_store_management.VIEW" 
              xmlns:viewmodel="clr-namespace:Jewelry_store_management.VIEWMODEL"
+             xmlns:helper="clr-namespace:Jewelry_store_management.HELPER"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="395">
     <UserControl.DataContext>
         <viewmodel:SignUpViewModel/>
     </UserControl.DataContext>
     <StackPanel Background="White">
+        
         <StackPanel Orientation="Horizontal">
             <Button Margin="20 0 0 0" Command="{Binding BackCommand}" Background="Transparent" BorderBrush="Transparent" >
                 <Grid>
-                <Image Source = "/Drawable/Icons/icon_back.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="60"></Image>
+                    <Image Source = "/Drawable/Icons/icon_back.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="60"></Image>
                 </Grid>
             </Button>
-            
+
             <TextBlock Text="ĐĂNG KÝ" Margin="20 20 60 0" Foreground="Black" TextAlignment="Center" FontSize="34" FontFamily="Times New Roman" ></TextBlock>
         </StackPanel>
+
         <StackPanel Orientation="Horizontal" Margin="20">
             <md:PackIcon Kind="User" Width="35" Height="35" Foreground="Aqua"></md:PackIcon>
-            <TextBox Margin="10 0" Width="295" md:HintAssist.Hint="Nhập Email" Foreground="Black" FontSize="20" ></TextBox>
+            <TextBox Text="{Binding UserName}" Margin="10 0" Width="295" md:HintAssist.Hint="Họ và tên" Foreground="Black" FontSize="20" ></TextBox>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Margin="20">
-            <md:PackIcon Kind="Lock" Width="35" Height="35" Foreground="Aqua"></md:PackIcon>
-            <PasswordBox Margin="10 0" Width="295" md:HintAssist.Hint="Nhập mật khẩu"  Foreground="Black" FontSize="20" ></PasswordBox>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" Margin="20">
-            <md:PackIcon Kind="Lock" Width="35" Height="35" Foreground="Aqua"></md:PackIcon>
-            <PasswordBox Margin="10 0" Width="295" md:HintAssist.Hint="Nhập lại mật khẩu"  Foreground="Black" FontSize="20" ></PasswordBox>
-        </StackPanel>
+        
         <StackPanel Orientation="Horizontal" Margin="20">
             <md:PackIcon Kind="User" Width="35" Height="35" Foreground="Aqua"></md:PackIcon>
-            <TextBox Margin="10 0" Width="295" md:HintAssist.Hint="Họ và tên" Foreground="Black" FontSize="20" ></TextBox>
+            <TextBox Text="{Binding Email}" Margin="10 0" Width="295" md:HintAssist.Hint="Nhập Email" Foreground="Black" FontSize="20" ></TextBox>
         </StackPanel>
+        
+        <StackPanel Orientation="Horizontal" Margin="20">
+            <md:PackIcon Kind="Lock" Width="35" Height="35" Foreground="Aqua"></md:PackIcon>
+            <local:PasswordControl Margin="10 0" Width="295" md:HintAssist.Hint="Nhập mật khẩu"  Foreground="Black" FontSize="20" Password="{Binding Password, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></local:PasswordControl>
+         </StackPanel>
+        
+        <StackPanel Orientation="Horizontal" Margin="20">
+            <md:PackIcon Kind="Lock" Width="35" Height="35" Foreground="Aqua"></md:PackIcon>
+            <local:RepasswordControl Margin="10 0" Width="295" md:HintAssist.Hint="Nhập lại mật khẩu"  Foreground="Black" FontSize="20" Repassword="{Binding Repassword, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></local:RepasswordControl>
+        </StackPanel>
+        
+       
         <Button Width="106" Height="40" Style="{StaticResource MaterialDesignRaisedButton}"
-        md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="Aqua"  Background="Aqua" 
-        Foreground="White" Content="Đăng ký" Command="{Binding SignUpCommand}"/>
+                md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="Aqua"  Background="Aqua" 
+                Foreground="White" Content="Đăng ký" Command="{Binding SignUpCommand}"/>
     </StackPanel>
 </UserControl>
