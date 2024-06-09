@@ -132,8 +132,19 @@ namespace Jewelry_store_management.VIEWMODEL
         // phương thức kiểm tra đầu vào
         private bool ValidateInputs()
         {
-          
-           
+            // kiểm tra họ và tên 
+            if (string.IsNullOrEmpty(UserName))
+            {
+                MessageBox.Show("Tên người dùng không hợp lệ!");
+                return false;
+            }
+            // Kiểm tra định dạng email
+            if (string.IsNullOrEmpty(Email) || !IsValidEmail(Email))
+            {
+                MessageBox.Show("Email không hợp lệ.");
+                return false;
+            }
+
             // Kiểm tra password phải có trên 8 ký tự và chứa cả chữ cái và số
             if (string.IsNullOrEmpty(Password) || Password.Length < 8 || !Password.Any(char.IsLetter) || !Password.Any(char.IsDigit))
             {
@@ -147,19 +158,9 @@ namespace Jewelry_store_management.VIEWMODEL
                 MessageBox.Show("Mật khẩu nhập lại không khớp.");
                 return false;
             }
-            // kiểm tra họ và tên 
-            if (string.IsNullOrEmpty(UserName) )
-            {
-                MessageBox.Show("Tên người dùng không hợp lệ!");
-                return false;
-            }
+           
 
-            // Kiểm tra định dạng email
-            if (string.IsNullOrEmpty(Email) || !IsValidEmail(Email))
-            {
-                MessageBox.Show("Email không hợp lệ.");
-                return false;
-            }
+           
 
             return true;
         }
