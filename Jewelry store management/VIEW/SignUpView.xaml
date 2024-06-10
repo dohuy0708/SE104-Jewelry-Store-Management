@@ -30,7 +30,7 @@
         </StackPanel>
         
         <StackPanel Orientation="Horizontal" Margin="20">
-            <md:PackIcon Kind="User" Width="35" Height="35" Foreground="Aqua"></md:PackIcon>
+            <md:PackIcon Kind="Envelope" Width="35" Height="35" Foreground="Aqua"></md:PackIcon>
             <TextBox Text="{Binding Email}" Margin="10 0" Width="295" md:HintAssist.Hint="Nhập Email" Foreground="Black" FontSize="20" ></TextBox>
         </StackPanel>
         
@@ -40,7 +40,7 @@
          </StackPanel>
         
         <StackPanel Orientation="Horizontal" Margin="20">
-            <md:PackIcon Kind="Lock" Width="35" Height="35" Foreground="Aqua"></md:PackIcon>
+            <md:PackIcon Kind="LockCheck" Width="35" Height="35" Foreground="Aqua"></md:PackIcon>
             <local:RepasswordControl Margin="10 0" Width="295" md:HintAssist.Hint="Nhập lại mật khẩu"  Foreground="Black" FontSize="20" Repassword="{Binding Repassword, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></local:RepasswordControl>
         </StackPanel>
         

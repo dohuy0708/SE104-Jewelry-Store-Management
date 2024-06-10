@@ -63,6 +63,7 @@ namespace Jewelry_store_management.VIEWMODEL
             };
             await _userHelper.AddUser(newUser);
             Users.Add(newUser);
+
             MessageBox.Show("Add user successed!");
         }
 

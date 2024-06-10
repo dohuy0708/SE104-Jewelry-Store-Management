@@ -23,8 +23,8 @@ namespace Jewelry_store_management.HELPER
         {
             // Mã hóa mật khẩu trước khi lưu vào cơ sở dữ liệu
             newUser.Password = HashPassword(newUser.Password);
-            PushResponse response = await _client.PushAsync("users", newUser);
-            newUser.Uid = response.Result.name;
+            await _client.SetAsync($"users/{newUser.Uid}", newUser);
+             
         }
 
         // lấy tất cả các   user trong DB

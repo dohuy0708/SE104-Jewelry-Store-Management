@@ -85,7 +85,9 @@ namespace Jewelry_store_management.VIEWMODEL
                 }
                 else
                 {
-                    MessageBox.Show("Email hoặc mật khẩu không đúng.");
+                    MessageBox_Window.ShowDialog("Email hoặc mật khẩu không đúng!", "Lỗi", "\\Drawable\\Icons\\icon_error.png", MessageBox_Window.MessageBoxButton.OK);
+
+                   
                 }
             }
 
@@ -114,16 +116,22 @@ namespace Jewelry_store_management.VIEWMODEL
         private bool ValidateInputs()
         {
             // Kiểm tra định dạng email
-            if (string.IsNullOrEmpty(Email) || !IsValidEmail(Email))
+            if (string.IsNullOrEmpty(Password) ||string.IsNullOrEmpty(Email) )
             {
-                MessageBox_Window.ShowDialog("Email không hợp lệ!eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", "Lỗi", "\\Drawable\\Icons\\icon_error.png", MessageBox_Window.MessageBoxButton.OK);
+                MessageBox_Window.ShowDialog("Vui lòng nhập Email và Mật khẩu để đăng nhập!", "Chú ý", "\\Drawable\\Icons\\icon_attention.png", MessageBox_Window.MessageBoxButton.OK);
                 return false;
             }
-
-            // Kiểm tra password phải có trên 8 ký tự và chứa cả chữ cái và số
-            if (string.IsNullOrEmpty(Password) || Password.Length < 8 || !Password.Any(char.IsLetter) || !Password.Any(char.IsDigit))
+            if ( !IsValidEmail(Email))
             {
-                MessageBox.Show("Password phải có ít nhất 8 ký tự, bao gồm cả chữ cái và số.");
+                MessageBox_Window.ShowDialog("Email không hợp lệ!", "Chú ý", "\\Drawable\\Icons\\icon_attention.png", MessageBox_Window.MessageBoxButton.OK);
+                return false;
+            }
+            // Kiểm tra password phải có trên 8 ký tự và chứa cả chữ cái và số
+            if ( Password.Length < 8 || !Password.Any(char.IsLetter) || !Password.Any(char.IsDigit))
+            {
+                MessageBox_Window.ShowDialog("Mật khẩu phải có ít nhất 8 ký tự, bao gồm cả chữ cái và số.", "Chú ý", "\\Drawable\\Icons\\icon_attention.png", MessageBox_Window.MessageBoxButton.OK);
+
+                
                 return false;
             }
 

@@ -7,30 +7,67 @@
              xmlns:local="clr-namespace:Jewelry_store_management.VIEW" xmlns:viewmodel="clr-namespace:Jewelry_store_management.VIEWMODEL"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="395">
+    <UserControl.Resources>
+        <Style x:Key="BlueCheckBox" TargetType="CheckBox">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CheckBox">
+                        <StackPanel Orientation="Horizontal">
+                            <Border x:Name="border"
+                                    Width="16" 
+                                    Height="16" 
+                                    BorderBrush="Black" 
+                                    BorderThickness="1" 
+                                    Background="White"
+                                    VerticalAlignment="Center">
+                                <Path x:Name="checkMark"
+                                      Data="M0,0 L1,1 M1,0 L0,1"
+                                      Stretch="Uniform"
+                                      Stroke="Transparent"
+                                      StrokeThickness="2" />
+                            </Border>
+                            <ContentPresenter Margin="5 0 0 0"
+                                              VerticalAlignment="Center" />
+                        </StackPanel>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="Blue" />
+                                <Setter TargetName="checkMark" Property="Stroke" Value="White" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
     <UserControl.DataContext>
         <viewmodel:SignInViewModel/>
     </UserControl.DataContext>
     
     <StackPanel Background="White">
-        <TextBlock Text="ĐĂNG NHẬP" Margin="60 60 60 0" Foreground="Black" TextAlignment="Center" FontSize="38" FontFamily="Times New Roman" ></TextBlock>
+        <TextBlock Text="ĐĂNG NHẬP" Margin="60 40 60 0" Foreground="Black" TextAlignment="Center" FontSize="38" FontFamily="Times New Roman" ></TextBlock>
         
         <StackPanel Orientation="Horizontal" Margin="20">
-            <md:PackIcon Kind="User" Width="50" Height="50" Foreground="Aqua"></md:PackIcon>
+            <md:PackIcon Kind="Envelope" Width="50" Height="50" Foreground="Aqua"></md:PackIcon>
             <TextBox Text="{Binding Email}" Margin="10 0" Width="295" md:HintAssist.Hint="Nhập Email" Foreground="Black" FontSize="20" ></TextBox>
         </StackPanel>
        
-        <StackPanel Orientation="Horizontal" Margin="20">
+        <StackPanel Orientation="Horizontal" Margin="20 5 20 10">
             <md:PackIcon Kind="Lock" Width="50" Height="50" Foreground="Aqua"></md:PackIcon>
             <local:PasswordControl Margin="10 0" Width="295" md:HintAssist.Hint="Nhập mật khẩu"  Foreground="Black" FontSize="20" Password="{Binding Password, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></local:PasswordControl>
         </StackPanel>
-        
+
+        <CheckBox IsChecked="{Binding IsRememberMeChecked}" Content="Ghi nhớ đăng nhập" Foreground="Black" FontSize="14" Margin="240 0 0 15"  />
+
+         
+
         <Button Width="106" Height="40" Style="{StaticResource MaterialDesignRaisedButton}"
  md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="Aqua"  Background="Aqua"  
  Foreground="White" ToolTip="Đăng nhập" Content="Đăng nhập" Command="{Binding LogInCommand}"></Button>
       
-        <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
-            <Button Margin="40 0" Content="Đăng ký" Foreground="Black" Background="Transparent"  BorderBrush="Transparent" Command="{Binding SignUpCommand}" ></Button>
-            <Button Margin="60 0 50 0" Content="Quên mật khẩu" Foreground="Black" Background="Transparent" BorderBrush="Transparent" Command="{Binding ForgetPasswordCommand}"></Button>
+        <StackPanel Orientation="Horizontal" Margin="0 15 0 0">
+            <Button   Margin="40 0" Content="Đăng ký" FontSize="16"   Foreground="Black" Background="Transparent"  BorderBrush="Transparent" Command="{Binding SignUpCommand}" FontStyle="Italic" />
+            <Button Margin="60 0 50 0" FontSize="16" Content="Quên mật khẩu" Foreground="Black" Background="Transparent" BorderBrush="Transparent" Command="{Binding ForgetPasswordCommand}" FontStyle="Italic"></Button>
         </StackPanel>
         
     </StackPanel>

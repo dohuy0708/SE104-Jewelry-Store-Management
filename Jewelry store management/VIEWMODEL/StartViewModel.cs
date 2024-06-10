@@ -13,6 +13,8 @@ namespace Jewelry_store_management.VIEWMODEL
         public SignInViewModel SignInView;
         public SignUpViewModel SignUpView;
         public ForgetPasswordViewModel ForgetPasswordView;
+        public GetNewPassWordViewModel GetNewPassWordView;
+        public VerifyCodeViewModel VerifyCodeView;
         private int _nview=0;
         public int NView {
             get { return _nview; }
@@ -28,6 +30,8 @@ namespace Jewelry_store_management.VIEWMODEL
 
         private void ForgetPass(object obj) => CurrentView = ForgetPasswordView;
 
+        private void GetPass(object obj) => CurrentView = GetNewPassWordView;
+        private void VerifyCode(object obj) => CurrentView = VerifyCodeView;
 
         private object _currentView;
         public object CurrentView
@@ -45,6 +49,10 @@ namespace Jewelry_store_management.VIEWMODEL
                     CurrentView = SignUpView;break;
                 case 2:
                     CurrentView = ForgetPasswordView;break;
+                case 3:
+                    CurrentView = VerifyCodeView;break;
+                case 4:
+                    CurrentView = GetNewPassWordView;break;
                 default:
                     break;
             }
@@ -53,6 +61,8 @@ namespace Jewelry_store_management.VIEWMODEL
             SignInView = new SignInViewModel();
             SignUpView = new SignUpViewModel();
             ForgetPasswordView = new ForgetPasswordViewModel();
+            GetNewPassWordView = new GetNewPassWordViewModel();
+            VerifyCodeView = new VerifyCodeViewModel();
             CurrentView = SignInView;
         }
     }

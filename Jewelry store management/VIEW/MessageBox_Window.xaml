@@ -13,7 +13,7 @@
         Background="Transparent"
         
         Width="360"
-        Height="220">
+        Height="200">
     <Border BorderBrush="Black" BorderThickness="1" CornerRadius="10" Padding="0" Background="AliceBlue">
         <Grid >
             <Grid.RowDefinitions>
@@ -22,7 +22,7 @@
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" HorizontalAlignment="Center" Text=" " FontWeight="Bold" FontSize="30"></TextBlock>
+            <TextBlock Grid.Row="0" HorizontalAlignment="Center" Text=" " FontWeight="Bold" FontSize="20"></TextBlock>
 
 
             <Border Grid.Row="1" Margin="10 0 10 5"  >
@@ -32,7 +32,7 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Image x:Name="TBLOCK_Icon" Source="/Drawable/Icons/icon_back.png"
-                     Width="50" Height="50" Margin="10"/>
+                     Width="50" Height="50" Margin="10 10 20 10"/>
                     <StackPanel Grid.Column="1" Margin="5">
                         <TextBlock x:Name="TBLOCK_Title" Text="Caption" FontWeight="Bold" FontSize="22" Margin="0 0 0 10"/>
                         <TextBlock x:Name="TBLOCK_Message" TextWrapping="WrapWithOverflow" Text="This is a message"  FontSize="16" Height="65"/>

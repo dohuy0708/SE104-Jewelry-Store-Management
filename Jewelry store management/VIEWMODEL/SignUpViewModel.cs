@@ -1,5 +1,6 @@
 ﻿using Jewelry_store_management.HELPER;
 using Jewelry_store_management.MODELS;
+using Jewelry_store_management.VIEW;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -77,20 +78,20 @@ namespace Jewelry_store_management.VIEWMODEL
         public SignUpViewModel()
         {
 
-            BackCommand = new RelayCommand(_ => BackClick());
-            SignUpCommand = new RelayCommand(_ => SignUpClick());
+            BackCommand = new RelayCommand(async _ => await BackClick());
+            SignUpCommand = new RelayCommand(async _ => await SignUpClick());
             _userHelper = new UserHelper();
         }
 
 
         // các hàm chức năng
-        private void BackClick()
+        private async Task BackClick()
         {
             var window = Application.Current.MainWindow;
             var viewModel = (window.DataContext as StartViewModel);
             viewModel.NView = 0;
         }
-        private async void SignUpClick()
+        private async Task SignUpClick()
         {
             // nếu kiểm tra input hợp lệ thì gọi hàm đăng ký
             if (ValidateInputs())
@@ -99,6 +100,7 @@ namespace Jewelry_store_management.VIEWMODEL
                 
                 var newUser = new User
                 {
+                    Uid = GenerateId(),
                     Name = UserName,
                     Password = Password,
                     Email = Email
@@ -110,7 +112,9 @@ namespace Jewelry_store_management.VIEWMODEL
 
                 if (isRegistered)
                 {
-                    MessageBox.Show("Đăng ký thành công!");
+                    MessageBox_Window.ShowDialog("Đăng ký thành công!", "Thành công", "\\Drawable\\Icons\\icon_success", MessageBox_Window.MessageBoxButton.OK);
+
+                     
                     // nếu đăng ký thành công thì quay về đăng nhập
                     var window = Application.Current.MainWindow;
                     var viewModel = (window.DataContext as StartViewModel);
@@ -118,8 +122,11 @@ namespace Jewelry_store_management.VIEWMODEL
                 }
                 else
                 {
-                    MessageBox.Show("Email đã tồn tại, vui lòng sử dụng email khác.");
+                    MessageBox_Window.ShowDialog("Email đã tồn tại, vui lòng sử dụng email khác.", "Chú ý", "\\Drawable\\Icons\\icon_attention.png", MessageBox_Window.MessageBoxButton.OK);
+
+                   
                 }
+
 
             }
 
@@ -135,27 +142,31 @@ namespace Jewelry_store_management.VIEWMODEL
             // kiểm tra họ và tên 
             if (string.IsNullOrEmpty(UserName))
             {
-                MessageBox.Show("Tên người dùng không hợp lệ!");
+                MessageBox_Window.ShowDialog("Tên người dùng không hợp lệ!", "Chú ý", "\\Drawable\\Icons\\icon_attention.png", MessageBox_Window.MessageBoxButton.OK);
+
                 return false;
             }
             // Kiểm tra định dạng email
             if (string.IsNullOrEmpty(Email) || !IsValidEmail(Email))
             {
-                MessageBox.Show("Email không hợp lệ.");
+                MessageBox_Window.ShowDialog("Email không hợp lệ!", "Chú ý", "\\Drawable\\Icons\\icon_attention.png", MessageBox_Window.MessageBoxButton.OK);
+
                 return false;
             }
 
             // Kiểm tra password phải có trên 8 ký tự và chứa cả chữ cái và số
             if (string.IsNullOrEmpty(Password) || Password.Length < 8 || !Password.Any(char.IsLetter) || !Password.Any(char.IsDigit))
             {
-                MessageBox.Show("Password phải có ít nhất 8 ký tự, bao gồm cả chữ cái và số.");
+                MessageBox_Window.ShowDialog("Password phải có ít nhất 8 ký tự, bao gồm cả chữ cái và số.", "Chú ý", "\\Drawable\\Icons\\icon_attention.png", MessageBox_Window.MessageBoxButton.OK);
+ 
                 return false;
             }
 
             // Kiểm tra password nhập lại có trùng với password không
             if (string.IsNullOrEmpty(Repassword)||(Password!=Repassword))///
             {
-                MessageBox.Show("Mật khẩu nhập lại không khớp.");
+
+                MessageBox_Window.ShowDialog("Mật khẩu nhập lại không khớp.", "Chú ý", "\\Drawable\\Icons\\icon_attention.png", MessageBox_Window.MessageBoxButton.OK);
                 return false;
             }
            
@@ -171,6 +182,23 @@ namespace Jewelry_store_management.VIEWMODEL
             // Sử dụng Regex để kiểm tra định dạng email
             var emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
             return Regex.IsMatch(email, emailPattern);
+        }
+
+        private static Random random = new Random();
+        public static string GenerateId()
+        {
+            const string prefix = "AD"; // dinh nghia tien to co dinh
+
+            // tao 4 so ngan nhien
+            int randomNumber = random.Next(10000);
+
+            // dinh dang thanh chuoi 4 ky tu
+            string randomNumberString = randomNumber.ToString("D4");
+
+            // ket hop thanh ID
+            string id = prefix + randomNumberString;
+
+            return id;
         }
 
 
