@@ -1,0 +1,51 @@
+﻿<Window x:Class="Jewelry_store_management.VIEW.MessageBox_Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Jewelry_store_management.VIEW"
+        mc:Ignorable="d"
+        Title="MessageBox_Window"  
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        Topmost="True"
+        AllowsTransparency="True"
+        Background="Transparent"
+        
+        Width="360"
+        Height="220">
+    <Border BorderBrush="Black" BorderThickness="1" CornerRadius="10" Padding="0" Background="AliceBlue">
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" HorizontalAlignment="Center" Text=" " FontWeight="Bold" FontSize="30"></TextBlock>
+
+
+            <Border Grid.Row="1" Margin="10 0 10 5"  >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image x:Name="TBLOCK_Icon" Source="/Drawable/Icons/icon_back.png"
+                     Width="50" Height="50" Margin="10"/>
+                    <StackPanel Grid.Column="1" Margin="5">
+                        <TextBlock x:Name="TBLOCK_Title" Text="Caption" FontWeight="Bold" FontSize="22" Margin="0 0 0 10"/>
+                        <TextBlock x:Name="TBLOCK_Message" TextWrapping="WrapWithOverflow" Text="This is a message"  FontSize="16" Height="65"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <StackPanel x:Name="SP_ContainsButton"  Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0" >
+                <Button x:Name="BTN_OK" Click="Button_Click_OK" Background="CornflowerBlue" Foreground="White" Margin="10 10 10 16" MinWidth="85" Padding="0">OK</Button>
+                <Button x:Name="BTN_YES" Background="Green" Foreground="White" Click="Button_Click_YES" Margin="10 10 10 6" MinWidth="85" Padding="0">YES</Button>
+                <Button x:Name="BTN_NO" Click="Button_Click_NO" Foreground="White" Margin="10 10 10 6" MinWidth="85" Padding="0">NO</Button>
+                <Button x:Name="BTN_CANCEL" Click="Button_Click_CANCEL" Background="Red" Foreground="White" Margin="10 10 10 6" MinWidth="85" Padding="0">CANCEL</Button>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

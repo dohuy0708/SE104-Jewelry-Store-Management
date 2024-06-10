@@ -1,4 +1,5 @@
 ﻿using Jewelry_store_management.HELPER;
+using Jewelry_store_management.VIEW;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -69,8 +70,17 @@ namespace Jewelry_store_management.VIEWMODEL
 
                 if (user != null)
                 {
-                    MessageBox.Show("Đăng nhập thành công!");
-                    // Chuyển đến trang chính hoặc thực hiện các thao tác cần thiết sau khi đăng nhập
+                    var currentWindow = Application.Current.MainWindow;
+
+                    // Khởi động cửa sổ MainWindow
+                    var mainWindow = new MainWindow();
+                    Application.Current.MainWindow = mainWindow;
+                    mainWindow.Show();
+
+                    // Tắt cửa sổ hiện tại
+                   
+                    currentWindow.Close();
+
 
                 }
                 else
@@ -106,7 +116,7 @@ namespace Jewelry_store_management.VIEWMODEL
             // Kiểm tra định dạng email
             if (string.IsNullOrEmpty(Email) || !IsValidEmail(Email))
             {
-                MessageBox.Show("Email không hợp lệ.");
+                MessageBox_Window.ShowDialog("Email không hợp lệ!eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", "Lỗi", "\\Drawable\\Icons\\icon_error.png", MessageBox_Window.MessageBoxButton.OK);
                 return false;
             }
 

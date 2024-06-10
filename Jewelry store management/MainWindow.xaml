@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:Jewelry_store_management"
         xmlns:vm="clr-namespace:Jewelry_store_management.VIEWMODEL"
         mc:Ignorable="d"
-        Title="H-Jewelry Management" Height="450" Width="800"
+         Icon="\Drawable\Images\Logo.png"
+        Title="H-Jewelry Management" Height="450" Width="800" WindowStartupLocation="CenterScreen"
        >
 
 

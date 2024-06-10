@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Jewelry_store_management.VIEW" xmlns:viewmodel="clr-namespace:Jewelry_store_management.VIEWMODEL" 
         mc:Ignorable="d"
-        Title="StartView" Height="450" Width="800"
-        DataContext="{StaticResource StartVM}">
+        Icon="\Drawable\Images\Logo.png"
+        Title="H-Jewelry" Height="450" Width="800"
+        DataContext="{StaticResource StartVM}" WindowStartupLocation="CenterScreen">
         
     <Grid>
         <Grid.ColumnDefinitions>
