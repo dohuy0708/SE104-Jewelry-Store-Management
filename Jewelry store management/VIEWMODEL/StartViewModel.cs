@@ -12,6 +12,7 @@ namespace Jewelry_store_management.VIEWMODEL
     {
         public SignInViewModel SignInView;
         public SignUpViewModel SignUpView;
+        
         public ForgetPasswordViewModel ForgetPasswordView;
         public GetNewPassWordViewModel GetNewPassWordView;
         public VerifyCodeViewModel VerifyCodeView;

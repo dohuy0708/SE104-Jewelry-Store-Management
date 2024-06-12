@@ -1,0 +1,94 @@
+﻿<Window x:Class="Jewelry_store_management.VIEW.AddProductView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:Jewelry_store_management.VIEW"
+             mc:Ignorable="d" 
+             d:DesignHeight="470" d:DesignWidth="605" ResizeMode="NoResize"
+             DataContext="{StaticResource AddProduct}">
+    <StackPanel>
+        <Grid Background="SkyBlue">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="185"/>
+            <ColumnDefinition Width="420" />
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="0">
+            <StackPanel>
+                <Button Margin="20 80 20 0"   Style="{StaticResource MaterialDesignFlatButton}" 
+                        md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="Aqua"  Background="Aqua" Foreground="White" Content="Thêm hình ảnh"
+                        Command="{Binding AddImageCommand}">
+                </Button>
+                <Image Source="{Binding Image}" Stretch="Uniform"/>
+                <Button Grid.Row="1" Content="Thay đổi hình ảnh" Command="{Binding RemoveImageCommand}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,10"
+                Visibility="{Binding HasImage, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            </StackPanel>
+        </Border>
+        <Border Grid.Column="1">
+            <StackPanel>
+                <Label Margin="60 30 60 0" Content="THÊM SẢN PHẨM" FontSize="25" FontWeight="Bold" HorizontalAlignment="Center"></Label>
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Margin="30 10 0 0">
+                        <Label Content="MÃ SẢN PHẨM"></Label>
+                        <TextBox Width="170"  ></TextBox>
+                    </StackPanel>
+                    <StackPanel Margin="30 10 30 0">
+                        <Label Content="TÊN SẢN PHẨM"></Label>
+                        <TextBox Width="170"  ></TextBox>
+                    </StackPanel>
+
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Margin="30 10 0 0">
+                        <Label Content="GIÁ NHẬP"></Label>
+                        <TextBox Width="170"  ></TextBox>
+                    </StackPanel>
+                    <StackPanel Margin="30 10 30 0">
+                        <Label Content="GIÁ BÁN"></Label>
+                        <TextBox Width="170"  ></TextBox>
+                    </StackPanel>
+
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Margin="30 10 0 0">
+                        <Label Content="LOẠI"></Label>
+                        <TextBox Width="170"  ></TextBox>
+                    </StackPanel>
+                    <StackPanel Margin="30 10 30 0">
+                        <Label Content="NHÀ CUNG CẤP"></Label>
+                        <ComboBox Width="169" Style="{StaticResource MaterialDesignComboBox}" ItemsSource="{Binding Supplierlist}" SelectedItem="{Binding SelectedSupplier}" Background="SkyBlue">
+
+                        </ComboBox>
+                    </StackPanel>
+
+
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Margin="30 10 0 0">
+                        <Label Content="SIZE"></Label>
+                        <TextBox Width="170"  ></TextBox>
+                    </StackPanel>
+                    <StackPanel Margin="30 10 30 0">
+                        <Label Content="SỐ LƯỢNG"></Label>
+                        <TextBox Width="170"  ></TextBox>
+                    </StackPanel>
+
+
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Margin="30 10 0 0">
+                        <Label Content="MÔ TẢ"></Label>
+                        <TextBox Width="366" Height="49"  ></TextBox>
+                    </StackPanel>
+                    <StackPanel Margin="30 10 30 0"/>
+
+
+                </StackPanel>
+                <Button Margin="0 20 0 30" Width="140" Style="{StaticResource MaterialDesignFlatButton}" 
+                        md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="Aqua"  Background="Aqua" Foreground="White" Content="Thêm sản phẩm"></Button>
+            </StackPanel>
+        </Border>
+        </Grid>
+    </StackPanel>
+</Window>

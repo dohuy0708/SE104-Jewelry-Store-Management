@@ -7,6 +7,10 @@
     <viewmodel:TestViewModel x:Key="TestVM"></viewmodel:TestViewModel>
     <viewmodel:StartViewModel x:Key="StartVM"></viewmodel:StartViewModel>
     <viewmodel:MainWindowViewModel x:Key="MainWindowVM"></viewmodel:MainWindowViewModel>
+    <viewmodel:AddProductViewModel x:Key="AddProduct"></viewmodel:AddProductViewModel>
+    <viewmodel:PurchaseOderViewModel x:Key="Purchase"></viewmodel:PurchaseOderViewModel>
+    <viewmodel:BillViewModel x:Key="Bill"></viewmodel:BillViewModel>
+    <viewmodel:ServiceViewModel x:Key="Service"></viewmodel:ServiceViewModel>
     <DataTemplate DataType="{x:Type viewmodel:SignInViewModel}">
         <view:SignInView/>
     </DataTemplate>
@@ -16,11 +20,20 @@
     <DataTemplate DataType="{x:Type viewmodel:ForgetPasswordViewModel}">
         <view:ForgetPasswordView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodel:AddProductViewModel}">
+        <view:AddProductView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodel:AddSupplierViewModel}">
+        <view:AddSuppierView/>
+    </DataTemplate>
     <DataTemplate DataType="{x:Type viewmodel:VerifyCodeViewModel}">
         <view:VerifyCodeView/>
     </DataTemplate>
     <DataTemplate DataType="{x:Type viewmodel:GetNewPassWordViewModel}">
         <view:GetNewPassWordView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodel:PurchaseOderViewModel}">
+        <view:PurchaseOrderView/>
     </DataTemplate>
 
 

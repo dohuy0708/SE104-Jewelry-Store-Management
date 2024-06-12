@@ -461,13 +461,27 @@
     <Compile Include="MODELS\ServiceOrder.cs" />
     <Compile Include="MODELS\Supplier.cs" />
     <Compile Include="Command\RelayCommand.cs" />
+    <Compile Include="VIEWMODEL\AddProductViewModel.cs" />
+    <Compile Include="VIEWMODEL\AddSupplierViewModel.cs" />
+    <Compile Include="VIEWMODEL\BillViewModel.cs" />
     <Compile Include="VIEWMODEL\ForgetPasswordViewModel.cs" />
     <Compile Include="VIEWMODEL\GetNewPassWordViewModel.cs" />
     <Compile Include="VIEWMODEL\MainWindowViewModel.cs" />
+    <Compile Include="VIEWMODEL\PurchaseOderViewModel.cs" />
+    <Compile Include="VIEWMODEL\ServiceViewModel.cs" />
     <Compile Include="VIEWMODEL\SignInViewModel.cs" />
     <Compile Include="VIEWMODEL\SignUpViewModel.cs" />
     <Compile Include="VIEWMODEL\StartViewModel.cs" />
     <Compile Include="VIEWMODEL\VerifyCodeViewModel.cs" />
+    <Compile Include="VIEW\AddProductView.xaml.cs">
+      <DependentUpon>AddProductView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VIEW\AddSuppierView.xaml.cs">
+      <DependentUpon>AddSuppierView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VIEW\BillView.xaml.cs">
+      <DependentUpon>BillView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VIEW\ForgetPasswordView.xaml.cs">
       <DependentUpon>ForgetPasswordView.xaml</DependentUpon>
     </Compile>
@@ -479,6 +493,9 @@
     </Compile>
     <Compile Include="VIEW\PasswordControl.xaml.cs">
       <DependentUpon>PasswordControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VIEW\PurchaseOrderView.xaml.cs">
+      <DependentUpon>PurchaseOrderView.xaml</DependentUpon>
     </Compile>
     <Compile Include="VIEW\RepasswordControl.xaml.cs">
       <DependentUpon>RepasswordControl.xaml</DependentUpon>
@@ -506,6 +523,9 @@
     </Compile>
     <Compile Include="VIEWMODEL\BaseViewModel.cs" />
     <Compile Include="VIEWMODEL\TestViewModel.cs" />
+    <Compile Include="VIEW\ServiceView.xaml.cs">
+      <DependentUpon>ServiceView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VIEW\SignInView.xaml.cs">
       <DependentUpon>SignInView.xaml</DependentUpon>
     </Compile>
@@ -518,9 +538,21 @@
     <Compile Include="VIEW\TestView.xaml.cs">
       <DependentUpon>TestView.xaml</DependentUpon>
     </Compile>
+    <Page Include="VIEW\AddProductView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VIEW\AddSuppierView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Compile Include="VIEW\VerifyCodeView.xaml.cs">
       <DependentUpon>VerifyCodeView.xaml</DependentUpon>
     </Compile>
+    <Page Include="VIEW\BillView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="VIEW\ForgetPasswordView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -534,6 +566,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="VIEW\PasswordControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VIEW\PurchaseOrderView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -583,6 +619,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="ResourceXAML\MainResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VIEW\ServiceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
