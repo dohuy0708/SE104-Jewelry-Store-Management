@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Jewelry_store_management.VIEWMODEL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace Jewelry_store_management.GUI
         public scrSupplier()
         {
             InitializeComponent();
+            DataContext = new scrSupplierViewModel();
         }
     }
 }

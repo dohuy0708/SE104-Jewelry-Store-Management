@@ -40,7 +40,7 @@ namespace Jewelry_store_management
 
             
             InitializeComponent();
-           // DataContext = new MainWindowViewModel();
+            DataContext = new MainWindowViewModel();
       
         }
 
@@ -51,6 +51,8 @@ namespace Jewelry_store_management
                 this.DragMove();
             }
         }
+
+
         //// di chuyển màn hình
         //private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         //{
