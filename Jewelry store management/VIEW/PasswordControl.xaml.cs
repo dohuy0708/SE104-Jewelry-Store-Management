@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Jewelry_store_management.VIEW
 {
@@ -20,7 +8,14 @@ namespace Jewelry_store_management.VIEW
     /// </summary>
     public partial class PasswordControl : UserControl
     {
+        public PasswordControl()
+        {
+            InitializeComponent();
+        }
 
+        public static readonly DependencyProperty PasswordProperty =
+            DependencyProperty.Register("Password", typeof(string), typeof(PasswordControl),
+                new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnPasswordPropertyChanged));
 
         public string Password
         {
@@ -28,21 +23,24 @@ namespace Jewelry_store_management.VIEW
             set { SetValue(PasswordProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for Password.  This enables animation, styling, binding, etc...
-
-        public static readonly DependencyProperty PasswordProperty =
-            DependencyProperty.Register("Password", typeof(string), typeof(PasswordControl), new PropertyMetadata(string.Empty));
-
-
-
-        public PasswordControl()
+        private static void OnPasswordPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            InitializeComponent();
+            if (d is PasswordControl passwordControl)
+            {
+                var newPassword = (string)e.NewValue;
+                if (passwordControl.passwordBox.Password != newPassword)
+                {
+                    passwordControl.passwordBox.Password = newPassword;
+                }
+            }
         }
 
         private void passwordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            Password= passwordBox.Password;
+            if (Password != passwordBox.Password)
+            {
+                Password = passwordBox.Password;
+            }
         }
     }
 }
