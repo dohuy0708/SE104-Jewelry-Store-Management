@@ -38,12 +38,48 @@ namespace Jewelry_store_management.VIEWMODEL
 
         private Brush _menuHomeBackground;
         private Brush _menuOrderBackground;
-        private Brush _menuServiceBackground;
-        private Brush _menuWarehouseBackground;
-        private Brush _menuAddproBackground;
-        private Brush _menuSupplierBackground;
-        private Brush _menuAccountBackground;
-        
+        private Brush _menuServiceBackground = Brushes.Transparent;
+        private Brush _menuWarehouseBackground = Brushes.Transparent;
+        private Brush _menuAddproBackground = Brushes.Transparent;
+        private Brush _menuSupplierBackground = Brushes.Transparent;
+        private Brush _menuAccountBackground = Brushes.Transparent;
+
+        public Brush MenuHomeBackground
+        {
+            get { return _menuHomeBackground; }
+            set { _menuHomeBackground = value; OnPropertyChanged(); }
+        }
+        public Brush MenuOrderBackground
+        {
+            get { return _menuOrderBackground; }
+            set { _menuOrderBackground = value; OnPropertyChanged(); }
+        }
+        public Brush MenuServiceBackground
+        {
+            get { return _menuServiceBackground; }
+            set { _menuServiceBackground = value; OnPropertyChanged(); }
+        }
+        public Brush MenuWarehouseBackground
+        {
+            get { return _menuWarehouseBackground; }
+            set { _menuWarehouseBackground = value; OnPropertyChanged(); }
+        }
+        public Brush MenuAddproBackground
+        {
+            get { return _menuAddproBackground; }
+            set { _menuAddproBackground = value; OnPropertyChanged(); }
+        }
+        public Brush MenuSupplierBackground
+        {
+            get { return _menuSupplierBackground; }
+            set { _menuSupplierBackground = value; OnPropertyChanged(); }
+        }
+        public Brush MenuAccountBackground
+        {
+            get { return _menuAccountBackground; }
+            set { _menuAccountBackground = value; OnPropertyChanged(); }
+        }
+
         public int Scr
         {
             get { return _scr; }
@@ -89,49 +125,7 @@ namespace Jewelry_store_management.VIEWMODEL
         }
 
 
-        // tô màu 
-        public Brush MenuHomeBackground
-        {
-            get { return _menuHomeBackground; }
-            set { _menuHomeBackground = value; OnPropertyChanged(); }
-        }
-
-        public Brush MenuOrderBackground
-        {
-            get { return _menuOrderBackground; }
-            set { _menuOrderBackground = value; OnPropertyChanged(); }
-        }
-
-        public Brush MenuServiceBackground
-        {
-            get { return _menuServiceBackground; }
-            set { _menuServiceBackground = value; OnPropertyChanged(); }
-        }
-
-        public Brush MenuWarehouseBackground
-        {
-            get { return _menuWarehouseBackground; }
-            set { _menuWarehouseBackground = value; OnPropertyChanged(); }
-        }
-
-        public Brush MenuAddproBackground
-        {
-            get { return _menuAddproBackground; }
-            set { _menuAddproBackground = value; OnPropertyChanged(); }
-        }
-
-        public Brush MenuSupplierBackground
-        {
-            get { return _menuSupplierBackground; }
-            set { _menuSupplierBackground = value; OnPropertyChanged(); }
-        }
-
-        public Brush MenuAccountBackground
-        {
-            get { return _menuAccountBackground; }
-            set { _menuAccountBackground = value; OnPropertyChanged(); }
-        }
-
+        
      
 
         public MainWindowViewModel()
@@ -154,97 +148,91 @@ namespace Jewelry_store_management.VIEWMODEL
             MenuSupplierCommand = new RelayCommand(async _ => await MenuSupplierClick());
             MenuAccountCommand = new RelayCommand(async _ => await MenuAccountClick());
 
-            MenuHomeBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("AliceBlue"));
-            MenuOrderBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("AliceBlue"));
-            MenuServiceBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("AliceBlue"));
-            MenuWarehouseBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("AliceBlue"));
-            MenuAddproBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("AliceBlue"));
-            MenuSupplierBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("AliceBlue"));
-            MenuAccountBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("AliceBlue"));
+           
 
 
 
 
         }
 
-
+        private void ResetMenuBackgrounds()
+        {
+            MenuHomeBackground = Brushes.Transparent;
+            MenuOrderBackground = Brushes.Transparent;
+            MenuServiceBackground = Brushes.Transparent;
+            MenuWarehouseBackground = Brushes.Transparent;
+            MenuAddproBackground = Brushes.Transparent;
+            MenuSupplierBackground = Brushes.Transparent;
+            MenuAccountBackground = Brushes.Transparent;
+        }
 
         private async Task MenuHomeClick()
         {
-            MessageBox.Show("SCr1");
+           
             Scr = 1;
             UpdateView();
-            SetMenuBackgrounds(MenuHomeBackground);
+            ResetMenuBackgrounds();
+            MenuHomeBackground = Brushes.Aqua ;
         }
 
         private async Task  MenuOrderClick()
         {
+            ResetMenuBackgrounds();
+            MenuOrderBackground = Brushes.Aqua;
             Scr = 2;
             UpdateView() ;
-            SetMenuBackgrounds(MenuOrderBackground);
+            
         }
 
         private async Task  MenuServiceClick()
         {
+            ResetMenuBackgrounds();
+            MenuServiceBackground = Brushes.Aqua;
             Scr = 3;
             UpdateView();
-            SetMenuBackgrounds(MenuServiceBackground);
+            
         }
 
         private async Task MenuWarehouseClick()
         {
+            ResetMenuBackgrounds();
+            MenuWarehouseBackground = Brushes.Aqua;
             Scr = 4;
             UpdateView();
-            SetMenuBackgrounds(MenuWarehouseBackground);
+           
         }
 
         private async Task MenuAddproClick()
         {
+            ResetMenuBackgrounds();
+            MenuAddproBackground = Brushes.Aqua;
             Scr = 5;
             UpdateView();
-            SetMenuBackgrounds(MenuAddproBackground);
+            
         }
 
         private async Task MenuSupplierClick()
         {
+            ResetMenuBackgrounds();
+            MenuSupplierBackground = Brushes.Aqua;
             Scr = 6;
             UpdateView();
-            SetMenuBackgrounds(MenuSupplierBackground);
+            
         }
 
         private async Task MenuAccountClick()
         {
+            ResetMenuBackgrounds();
+            MenuAccountBackground = Brushes.Aqua;
             Scr = 7;
             UpdateView();
-            SetMenuBackgrounds(MenuAccountBackground);
+             
         }
 
 
-
-        private void SetMenuBackgrounds(Brush activeBrush)
-        {
-
-
-            MenuHomeBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("AliceBlue"));
-            MenuOrderBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("AliceBlue"));
-            MenuServiceBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("AliceBlue"));
-            MenuWarehouseBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("AliceBlue"));
-            MenuAddproBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("AliceBlue"));
-            MenuSupplierBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("AliceBlue"));
-            MenuAccountBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("AliceBlue"));
-
-            if (activeBrush == MenuHomeBackground) MenuHomeBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("SkyBlue"));
-            if (activeBrush == MenuOrderBackground) MenuOrderBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("SkyBlue"));
-            if (activeBrush == MenuServiceBackground) MenuServiceBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("SkyBlue"));
-            if (activeBrush == MenuWarehouseBackground) MenuWarehouseBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("SkyBlue"));
-            if (activeBrush == MenuAddproBackground) MenuAddproBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("SkyBlue"));
-            if (activeBrush == MenuSupplierBackground) MenuSupplierBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("SkyBlue"));
-            if (activeBrush == MenuAccountBackground) MenuAccountBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("SkyBlue"));
-        }
+ 
 
 
 
-       
-       
     }
 }
