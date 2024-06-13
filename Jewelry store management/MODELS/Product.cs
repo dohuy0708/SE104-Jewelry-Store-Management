@@ -46,5 +46,13 @@ namespace Jewelry_store_management.MODELS
             Number=number;
             ImageURL=imageURL;
         }
+        public Product(string name, string pID, double purchasePrice,string size,int number)
+        {
+            Name=name;
+            PID=pID;
+            PurchasePrice = purchasePrice;
+            Size = size;
+            Number = number;
+        }
     }
 }
