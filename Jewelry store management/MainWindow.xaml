@@ -8,7 +8,10 @@
         mc:Ignorable="d"
          Icon="\Drawable\Images\Logo.png"
         Title="H-Jewelry Management" Height="450" Width="800" WindowStartupLocation="CenterScreen"
-       >
+       DataContext="{StaticResource MainWindowVM}" >
+
+    
+    
 
 
 
@@ -16,7 +19,7 @@
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="195"/>
-                <ColumnDefinition Width="885"/>
+                <ColumnDefinition  />
             </Grid.ColumnDefinitions>
             <Border CornerRadius="10,0,0,10" Grid.Column="0">
                 <Border.Background>
@@ -102,11 +105,11 @@
                     </StackPanel>
                 </ScrollViewer>
             </Border>
-            <Border CornerRadius="0,5,5,0" Grid.Column="1">
+            <Border CornerRadius="0,5,5,0" Grid.Column="1" >
                 <Border.Background>
                     <SolidColorBrush Color="SkyBlue"/>
                 </Border.Background>
-                <ContentControl Content="{Binding}"/>
+                <ContentControl Content="{Binding CurrentScr}"/>
             </Border>
         </Grid>
     </Border>

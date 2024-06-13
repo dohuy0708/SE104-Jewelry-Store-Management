@@ -16,6 +16,7 @@ namespace Jewelry_store_management.VIEWMODEL
         public ForgetPasswordViewModel ForgetPasswordView;
         public GetNewPassWordViewModel GetNewPassWordView;
         public VerifyCodeViewModel VerifyCodeView;
+
         private int _nview=0;
         public int NView {
             get { return _nview; }
@@ -26,13 +27,7 @@ namespace Jewelry_store_management.VIEWMODEL
                 OnPropertyChanged(nameof(_nview));
             } 
         }
-        private void SignIn(object obj) => CurrentView = SignInView;
-        private void SignUp(object obj) => CurrentView = SignUpView;
-
-        private void ForgetPass(object obj) => CurrentView = ForgetPasswordView;
-
-        private void GetPass(object obj) => CurrentView = GetNewPassWordView;
-        private void VerifyCode(object obj) => CurrentView = VerifyCodeView;
+     
 
         private object _currentView;
         public object CurrentView
