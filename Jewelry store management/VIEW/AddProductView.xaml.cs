@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Jewelry_store_management.VIEW
 {
     /// <summary>
-    /// Interaction logic for scrAccount.xaml
+    /// Interaction logic for AddProductView.xaml
     /// </summary>
-    public partial class scrAccount : UserControl
+    public partial class AddProductView : UserControl
     {
-        public scrAccount()
+        public AddProductView()
         {
             InitializeComponent();
         }

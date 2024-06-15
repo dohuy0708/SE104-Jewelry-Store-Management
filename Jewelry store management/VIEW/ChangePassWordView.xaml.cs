@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Jewelry_store_management.VIEW
 {
     /// <summary>
-    /// Interaction logic for scrAccount.xaml
+    /// Interaction logic for ChangePassWordView.xaml
     /// </summary>
-    public partial class scrAccount : UserControl
+    public partial class ChangePassWordView : Window
     {
-        public scrAccount()
+        public ChangePassWordView()
         {
             InitializeComponent();
         }

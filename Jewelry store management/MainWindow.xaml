@@ -6,17 +6,20 @@
         xmlns:local="clr-namespace:Jewelry_store_management"
         xmlns:vm="clr-namespace:Jewelry_store_management.VIEWMODEL"
         mc:Ignorable="d"
-        Icon="\Drawable\Images\Logo.png"
-        Title="H-Jewelry Management" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+         Icon="\Drawable\Images\Logo.png"
+        Title="H-Jewelry Management" Height="450" Width="800" WindowStartupLocation="CenterScreen"
+       DataContext="{StaticResource MainWindowVM}" >
 
-    <!--<Window.DataContext>
-        <vm:MainWindowViewModel />
-    </Window.DataContext>-->
+    
+    
+
+
+
     <Border CornerRadius="5" MouseDown="Border_MouseDown">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="195"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition  />
             </Grid.ColumnDefinitions>
             <Border CornerRadius="10,0,0,10" Grid.Column="0">
                 <Border.Background>
@@ -101,11 +104,11 @@
                     </StackPanel>
                 </ScrollViewer>
             </Border>
-            <Border CornerRadius="0,5,5,0" Grid.Column="1">
+            <Border CornerRadius="0,5,5,0" Grid.Column="1" >
                 <Border.Background>
                     <SolidColorBrush Color="SkyBlue"/>
                 </Border.Background>
-                <ContentControl Content="{Binding}"/>
+                <ContentControl Content="{Binding CurrentScr}"/>
             </Border>
         </Grid>
     </Border>

@@ -1,74 +1,22 @@
-﻿using System;
+﻿using Jewelry_store_management.GUI;
+using Jewelry_store_management.VIEW;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Jewelry_store_management.VIEWMODEL
 {
-    public class MainWindowViewModel : INotifyPropertyChanged
+    public class MainWindowViewModel : BaseViewModel
     {
-        private int _scr;
-        private Brush _menuHomeBackground;
-        private Brush _menuOrderBackground;
-        private Brush _menuServiceBackground;
-        private Brush _menuWarehouseBackground;
-        private Brush _menuAddproBackground;
-        private Brush _menuSupplierBackground;
-        private Brush _menuAccountBackground;
 
-        public int Scr
-        {
-            get { return _scr; }
-            set { _scr = value; OnPropertyChanged(); }
-        }
-
-        public Brush MenuHomeBackground
-        {
-            get { return _menuHomeBackground; }
-            set { _menuHomeBackground = value; OnPropertyChanged(); }
-        }
-
-        public Brush MenuOrderBackground
-        {
-            get { return _menuOrderBackground; }
-            set { _menuOrderBackground = value; OnPropertyChanged(); }
-        }
-
-        public Brush MenuServiceBackground
-        {
-            get { return _menuServiceBackground; }
-            set { _menuServiceBackground = value; OnPropertyChanged(); }
-        }
-
-        public Brush MenuWarehouseBackground
-        {
-            get { return _menuWarehouseBackground; }
-            set { _menuWarehouseBackground = value; OnPropertyChanged(); }
-        }
-
-        public Brush MenuAddproBackground
-        {
-            get { return _menuAddproBackground; }
-            set { _menuAddproBackground = value; OnPropertyChanged(); }
-        }
-
-        public Brush MenuSupplierBackground
-        {
-            get { return _menuSupplierBackground; }
-            set { _menuSupplierBackground = value; OnPropertyChanged(); }
-        }
-
-        public Brush MenuAccountBackground
-        {
-            get { return _menuAccountBackground; }
-            set { _menuAccountBackground = value; OnPropertyChanged(); }
-        }
-
+        // khai báo
         public ICommand MenuHomeCommand { get; set; }
         public ICommand MenuOrderCommand { get; set; }
         public ICommand MenuServiceCommand { get; set; }
@@ -76,98 +24,215 @@ namespace Jewelry_store_management.VIEWMODEL
         public ICommand MenuAddproCommand { get; set; }
         public ICommand MenuSupplierCommand { get; set; }
         public ICommand MenuAccountCommand { get; set; }
+ 
+        public scrHome scrHome;
+        public scrAccountViewModel scrAccount;
+        public scrAddpro scrAddpro;
+        public scrOrder scrOrder;
+        public scrService scrService;
+        public scrSupplier scrSupplier;
+        public scrWarehouse scrWarehouse;
 
+
+        private int _scr =1;
+
+        private Brush _menuHomeBackground;
+        private Brush _menuOrderBackground;
+        private Brush _menuServiceBackground = Brushes.Transparent;
+        private Brush _menuWarehouseBackground = Brushes.Transparent;
+        private Brush _menuAddproBackground = Brushes.Transparent;
+        private Brush _menuSupplierBackground = Brushes.Transparent;
+        private Brush _menuAccountBackground = Brushes.Transparent;
+
+        public Brush MenuHomeBackground
+        {
+            get { return _menuHomeBackground; }
+            set { _menuHomeBackground = value; OnPropertyChanged(); }
+        }
+        public Brush MenuOrderBackground
+        {
+            get { return _menuOrderBackground; }
+            set { _menuOrderBackground = value; OnPropertyChanged(); }
+        }
+        public Brush MenuServiceBackground
+        {
+            get { return _menuServiceBackground; }
+            set { _menuServiceBackground = value; OnPropertyChanged(); }
+        }
+        public Brush MenuWarehouseBackground
+        {
+            get { return _menuWarehouseBackground; }
+            set { _menuWarehouseBackground = value; OnPropertyChanged(); }
+        }
+        public Brush MenuAddproBackground
+        {
+            get { return _menuAddproBackground; }
+            set { _menuAddproBackground = value; OnPropertyChanged(); }
+        }
+        public Brush MenuSupplierBackground
+        {
+            get { return _menuSupplierBackground; }
+            set { _menuSupplierBackground = value; OnPropertyChanged(); }
+        }
+        public Brush MenuAccountBackground
+        {
+            get { return _menuAccountBackground; }
+            set { _menuAccountBackground = value; OnPropertyChanged(); }
+        }
+
+        public int Scr
+        {
+            get { return _scr; }
+            set { 
+                _scr = value;
+               
+                OnPropertyChanged(); }
+        }
+
+        // khai báo currentView 
+        private object _currentScr;
+        public object CurrentScr
+        {
+            get { return _currentScr; }
+            set { _currentScr = value; OnPropertyChanged(); }
+        }
+
+
+        // hàm update contentView
+        private void UpdateView()
+
+        {
+             
+            switch (Scr)
+            {
+                case 1:
+                    CurrentScr= scrHome; break;
+                case 2:
+                    CurrentScr = scrOrder; break;
+                case 3:
+                    CurrentScr =scrService; break;
+                case 4:
+                    CurrentScr = scrWarehouse; break;
+                case 5:
+                    CurrentScr = scrAddpro; break;
+                case 6:
+                    CurrentScr = scrSupplier; break;
+                case 7:
+                    CurrentScr = scrAccount; break;
+                default:
+                    break;
+            }
+        }
+
+
+        
+     
 
         public MainWindowViewModel()
         {
-            MenuHomeCommand = new RelayCommand(_ => MenuHomeClick());
-            MenuOrderCommand = new RelayCommand(_ => MenuOrderClick());
-            MenuServiceCommand = new RelayCommand(_ => MenuServiceClick());
-            MenuWarehouseCommand = new RelayCommand(_ => MenuWarehouseClick());
-            MenuAddproCommand = new RelayCommand(_ => MenuAddproClick());
-            MenuSupplierCommand = new RelayCommand(_ => MenuSupplierClick());
-            MenuAccountCommand = new RelayCommand(_ => MenuAccountClick());
+            scrWarehouse = new scrWarehouse();
+            scrSupplier = new scrSupplier();    
+            scrAccount = new scrAccountViewModel();  
+            scrHome = new scrHome();
+            scrAddpro = new scrAddpro();
+            scrOrder = new scrOrder();
+            scrService = new scrService();
+            UpdateView();
 
-            MenuHomeBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("AliceBlue"));
-            MenuOrderBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("AliceBlue"));
-            MenuServiceBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("AliceBlue"));
-            MenuWarehouseBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("AliceBlue"));
-            MenuAddproBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("AliceBlue"));
-            MenuSupplierBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("AliceBlue"));
-            MenuAccountBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("AliceBlue"));
+
+            MenuHomeCommand = new RelayCommand(async _ => await MenuHomeClick());
+            MenuOrderCommand = new RelayCommand(async _ => await MenuOrderClick());
+            MenuServiceCommand = new RelayCommand(async _ => await MenuServiceClick());
+            MenuWarehouseCommand = new RelayCommand(async _ => await MenuWarehouseClick());
+            MenuAddproCommand = new RelayCommand(async _ => await MenuAddproClick());
+            MenuSupplierCommand = new RelayCommand(async _ => await MenuSupplierClick());
+            MenuAccountCommand = new RelayCommand(async _ => await MenuAccountClick());
+
+           
+
+
+
+
         }
 
-
-
-        private void MenuHomeClick()
+        private void ResetMenuBackgrounds()
         {
+            MenuHomeBackground = Brushes.Transparent;
+            MenuOrderBackground = Brushes.Transparent;
+            MenuServiceBackground = Brushes.Transparent;
+            MenuWarehouseBackground = Brushes.Transparent;
+            MenuAddproBackground = Brushes.Transparent;
+            MenuSupplierBackground = Brushes.Transparent;
+            MenuAccountBackground = Brushes.Transparent;
+        }
+
+        private async Task MenuHomeClick()
+        {
+           
             Scr = 1;
-            SetMenuBackgrounds(MenuHomeBackground);
+            UpdateView();
+            ResetMenuBackgrounds();
+            MenuHomeBackground = Brushes.Aqua ;
         }
 
-        private void MenuOrderClick()
+        private async Task  MenuOrderClick()
         {
+            ResetMenuBackgrounds();
+            MenuOrderBackground = Brushes.Aqua;
             Scr = 2;
-            SetMenuBackgrounds(MenuOrderBackground);
+            UpdateView() ;
+            
         }
 
-        private void MenuServiceClick()
+        private async Task  MenuServiceClick()
         {
+            ResetMenuBackgrounds();
+            MenuServiceBackground = Brushes.Aqua;
             Scr = 3;
-            SetMenuBackgrounds(MenuServiceBackground);
+            UpdateView();
+            
         }
 
-        private void MenuWarehouseClick()
+        private async Task MenuWarehouseClick()
         {
+            ResetMenuBackgrounds();
+            MenuWarehouseBackground = Brushes.Aqua;
             Scr = 4;
-            SetMenuBackgrounds(MenuWarehouseBackground);
+            UpdateView();
+           
         }
 
-        private void MenuAddproClick()
+        private async Task MenuAddproClick()
         {
+            ResetMenuBackgrounds();
+            MenuAddproBackground = Brushes.Aqua;
             Scr = 5;
-            SetMenuBackgrounds(MenuAddproBackground);
+            UpdateView();
+            
         }
 
-        private void MenuSupplierClick()
+        private async Task MenuSupplierClick()
         {
+            ResetMenuBackgrounds();
+            MenuSupplierBackground = Brushes.Aqua;
             Scr = 6;
-            SetMenuBackgrounds(MenuSupplierBackground);
+            UpdateView();
+            
         }
 
-        private void MenuAccountClick()
+        private async Task MenuAccountClick()
         {
+            ResetMenuBackgrounds();
+            MenuAccountBackground = Brushes.Aqua;
             Scr = 7;
-            SetMenuBackgrounds(MenuAccountBackground);
+            UpdateView();
+             
         }
 
 
-
-        private void SetMenuBackgrounds(Brush activeBrush)
-        {
-            MenuHomeBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("AliceBlue"));
-            MenuOrderBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("AliceBlue"));
-            MenuServiceBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("AliceBlue"));
-            MenuWarehouseBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("AliceBlue"));
-            MenuAddproBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("AliceBlue"));
-            MenuSupplierBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("AliceBlue"));
-            MenuAccountBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("AliceBlue"));
-
-            if (activeBrush == MenuHomeBackground) MenuHomeBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("SkyBlue"));
-            if (activeBrush == MenuOrderBackground) MenuOrderBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("SkyBlue"));
-            if (activeBrush == MenuServiceBackground) MenuServiceBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("SkyBlue"));
-            if (activeBrush == MenuWarehouseBackground) MenuWarehouseBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("SkyBlue"));
-            if (activeBrush == MenuAddproBackground) MenuAddproBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("SkyBlue"));
-            if (activeBrush == MenuSupplierBackground) MenuSupplierBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("SkyBlue"));
-            if (activeBrush == MenuAccountBackground) MenuAccountBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("SkyBlue"));
-        }
+ 
 
 
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string Name=null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(Name));
-        }
     }
 }

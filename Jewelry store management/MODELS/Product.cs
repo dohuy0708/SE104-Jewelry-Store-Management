@@ -17,7 +17,7 @@ namespace Jewelry_store_management.MODELS
         public string Category { get; set; } // Vàng / Trang sức
         public string SupplierName { get; set; }
         public double PurchasePrice { get; set; }
-        public double Profit { get; set; }
+        public double Profit { get; set; }// lợi nhuận 
         public double SalePrice { get; set; }
         public string DateImport { get; set; }
         public double weight { get; set; } // trọng lượng vàng, nhiu phân  
@@ -45,6 +45,14 @@ namespace Jewelry_store_management.MODELS
             Material=material;
             Number=number;
             ImageURL=imageURL;
+        }
+        public Product(string name, string pID, double purchasePrice,string size,int number)
+        {
+            Name=name;
+            PID=pID;
+            PurchasePrice = purchasePrice;
+            Size = size;
+            Number = number;
         }
     }
 }

@@ -85,7 +85,7 @@ namespace Jewelry_store_management.VIEWMODEL
 
 
         // các hàm chức năng
-        private async Task BackClick()
+        private async   Task BackClick()
         {
             var window = Application.Current.MainWindow;
             var viewModel = (window.DataContext as StartViewModel);
