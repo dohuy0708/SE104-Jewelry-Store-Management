@@ -18,11 +18,13 @@ namespace Jewelry_store_management.MODELS
         public double TotalPrice { get; set; }
         public double Voucher { get; set; }
         public double Cost { get; set; }
+        public string status {  get; set; }
+        public string statusImage {  get; set; }
         public string Pay { get; set; } // ck hay tm
 
         public List<Product> ListSaleProduct { get; set; }
 
-        public SaleOrder(string saleId, string customerName, string cPhone, string cEmail, string cAddress, string dateSale, double totalPrice, double voucher, double cost, string pay, List<Product> listSaleProduct)
+        public SaleOrder(string saleId, string customerName, string cPhone, string cEmail, string cAddress, string dateSale, double totalPrice, double voucher, double cost, string pay, List<Product> listSaleProduct, string statuss, string StatusImage)
         {
             SaleId=saleId;
             CustomerName=customerName;
@@ -35,6 +37,8 @@ namespace Jewelry_store_management.MODELS
             Cost=cost;
             Pay=pay;
             ListSaleProduct=listSaleProduct;
+            status = statuss;
+            statusImage = StatusImage;
         }
 
         public void CalculateTotalPrice()

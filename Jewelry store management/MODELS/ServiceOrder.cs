@@ -22,22 +22,26 @@ namespace Jewelry_store_management.MODELS
         public string Pay { get; set; } // ck hay tm
         public List<Product> ListServiceProduct { get; set; }
         public string Describe{ get; set; }
+        public string Status{ get; set; }
+        public string statusImage{ get; set; }
 
-        public ServiceOrder(string serviceID, string serviceName, string customerName, string cPhone, string cEmail, string cAddress, string dateOrder, double totalPrice, double voucher, double cost, string pay, List<Product> listServiceProduct, string describe)
+        public ServiceOrder(string serviceID, string serviceName, string customerName, string cPhone, string cEmail, string cAddress, string dateOrder, double totalPrice, double voucher, double cost, string pay, List<Product> listServiceProduct, string describe, string status, string StatusImage)
         {
-            ServiceID=serviceID;
-            ServiceName=serviceName;
-            CustomerName=customerName;
-            CPhone=cPhone;
-            CEmail=cEmail;
-            CAddress=cAddress;
-            DateOrder=dateOrder;
-            TotalPrice=totalPrice;
-            Voucher=voucher;
-            Cost=cost;
-            Pay=pay;
-            ListServiceProduct=listServiceProduct;
-            Describe=describe;
+            ServiceID = serviceID;
+            ServiceName = serviceName;
+            CustomerName = customerName;
+            CPhone = cPhone;
+            CEmail = cEmail;
+            CAddress = cAddress;
+            DateOrder = dateOrder;
+            TotalPrice = totalPrice;
+            Voucher = voucher;
+            Cost = cost;
+            Pay = pay;
+            ListServiceProduct = listServiceProduct;
+            Describe = describe;
+            Status = status;
+            statusImage = StatusImage;
         }
 
         public void CalculateTotalPrice()

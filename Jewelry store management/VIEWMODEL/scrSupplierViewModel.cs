@@ -29,11 +29,12 @@ namespace Jewelry_store_management.VIEWMODEL
 
         public scrSupplierViewModel()
         {
-            // Khởi tạo danh sách đơn hàng
+            // Khởi tạo danh sách ncc
             SupplierEntries = new ObservableCollection<Supplier>
         {
             new Supplier { SID = "NCC1", Name = "Cty TNHH TV1", Address="TP. HCM" },
-            new Supplier { SID = "NCC2", Name = "Cty TNHH TV2", Address="TP. Ha Noi" },
+            new Supplier { SID = "NCC2", Name = "Cty TNHH TV2", Address="TP. Hà Nội" },
+            new Supplier { SID = "NCC3", Name = "Cty H-Jewelry", Address="Bình Dương" },
             // Thêm các mục khác nếu cần thiết
         };
 

@@ -87,14 +87,15 @@
                 <DataGrid x:Name="OrderDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" Margin="10"
                           ItemsSource="{Binding OrderEntries}" ColumnWidth="*">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Mã đơn" Binding="{Binding OrderID}" Width="*"  IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Mã đơn" Binding="{Binding SaleId}" Width="*"  IsReadOnly="True"/>
                         <DataGridTextColumn Header="Tên khách hàng" Binding="{Binding CustomerName}" Width="*" IsReadOnly="True" />
-                        <DataGridTextColumn Header="Ngày nhận đơn" Binding="{Binding OrderDate}" Width="*" IsReadOnly="True" />
+                        <DataGridTextColumn Header="Ngày nhận đơn" Binding="{Binding DateSale}" Width="*" IsReadOnly="True" />
+                        <DataGridTextColumn Header="Tổng tiền" Binding="{Binding Cost}" Width="*" IsReadOnly="True" />
                         <DataGridTemplateColumn Header="">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <Image Source="{Binding StatusImage}" Width="20" Height="20" Margin="5" />
+                                        <Image Source="{Binding statusImage}" Width="20" Height="20" Margin="5" />
                                         <Button Width="30" Height="30" Margin="5" Background="Transparent">
                                             <Image Source="Images/ViewIcon.png" Width="20" Height="20" />
                                         </Button>

@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using Jewelry_store_management.VIEWMODEL;
 namespace Jewelry_store_management.GUI
 {
     /// <summary>
@@ -23,6 +23,8 @@ namespace Jewelry_store_management.GUI
         public scrService()
         {
             InitializeComponent();
+            DataContext = new scrServiceViewModel();
+
         }
     }
 }

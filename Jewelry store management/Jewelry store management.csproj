@@ -454,6 +454,7 @@
     <Compile Include="HELPER\SaleOrderHelper.cs" />
     <Compile Include="HELPER\ServiceOrderHelper.cs" />
     <Compile Include="HELPER\SupplierHelper.cs" />
+    <Compile Include="MODELS\AddPro.cs" />
     <Compile Include="MODELS\Customer.cs" />
     <Compile Include="MODELS\Order.cs" />
     <Compile Include="MODELS\Product.cs" />
@@ -465,7 +466,9 @@
     <Compile Include="VIEWMODEL\ForgetPasswordViewModel.cs" />
     <Compile Include="VIEWMODEL\GetNewPassWordViewModel.cs" />
     <Compile Include="VIEWMODEL\MainWindowViewModel.cs" />
+    <Compile Include="VIEWMODEL\scrAddproViewModel.cs" />
     <Compile Include="VIEWMODEL\scrOrderViewModel.cs" />
+    <Compile Include="VIEWMODEL\scrServiceViewModel.cs" />
     <Compile Include="VIEWMODEL\scrSupplierViewModel.cs" />
     <Compile Include="VIEWMODEL\scrWarehouseViewModel.cs" />
     <Compile Include="VIEWMODEL\SignInViewModel.cs" />

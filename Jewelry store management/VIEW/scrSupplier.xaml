@@ -87,9 +87,9 @@
                 <DataGrid x:Name="OrderDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" Margin="10"
                        ItemsSource="{Binding SupplierEntries}" ColumnWidth="*">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Mã nha cung cap" Binding="{Binding SID}" Width="*"  IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Tên nha cung cap" Binding="{Binding Name}" Width="*" IsReadOnly="True" />
-                        <DataGridTextColumn Header="Dia chi" Binding="{Binding Address}" Width="*" IsReadOnly="True" />
+                        <DataGridTextColumn Header="Mã nhà cung cấp" Binding="{Binding SID}" Width="*"  IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Tên nhà cung cấp" Binding="{Binding Name}" Width="*" IsReadOnly="True" />
+                        <DataGridTextColumn Header="Địa chỉ" Binding="{Binding Address}" Width="*" IsReadOnly="True" />
                         <DataGridTemplateColumn Header="">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
