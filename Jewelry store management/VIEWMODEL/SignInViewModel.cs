@@ -135,6 +135,8 @@ namespace Jewelry_store_management.VIEWMODEL
                 if (user != null)
                 {
                     SaveCredentials(); // Lưu thông tin đăng nhập nếu "Ghi nhớ đăng nhập" được chọn
+                    
+                    GlobalVariables.CurrentEmail = Email;
 
                     var currentWindow = Application.Current.MainWindow;
 

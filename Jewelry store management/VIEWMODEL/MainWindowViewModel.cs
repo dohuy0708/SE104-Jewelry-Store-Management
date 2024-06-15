@@ -26,7 +26,7 @@ namespace Jewelry_store_management.VIEWMODEL
         public ICommand MenuAccountCommand { get; set; }
  
         public scrHome scrHome;
-        public scrAccount scrAccount;
+        public scrAccountViewModel scrAccount;
         public scrAddpro scrAddpro;
         public scrOrder scrOrder;
         public scrService scrService;
@@ -132,7 +132,7 @@ namespace Jewelry_store_management.VIEWMODEL
         {
             scrWarehouse = new scrWarehouse();
             scrSupplier = new scrSupplier();    
-            scrAccount = new scrAccount();  
+            scrAccount = new scrAccountViewModel();  
             scrHome = new scrHome();
             scrAddpro = new scrAddpro();
             scrOrder = new scrOrder();

@@ -10,5 +10,6 @@ namespace Jewelry_store_management.HELPER
     {
         public static string VerificationCode { get; set; }
         public static string VerificationEmail { get; set; }
+        public static string CurrentEmail { get; set; }
     }
 }

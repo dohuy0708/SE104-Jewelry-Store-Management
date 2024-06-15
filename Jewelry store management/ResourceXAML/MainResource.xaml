@@ -1,12 +1,14 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:viewmodel="clr-namespace:Jewelry_store_management.VIEWMODEL"
-                    xmlns:view="clr-namespace:Jewelry_store_management.VIEW"
-                  >
+                    xmlns:view="clr-namespace:Jewelry_store_management.VIEW" xmlns:view1="clr-namespace:Jewelry_store_management.GUI">
     <viewmodel:BaseViewModel x:Key="BaseVM"></viewmodel:BaseViewModel>
     <viewmodel:TestViewModel x:Key="TestVM"></viewmodel:TestViewModel>
     <viewmodel:StartViewModel x:Key="StartVM"></viewmodel:StartViewModel>
     <viewmodel:MainWindowViewModel x:Key="MainWindowVM"></viewmodel:MainWindowViewModel>
+   <viewmodel:scrAccountViewModel x:Key="scrAccountVM"></viewmodel:scrAccountViewModel>
+    <viewmodel:ChangePasswordViewModel x:Key="ChangePassVM"></viewmodel:ChangePasswordViewModel>
+    
     <DataTemplate DataType="{x:Type viewmodel:SignInViewModel}">
         <view:SignInView/>
     </DataTemplate>
@@ -27,6 +29,10 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type viewmodel:GetNewPassWordViewModel}">
         <view:GetNewPassWordView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewmodel:scrAccountViewModel}">
+        <view:scrAccount/>
     </DataTemplate>
 
 

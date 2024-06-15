@@ -50,7 +50,7 @@ namespace Jewelry_store_management.HELPER
         /// Đăng nhập 
 
         // Lấy người dùng bằng email
-        public async Task<User> GetUserByEmail(string email)
+        public async Task <User> GetUserByEmail(string email)
         {
             FirebaseResponse response = await _client.GetAsync("users");
             var users = response.ResultAs<Dictionary<string, User>>();

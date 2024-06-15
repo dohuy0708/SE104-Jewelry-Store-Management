@@ -463,9 +463,11 @@
     <Compile Include="Command\RelayCommand.cs" />
     <Compile Include="VIEWMODEL\AddProductViewModel.cs" />
     <Compile Include="VIEWMODEL\AddSupplierViewModel.cs" />
+    <Compile Include="VIEWMODEL\ChangePasswordViewModel.cs" />
     <Compile Include="VIEWMODEL\ForgetPasswordViewModel.cs" />
     <Compile Include="VIEWMODEL\GetNewPassWordViewModel.cs" />
     <Compile Include="VIEWMODEL\MainWindowViewModel.cs" />
+    <Compile Include="VIEWMODEL\scrAccountViewModel.cs" />
     <Compile Include="VIEWMODEL\SignInViewModel.cs" />
     <Compile Include="VIEWMODEL\SignUpViewModel.cs" />
     <Compile Include="VIEWMODEL\StartViewModel.cs" />
@@ -475,6 +477,9 @@
     </Compile>
     <Compile Include="VIEW\AddSuppierView.xaml.cs">
       <DependentUpon>AddSuppierView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VIEW\ChangePassWordView.xaml.cs">
+      <DependentUpon>ChangePassWordView.xaml</DependentUpon>
     </Compile>
     <Compile Include="VIEW\ForgetPasswordView.xaml.cs">
       <DependentUpon>ForgetPasswordView.xaml</DependentUpon>
@@ -537,6 +542,10 @@
     <Compile Include="VIEW\VerifyCodeView.xaml.cs">
       <DependentUpon>VerifyCodeView.xaml</DependentUpon>
     </Compile>
+    <Page Include="VIEW\ChangePassWordView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="VIEW\ForgetPasswordView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
