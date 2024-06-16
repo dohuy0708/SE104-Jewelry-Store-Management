@@ -18,16 +18,17 @@ namespace Jewelry_store_management.VIEWMODEL
         public ICommand RemoveImageCommand { get; set; }
 
         // List hình ảnh
-        private ObservableCollection<BitmapImage> imagelist { get; set; }
-        public ObservableCollection<BitmapImage> Imagelist
+        private String image{ get; set; }
+        public String Image
         {
-            get { return imagelist; }
+            get { return image; }
             set 
             { 
-                imagelist = value;
+                image = value;
                 OnPropertyChanged();
             }
         }
+
         // List nhà cung cấp
         private ObservableCollection<String> supplierlist { get; set; }
         public ObservableCollection<String> Supplierlist
@@ -49,11 +50,20 @@ namespace Jewelry_store_management.VIEWMODEL
                 OnPropertyChanged();
             }
         }
+        private bool hasImage;
+        public bool HasImage
+        {
+            get { return hasImage; }
+            set
+            {
+                hasImage = value;
+                OnPropertyChanged(nameof(HasImage));
+            }
+        }
         public AddProductViewModel()
         {
             Supplierlist = new ObservableCollection<string>();
             GetSupplierlist();
-            Imagelist = new ObservableCollection<BitmapImage>();
             AddImageCommand = new RelayCommand(_ => AddImage());
             RemoveImageCommand = new RelayCommand<object>(RemoveImage);
         }
@@ -61,25 +71,21 @@ namespace Jewelry_store_management.VIEWMODEL
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Image Files (*.bmp;*.jpg;*.png)|*.bmp;*.jpg;*.png|All files (*.*)|*.*";
-            openFileDialog.Multiselect = true;
+            openFileDialog.Multiselect = false;
             if (openFileDialog.ShowDialog() == true)
             {
-                foreach (string filename in openFileDialog.FileNames)
+                foreach (String filename in openFileDialog.FileNames)
                 {
-                    BitmapImage bitmap = new BitmapImage();
-                    bitmap.BeginInit();
-                    bitmap.UriSource = new Uri(filename);
-                    bitmap.EndInit();
-                    Imagelist.Add(bitmap);
+                    Image = filename;
                 }
             }
         }
          private void RemoveImage(object obj)
         {
             BitmapImage image = obj as BitmapImage;
-            if (image != null && Imagelist.Contains(image))
+            if (image != null)
             {
-                Imagelist.Remove(obj as BitmapImage);
+                image = null;
                 image.StreamSource?.Dispose();
             }
         }   
@@ -89,7 +95,13 @@ namespace Jewelry_store_management.VIEWMODEL
             Supplierlist.Add("aaa");
             Supplierlist.Add("bbb");
             Supplierlist.Add("ccc");
-
+            if (Image != null)
+            {
+                HasImage = true;
+            }
+            else {
+                hasImage = false;
+            }
         }
     }
 }

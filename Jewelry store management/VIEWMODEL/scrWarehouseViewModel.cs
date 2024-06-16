@@ -4,17 +4,20 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
 using Jewelry_store_management.MODELS;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Jewelry_store_management.VIEWMODEL
 {
-    public class scrWarehouseViewModel : INotifyPropertyChanged
+    public class scrWarehouseViewModel : BaseViewModel
     {
         private ObservableCollection<Product> productEntries;
-
         public ObservableCollection<Product> ProductEntries
         {
             get { return productEntries; }
@@ -24,6 +27,12 @@ namespace Jewelry_store_management.VIEWMODEL
                 OnPropertyChanged();
             }
         }
+        public ObservableCollection<String> CategoryList;
+        public ObservableCollection<String> TypeList;
+        public ObservableCollection<String> MaterialList;
+        public ObservableCollection<Filter> CategoryFilterList;
+        public ICollectionView CategoryFilteredItems { get; set; }
+
 
         public ICommand SearchCommand { get; set; }
 
@@ -50,17 +59,43 @@ namespace Jewelry_store_management.VIEWMODEL
 
             // Khởi tạo lệnh tìm kiếm
             SearchCommand = new RelayCommand(Search);
+            //Khởi tạo danh sách category
+           CategoryList = new ObservableCollection<string> { "Vàng", "Trang Sức" };
+            CategoryFilterList = new ObservableCollection<Filter>(CategoryList.Select(c => new Filter { Name = c }));
+            CategoryFilteredItems = CollectionViewSource.GetDefaultView(ProductEntries);
+            CategoryFilteredItems.Filter = FilterItems;
+        }
+        private bool FilterItems(object item)
+        {
+            if (item is Product currentItem)
+            {
+                return CategoryFilterList.Any(f => f.IsSelected && f.Name == currentItem.Category);
+            }
+            return false;
         }
 
         private void Search(object parameter)
         {
             // Thực hiện logic tìm kiếm ở đây
         }
-        public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        public class Filter: BaseViewModel
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+            private bool isSelected;
+            public string Name { get; set; }
+
+            public bool IsSelected
+            {
+                get => isSelected;
+                set
+                {
+                    if (isSelected != value)
+                    {
+                        isSelected = value;
+                        OnPropertyChanged(nameof(IsSelected));
+                    }
+                }
+            }
         }
     }
 }

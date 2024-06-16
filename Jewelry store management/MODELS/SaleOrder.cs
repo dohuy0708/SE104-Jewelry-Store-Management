@@ -40,7 +40,10 @@ namespace Jewelry_store_management.MODELS
             status = statuss;
             statusImage = StatusImage;
         }
-
+        public SaleOrder(List<Product> listSaleProduct)
+        {
+            ListSaleProduct=listSaleProduct;
+        }
         public void CalculateTotalPrice()
         {
             TotalPrice = ListSaleProduct.Sum(product => product.SalePrice);

@@ -83,6 +83,22 @@
                     </Style>
                 </TextBox.Style>
             </TextBox>
+            <StackPanel>
+                <ItemsControl ItemsSource="{Binding CategoryFilterList}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <CheckBox Content="{Binding Name}" IsChecked="{Binding IsSelected, Mode=TwoWay}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <ListBox ItemsSource="{Binding CategoryFilteredItems}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
             <ScrollViewer VerticalScrollBarVisibility="Visible">
                 <ItemsControl ItemsSource="{Binding ProductEntries}">
                     <ItemsControl.ItemsPanel>

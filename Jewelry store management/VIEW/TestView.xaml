@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Jewelry_store_management.VIEW"
+        xmlns:local="clr-namespace:Jewelry_store_management.VIEW" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="TestView" Height="450" Width="800"
         DataContext="{StaticResource TestVM}">
@@ -23,5 +23,16 @@
 
         <Button Content="Add User" Command="{Binding AddUserCommand}" Grid.Row="2" Margin="50,5"/>
         <Button Content="Retrieve User" Command="{Binding RetrieveUserCommand}" Grid.Row="3" Margin="100,5"/>
+        <ComboBox ItemsSource="{Binding Items}"
+                  SelectedItem="{Binding SelectedItem}"
+                  Width="200">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}"
+                                           CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ComboBox}}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ComboBox>
+
     </Grid>
 </Window>
