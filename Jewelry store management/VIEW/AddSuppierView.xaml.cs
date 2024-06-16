@@ -18,7 +18,7 @@ namespace Jewelry_store_management.VIEW
     /// <summary>
     /// Interaction logic for AddSuppierView.xaml
     /// </summary>
-    public partial class AddSuppierView : UserControl
+    public partial class AddSuppierView 
     {
         public AddSuppierView()
         {
