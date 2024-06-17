@@ -39,7 +39,7 @@ namespace Jewelry_store_management.MODELS
 
         public void CalculateTotalPrice()
         {
-            TotalPrice = ListPurchaseProduct.Sum(product => product.SalePrice);
+            TotalPrice = (double)ListPurchaseProduct.Sum(product => product.SalePrice);
         }
         public void CalculateCost()
         {

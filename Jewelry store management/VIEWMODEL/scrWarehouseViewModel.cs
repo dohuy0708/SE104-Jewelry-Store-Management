@@ -32,17 +32,7 @@ namespace Jewelry_store_management.VIEWMODEL
             // Khởi tạo danh sách pro
             ProductEntries = new ObservableCollection<Product>
         {
-            new Product { PID = "SP11", Name = "Dây chuyền lục bảo", Number=200, ImageURL="/Drawble/Images/Logo.png" },
-            new Product { PID = "SP66", Name = "Ngọc đại pháp sư", Number=100, ImageURL="/Drawble/Images/Logo.png" },
-            new Product { PID = "SP33", Name = "Nhẫn máu", Number=300, ImageURL="/Drawble/Images/Logo.png" },
-            new Product { PID = "SP34", Name = "Nhẫn máu cam", Number=400, ImageURL="/Drawble/Images/Logo.png" },
-            new Product { PID = "SP35", Name = "Nhẫn máu xanh", Number=600, ImageURL="/Drawble/Images/Logo.png" },
-            new Product { PID = "SP36", Name = "Nhẫn máu cam xanh", Number=500, ImageURL="/Drawble/Images/Logo.png" },
-            new Product { PID = "SP37", Name = "Nhẫn máu blue", Number=700, ImageURL="/Drawble/Images/Logo.png" },
-            new Product { PID = "SP38", Name = "Nhẫn máu orange", Number=900, ImageURL="/Drawble/Images/Logo.png" },
-            new Product { PID = "SP39", Name = "Nhẫn máu blue orange", Number=800, ImageURL="/Drawble/Images/Logo.png" },
-            new Product { PID = "SP23", Name = "Nhẫn máu orange blue", Number=1100, ImageURL="/Drawble/Images/Logo.png" },
-            new Product { PID = "SP13", Name = "Nhẫn máu xanh cam", Number=1000, ImageURL="/Drawble/Images/Logo.png" },
+            
             //new Supplier { SID = "NCC2", Name = "Cty TNHH TV2", Address="TP. Hà Nội" },
             //new Supplier { SID = "NCC3", Name = "Cty H-Jewelry", Address="Bình Dương" },
             // Thêm các mục khác nếu cần thiết

@@ -470,13 +470,12 @@
     <Compile Include="VIEWMODEL\ForgetPasswordViewModel.cs" />
     <Compile Include="VIEWMODEL\GetNewPassWordViewModel.cs" />
     <Compile Include="VIEWMODEL\MainWindowViewModel.cs" />
-	  
     <Compile Include="VIEWMODEL\scrAddproViewModel.cs" />
     <Compile Include="VIEWMODEL\scrOrderViewModel.cs" />
     <Compile Include="VIEWMODEL\scrServiceViewModel.cs" />
     <Compile Include="VIEWMODEL\scrSupplierViewModel.cs" />
     <Compile Include="VIEWMODEL\scrWarehouseViewModel.cs" />
-	 <Compile Include="VIEWMODEL\scrAccountViewModel.cs" />
+    <Compile Include="VIEWMODEL\scrAccountViewModel.cs" />
     <Compile Include="VIEWMODEL\PurchaseOderViewModel.cs" />
     <Compile Include="VIEWMODEL\ServiceViewModel.cs" />
     <Compile Include="VIEWMODEL\SignInViewModel.cs" />
@@ -734,6 +733,14 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Drawable\Icons\icon_avatar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Drawable\Icons\icon_filter.png" />
+    <Resource Include="Drawable\Icons\icon_search.png" />
+    <Resource Include="Drawable\Icons\icon_sort.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Drawable\Icons\icon_detail.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Google.Api.CommonProtos.2.15.0\build\Google.Api.CommonProtos.targets" Condition="Exists('..\packages\Google.Api.CommonProtos.2.15.0\build\Google.Api.CommonProtos.targets')" />

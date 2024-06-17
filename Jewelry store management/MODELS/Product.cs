@@ -16,19 +16,19 @@ namespace Jewelry_store_management.MODELS
         public string Description { get; set; } // mô tả 
         public string Category { get; set; } // Vàng / Trang sức
         public string SupplierName { get; set; }
-        public double PurchasePrice { get; set; }
+        public decimal PurchasePrice { get; set; }
         public double Profit { get; set; }// lợi nhuận 
-        public double SalePrice { get; set; }
+        public decimal SalePrice { get; set; }
         public string DateImport { get; set; }
-        public double weight { get; set; } // trọng lượng vàng, nhiu phân  
+        public double Weight { get; set; } // trọng lượng vàng, nhiu phân  
         public string Size { get; set; }
         public string Type { get; set; } //  vàng: nhẫn/ thẻ ; trang sức : nhẫn, dây chuyển, bông tai
         public string Material { get; set; } // chất liệu : 24k 18k bạc bạch kim 
-        public int   Number { get; set; } // Tổng số lượng
+        public int   Quantity { get; set; } // Tổng số lượng
         public int Remain { get; set; } // số lượng còn lại 
         public string ImageURL { get; set; }
 
-        public Product(string name, string pID, string description, string category, string supplierName, double purchasePrice, double profit, double salePrice, string dateImport, double weight, string size, string type, string material, int number, string imageURL)
+        public Product(string name, string pID, string description, string category, string supplierName, decimal purchasePrice, double profit, decimal salePrice, string dateImport, double weight, string size, string type, string material, int number, string imageURL)
         {
             Name=name;
             PID=pID;
@@ -39,20 +39,20 @@ namespace Jewelry_store_management.MODELS
             Profit=profit;
             SalePrice=salePrice;
             DateImport=dateImport;
-            this.weight=weight;
+            this.Weight=weight;
             Size=size;
             Type=type;
             Material=material;
-            Number=number;
+            Quantity=number;
             ImageURL=imageURL;
         }
-        public Product(string name, string pID, double purchasePrice,string size,int number)
+        public Product(string name, string pID, decimal purchasePrice,string size,int number)
         {
             Name=name;
             PID=pID;
             PurchasePrice = purchasePrice;
             Size = size;
-            Number = number;
+            Quantity = number;
         }
     }
 }

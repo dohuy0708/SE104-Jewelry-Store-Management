@@ -171,21 +171,26 @@ namespace Jewelry_store_management.VIEWMODEL
         {
 
             // Thêm cái messagebox vào 
+            MessageBox_Window.ShowDialog("Bạn chắc chắn muốn đăng xuất!", "Chú ý", "\\Drawable\\Icons\\icon_attention.png", MessageBox_Window.MessageBoxButton.OkCancel);
 
+            if (MessageBox_Window.buttonResultClicked == MessageBox_Window.ButtonResult.OK)
+            {
+                // Clear the global variables
+                GlobalVariables.CurrentEmail = null;
 
-            // Clear the global variables
-            GlobalVariables.CurrentEmail = null;
+                // Close the current window
+                var currentWindow = Application.Current.MainWindow;
 
-            // Close the current window
-            var currentWindow = Application.Current.MainWindow;
+                // Open the StartView window
+                var startView = new StartView();
+                Application.Current.MainWindow = startView;
+                startView.Show();
 
-            // Open the StartView window
-            var startView = new StartView();
-            Application.Current.MainWindow = startView;
-            startView.Show();
+                // Close the current window
+                currentWindow.Close();
+            }    
 
-            // Close the current window
-            currentWindow.Close();
+                
         }   
 
         private async Task ChangePassword()
