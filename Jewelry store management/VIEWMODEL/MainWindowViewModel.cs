@@ -172,13 +172,13 @@ namespace Jewelry_store_management.VIEWMODEL
             Scr = 1;
             UpdateView();
             ResetMenuBackgrounds();
-            MenuHomeBackground = Brushes.Aqua ;
+            MenuHomeBackground = Brushes.SkyBlue ;
         }
 
         private async Task  MenuOrderClick()
         {
             ResetMenuBackgrounds();
-            MenuOrderBackground = Brushes.Aqua;
+            MenuOrderBackground = Brushes.SkyBlue;
             Scr = 2;
             UpdateView() ;
             
@@ -187,7 +187,7 @@ namespace Jewelry_store_management.VIEWMODEL
         private async Task  MenuServiceClick()
         {
             ResetMenuBackgrounds();
-            MenuServiceBackground = Brushes.Aqua;
+            MenuServiceBackground = Brushes.SkyBlue;
             Scr = 3;
             UpdateView();
             
@@ -196,7 +196,7 @@ namespace Jewelry_store_management.VIEWMODEL
         private async Task MenuWarehouseClick()
         {
             ResetMenuBackgrounds();
-            MenuWarehouseBackground = Brushes.Aqua;
+            MenuWarehouseBackground = Brushes.SkyBlue;
             Scr = 4;
             UpdateView();
            
@@ -205,7 +205,7 @@ namespace Jewelry_store_management.VIEWMODEL
         private async Task MenuAddproClick()
         {
             ResetMenuBackgrounds();
-            MenuAddproBackground = Brushes.Aqua;
+            MenuAddproBackground = Brushes.SkyBlue;
             Scr = 5;
             UpdateView();
             
@@ -214,7 +214,7 @@ namespace Jewelry_store_management.VIEWMODEL
         private async Task MenuSupplierClick()
         {
             ResetMenuBackgrounds();
-            MenuSupplierBackground = Brushes.Aqua;
+            MenuSupplierBackground = Brushes.SkyBlue;
             Scr = 6;
             UpdateView();
             
@@ -223,7 +223,7 @@ namespace Jewelry_store_management.VIEWMODEL
         private async Task MenuAccountClick()
         {
             ResetMenuBackgrounds();
-            MenuAccountBackground = Brushes.Aqua;
+            MenuAccountBackground = Brushes.SkyBlue;
             Scr = 7;
             UpdateView();
              

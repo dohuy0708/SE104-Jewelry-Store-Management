@@ -19,8 +19,8 @@
         <!-- Header -->
         <Border Background="AliceBlue" Grid.Row="0" Padding="10" BorderBrush="Gray" BorderThickness="0,0,0,1">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Thêm Sản Phẩm" FontSize="24" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Left"/>
-                <TextBlock Margin="630,0,10,0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontFamily="Gigi" FontWeight="Bold" FontStyle="Italic">H-Jewelry</TextBlock>
+                <TextBlock Text="Nhập hàng" FontSize="24" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Left"/>
+                <TextBlock Margin="650,0,10,0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontFamily="Gigi" FontWeight="Bold" FontStyle="Italic">H-Jewelry</TextBlock>
                 <Border Height="30" Width="45" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Image Source="/Drawable/Images/Logo.png" Margin="0,0,0,0"/>
                 </Border>
@@ -69,9 +69,9 @@
             </TextBox>
 
             <!-- Nút thêm sản phẩm -->
-            <Button Width="140" Height="40" Style="{StaticResource MaterialDesignRaisedButton}" Margin="170 0 0 0"
-          md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="AliceBlue"  Background="Aqua"  Command="{Binding  AddProCommand}"
-          Foreground="White" Content="Thêm sản phẩm" />
+            <Button Width="120" Height="40" Style="{StaticResource MaterialDesignRaisedButton}" Margin="170 0 0 0"
+          md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="AliceBlue"  Background="Aqua"  Command="{Binding  PurchaseProCommand}"
+          Foreground="White" Content="Nhập hàng" />
         </StackPanel>
 
         <!-- DataGrid -->

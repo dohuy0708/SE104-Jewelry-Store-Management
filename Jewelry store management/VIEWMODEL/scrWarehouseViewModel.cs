@@ -8,11 +8,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Jewelry_store_management.MODELS;
+using Jewelry_store_management.VIEW;
 
 namespace Jewelry_store_management.VIEWMODEL
 {
-    public class scrWarehouseViewModel : INotifyPropertyChanged
+    public class scrWarehouseViewModel :BaseViewModel
     {
+
+        // khai báo command
+        public ICommand SearchCommand { get; set; }
+
+        public ICommand AddCommand { get; set; }
+
+
+        // khai báo trường dữ liệu
         private ObservableCollection<Product> productEntries;
 
         public ObservableCollection<Product> ProductEntries
@@ -25,32 +34,31 @@ namespace Jewelry_store_management.VIEWMODEL
             }
         }
 
-        public ICommand SearchCommand { get; set; }
+     
 
         public scrWarehouseViewModel()
         {
             // Khởi tạo danh sách pro
-            ProductEntries = new ObservableCollection<Product>
-        {
-            
-            //new Supplier { SID = "NCC2", Name = "Cty TNHH TV2", Address="TP. Hà Nội" },
-            //new Supplier { SID = "NCC3", Name = "Cty H-Jewelry", Address="Bình Dương" },
-            // Thêm các mục khác nếu cần thiết
-        };
+            ProductEntries = new ObservableCollection<Product>();
 
-            // Khởi tạo lệnh tìm kiếm
+
+            AddCommand = new RelayCommand(async _ => await AddClick());
             SearchCommand = new RelayCommand(Search);
+        }
+
+        private async Task AddClick()
+        {
+            var addProView = new AddProductView
+            {
+                DataContext = new AddProductViewModel()
+            };
+            addProView.ShowDialog();
         }
 
         private void Search(object parameter)
         {
             // Thực hiện logic tìm kiếm ở đây
         }
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged([CallerMemberName] string name = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
+      
     }
 }

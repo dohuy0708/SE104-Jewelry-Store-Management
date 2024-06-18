@@ -18,7 +18,7 @@ namespace Jewelry_store_management.VIEWMODEL
     public class scrAddproViewModel:BaseViewModel
     {
         public ICommand SearchCommand { get; set; }
-        public ICommand AddProCommand { get; set; }
+        public ICommand PurchaseProCommand { get; set; }
 
        
         private ObservableCollection<AddPro> addproEntries;
@@ -44,7 +44,7 @@ namespace Jewelry_store_management.VIEWMODEL
             // Khởi tạo lệnh tìm kiếm
 
             SearchCommand = new RelayCommand(Search);
-            AddProCommand = new RelayCommand(async _ => await AddProClick());
+            PurchaseProCommand = new RelayCommand(async _ => await AddProClick());
         }
 
 
@@ -54,11 +54,11 @@ namespace Jewelry_store_management.VIEWMODEL
         {
             
 
-            var addProView = new AddProductView
+            var PurchaseProView = new PurchaseOrderView
             {
-                DataContext = new AddProductViewModel()
+                DataContext = new PurchaseOderViewModel()
             };
-            addProView.ShowDialog();
+           PurchaseProView.ShowDialog();
 
              
         }

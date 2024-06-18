@@ -71,7 +71,7 @@
             <!-- Nút thêm sản phẩm -->
             <Button Width="140" Height="40" Style="{StaticResource MaterialDesignRaisedButton}" Margin="170 0 0 0"
           md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="AliceBlue"  Background="Aqua" 
-          Foreground="White" Content="Thêm sản phẩm" />
+          Foreground="White" Content="Thêm sản phẩm"  Command="{Binding AddCommand}"/>
         </StackPanel>
 
         <!-- ItemsControl -->
