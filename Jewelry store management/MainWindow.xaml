@@ -6,21 +6,22 @@
         xmlns:local="clr-namespace:Jewelry_store_management"
         xmlns:vm="clr-namespace:Jewelry_store_management.VIEWMODEL"
         mc:Ignorable="d"
-         Icon="\Drawable\Images\Logo.png"
-        Title="H-Jewelry Management" Height="450" Width="800" WindowStartupLocation="CenterScreen"
-       DataContext="{StaticResource MainWindowVM}" >
+        Icon="\Drawable\Images\Logo.png"
+        Title="H-Jewelry Management" Height="700" Width="1200" WindowStartupLocation="CenterScreen"
+        DataContext="{StaticResource MainWindowVM}"  
+        ResizeMode="NoResize">
 
-    
-    
-
-
-
-    <Border CornerRadius="5" MouseDown="Border_MouseDown">
+    <Border CornerRadius="5" MouseDown="Border_MouseDown" BorderBrush="Gray" BorderThickness="1,1,1,1">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="195"/>
-                <ColumnDefinition  />
+                <ColumnDefinition Width="199"/>
+                <ColumnDefinition Width="1"/>
+                <!-- Separator Column -->
+                <ColumnDefinition />
+                <!-- Main Content Column -->
             </Grid.ColumnDefinitions>
+
+            <!-- Sidebar -->
             <Border CornerRadius="10,0,0,10" Grid.Column="0">
                 <Border.Background>
                     <SolidColorBrush Color="AliceBlue"/>
@@ -30,10 +31,10 @@
                         <Border Height="75" Width="95" HorizontalAlignment="Center" VerticalAlignment="Top">
                             <Image Source="/Drawable/Images/Logo.png" Margin="0,10,0,0"/>
                         </Border>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontFamily="Gigi" FontWeight="Bold" FontStyle="Italic">H-Jewelry</TextBlock>
 
                         <!-- Home -->
-                        <Button Command="{Binding MenuHomeCommand}" Cursor="Hand" Background="{Binding MenuHomeBackground}" BorderBrush="Transparent" Margin="0,0,0,0" Height="42" 
-                                >
+                        <Button Command="{Binding MenuHomeCommand}" Cursor="Hand" Background="{Binding MenuHomeBackground}" BorderBrush="Transparent" Margin="0,25,0,0" Height="42">
                             <StackPanel Orientation="Horizontal">
                                 <Border Width="50">
                                     <Image Source="/Drawable/Icons/icon_home.png" Margin="12,0,12,0" Height="27" Width="45"/>
@@ -43,7 +44,7 @@
                         </Button>
 
                         <!-- Order -->
-                        <Button Command="{Binding MenuOrderCommand}" Cursor="Hand" Background="{Binding MenuOrderBackground}" BorderBrush="Transparent" Margin="0,0,0,0" Height="42">
+                        <Button Command="{Binding MenuOrderCommand}" Cursor="Hand" Background="{Binding MenuOrderBackground}" BorderBrush="Transparent" Margin="0,5,0,0" Height="42">
                             <StackPanel Orientation="Horizontal">
                                 <Border Width="50">
                                     <Image Source="/Drawable/Icons/icon_order.png" Margin="12,0,12,0" Height="27" Width="45"/>
@@ -53,7 +54,7 @@
                         </Button>
 
                         <!-- Service -->
-                        <Button Command="{Binding MenuServiceCommand}" Cursor="Hand" Background="{Binding MenuServiceBackground}" BorderBrush="Transparent" Margin="0,0,0,0" Height="42">
+                        <Button Command="{Binding MenuServiceCommand}" Cursor="Hand" Background="{Binding MenuServiceBackground}" BorderBrush="Transparent" Margin="0,5,0,0" Height="42">
                             <StackPanel Orientation="Horizontal">
                                 <Border Width="50">
                                     <Image Source="/Drawable/Icons/icon_service.png" Margin="12,0,12,0" Height="27" Width="45"/>
@@ -63,7 +64,7 @@
                         </Button>
 
                         <!-- Warehouse -->
-                        <Button Command="{Binding MenuWarehouseCommand}" Cursor="Hand" Background="{Binding MenuWarehouseBackground}" BorderBrush="Transparent" Margin="0,0,0,0" Height="42">
+                        <Button Command="{Binding MenuWarehouseCommand}" Cursor="Hand" Background="{Binding MenuWarehouseBackground}" BorderBrush="Transparent" Margin="0,5,0,0" Height="42">
                             <StackPanel Orientation="Horizontal">
                                 <Border Width="50">
                                     <Image Source="/Drawable/Icons/icon_warehouse.png" Margin="6,0,6,0" Height="27" Width="45"/>
@@ -73,7 +74,7 @@
                         </Button>
 
                         <!-- Add Pro -->
-                        <Button Command="{Binding MenuAddproCommand}" Cursor="Hand" Background="{Binding MenuAddproBackground}" BorderBrush="Transparent" Margin="0,0,0,0" Height="42">
+                        <Button Command="{Binding MenuAddproCommand}" Cursor="Hand" Background="{Binding MenuAddproBackground}" BorderBrush="Transparent" Margin="0,5,0,0" Height="42">
                             <StackPanel Orientation="Horizontal">
                                 <Border Width="50">
                                     <Image Source="/Drawable/Icons/icon_addPro.png" Margin="6,0,6,0" Height="27" Width="45"/>
@@ -83,7 +84,7 @@
                         </Button>
 
                         <!-- Supplier -->
-                        <Button Command="{Binding MenuSupplierCommand}" Cursor="Hand" Background="{Binding MenuSupplierBackground}" BorderBrush="Transparent" Margin="0,0,0,0" Height="42">
+                        <Button Command="{Binding MenuSupplierCommand}" Cursor="Hand" Background="{Binding MenuSupplierBackground}" BorderBrush="Transparent" Margin="0,5,0,0" Height="42">
                             <StackPanel Orientation="Horizontal">
                                 <Border Width="45">
                                     <Image Source="/Drawable/Icons/icon_supplier.png" Margin="4,0,8,0" Height="27" Width="45"/>
@@ -93,7 +94,7 @@
                         </Button>
 
                         <!-- Account -->
-                        <Button Command="{Binding MenuAccountCommand}" Cursor="Hand" Background="{Binding MenuAccountBackground}" BorderBrush="Transparent" Margin="0,0,0,0" Height="42">
+                        <Button Command="{Binding MenuAccountCommand}" Cursor="Hand" Background="{Binding MenuAccountBackground}" BorderBrush="Transparent" Margin="0,200,0,0" Height="42">
                             <StackPanel Orientation="Horizontal">
                                 <Border Width="50">
                                     <Image Source="/Drawable/Icons/icon_admin.png" Margin="4,0,8,0" Height="27" Width="45"/>
@@ -104,7 +105,12 @@
                     </StackPanel>
                 </ScrollViewer>
             </Border>
-            <Border CornerRadius="0,5,5,0" Grid.Column="1" >
+
+            <!-- Black Separator -->
+            <Border Grid.Column="1" Background="Gray" Width="2"/>
+
+            <!-- Main Content -->
+            <Border CornerRadius="0,5,5,0" Grid.Column="2">
                 <Border.Background>
                     <SolidColorBrush Color="SkyBlue"/>
                 </Border.Background>

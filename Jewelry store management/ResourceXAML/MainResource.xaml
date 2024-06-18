@@ -6,6 +6,10 @@
     <viewmodel:TestViewModel x:Key="TestVM"></viewmodel:TestViewModel>
     <viewmodel:StartViewModel x:Key="StartVM"></viewmodel:StartViewModel>
     <viewmodel:MainWindowViewModel x:Key="MainWindowVM"></viewmodel:MainWindowViewModel>
+    <viewmodel:AddProductViewModel x:Key="AddProduct"></viewmodel:AddProductViewModel>
+    <viewmodel:PurchaseOderViewModel x:Key="Purchase"></viewmodel:PurchaseOderViewModel>
+    <viewmodel:BillViewModel x:Key="Bill"></viewmodel:BillViewModel>
+    <viewmodel:ServiceViewModel x:Key="Service"></viewmodel:ServiceViewModel>
    <viewmodel:scrAccountViewModel x:Key="scrAccountVM"></viewmodel:scrAccountViewModel>
     <viewmodel:ChangePasswordViewModel x:Key="ChangePassVM"></viewmodel:ChangePasswordViewModel>
     
@@ -29,6 +33,9 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type viewmodel:GetNewPassWordViewModel}">
         <view:GetNewPassWordView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodel:PurchaseOderViewModel}">
+        <view:PurchaseOrderView/>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type viewmodel:scrAccountViewModel}">

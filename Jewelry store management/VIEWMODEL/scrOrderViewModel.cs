@@ -11,7 +11,7 @@ using Jewelry_store_management.MODELS;
 
 namespace Jewelry_store_management.VIEWMODEL
 {
-    public class scrOrderViewModel : INotifyPropertyChanged
+    public class scrOrderViewModel : BaseViewModel
     {
 
         private ObservableCollection<SaleOrder> orderEntries;
@@ -47,11 +47,6 @@ namespace Jewelry_store_management.VIEWMODEL
         {
             // Thực hiện logic tìm kiếm ở đây
         }
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged([CallerMemberName] string name = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
+       
     }
 }

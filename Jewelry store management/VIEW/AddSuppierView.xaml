@@ -1,42 +1,35 @@
-﻿<UserControl x:Class="Jewelry_store_management.VIEW.AddSuppierView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Jewelry_store_management.VIEW"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel Background="SkyBlue">
-        <Label Content="THÊM NHÀ CUNG CẤP" FontSize="36" Margin="60 30 60 0">
+﻿<Window x:Class="Jewelry_store_management.VIEW.AddSuppierView"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+         xmlns:local="clr-namespace:Jewelry_store_management.VIEW"
+         mc:Ignorable="d" 
+              WindowStartupLocation="CenterScreen"
+         Height="500"   Width="500" ResizeMode="NoResize"
+         Icon="\Drawable\Images\Logo.png"
+         Title="H-Jewelry" >
+
+    <StackPanel Background="AliceBlue">
+        <Label Content="THÊM NHÀ CUNG CẤP" FontSize="34" Margin="70 30 40 20">
         </Label>
-        <StackPanel Orientation="Horizontal">
-            <StackPanel Margin="60 10 0 0">
-                <Label Content="MÃ NHÀ CUNG CẤP"></Label>
-                <TextBox Width="170"  ></TextBox>
-            </StackPanel>
-            <StackPanel Margin="60 10 30 0">
-                <Label Content="TÊN NHÀ CUNG CẤP"></Label>
-                <TextBox Width="170"  ></TextBox>
-            </StackPanel>
-            <StackPanel Margin="60 10 30 0">
-                <Label Content="SỐ ĐIỆN THOẠI"></Label>
-                <TextBox Width="170"  ></TextBox>
-            </StackPanel>
+        <StackPanel Margin="70 10 0 0">
+            <Label Content="MÃ NHÀ CUNG CẤP"></Label>
+            <TextBox Text="{Binding SupplierID}" Margin="0 0 60 0" FontSize="16"></TextBox>
         </StackPanel>
-        <StackPanel Margin="60 10 80 0">
+        <StackPanel Margin="70 10 0 0">
+            <Label Content="TÊN NHÀ CUNG CẤP"></Label>
+            <TextBox Text="{Binding SupplierName}" Margin="0 0 60 0" FontSize="16"></TextBox>
+        </StackPanel>
+        <StackPanel Margin="70 10 0 0">
+            <Label Content="SỐ ĐIỆN THOẠI"></Label>
+            <TextBox FontSize="16" Text="{Binding SupplierPhone}" Margin="0 0 60 0"  ></TextBox>
+        </StackPanel>
+        <StackPanel Margin="70 10 0 0">
             <Label Content="ĐỊA CHỈ"></Label>
-            <TextBox Width="703" ></TextBox>
+            <TextBox FontSize="16" Text="{Binding SupplierAddress}" Margin="0 0 60 0" ></TextBox>
         </StackPanel>
-        <DataGrid Background="SkyBlue" Margin="60 10 60 0" ItemsSource="{Binding Productlist}" AutoGenerateColumns="False" IsReadOnly="True">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="MÃ SẢN PHẨM" Binding="{Binding PID}"/>
-                <DataGridTextColumn Header="TÊN SẢN PHẨM" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="SIZE " Binding="{Binding Size}"/>
-                <DataGridTextColumn Header="SỐ LƯỢNG" Binding="{Binding Number}"/>
-                <DataGridTextColumn Header="GIÁ NHẬP" Binding="{Binding PurchasePrice}"/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <Button Margin="60 10 60 0" Background="SkyBlue" BorderBrush="Aqua" BorderThickness="2" Content="+" FontSize="24"  VerticalContentAlignment="Top" FontWeight="Bold" Command="{Binding AddProductCommand}"></Button>
-        <Button Margin="200 0 200 0" Content="THÊM NHÀ CUNG CẤP" Background="Aqua" BorderBrush="Transparent"></Button>
+        <Button Margin="70 40 60 0" Width="180" Content="THÊM NHÀ CUNG CẤP" Background="Aqua" BorderBrush="Transparent" Command="{Binding AddSupCommand}"></Button>
     </StackPanel>
-</UserControl>
+</Window>

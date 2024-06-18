@@ -1,0 +1,49 @@
+﻿<Window x:Class="Jewelry_store_management.VIEW.PurchaseOrderView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Jewelry_store_management.VIEW"
+        mc:Ignorable="d"
+        Title="PurchaseOrderView" Height="450" Width="800"
+        DataContext="{StaticResource Purchase}">
+    <StackPanel Background="SkyBlue">
+        <TextBlock Text="NHẬP HÀNG" FontSize="36" Margin="60 20 60 10"></TextBlock>
+        <StackPanel Orientation="Horizontal">
+            <StackPanel Margin="80 10 0 0 ">
+                <Label Content="NHÀ CUNG CẤP"></Label>
+            <ComboBox Width="169" Style="{StaticResource MaterialDesignComboBox}" ItemsSource="{Binding Supplierlist}" SelectedItem="{Binding SelectedSupplier}" Background="SkyBlue">
+            </ComboBox>
+        </StackPanel>
+        <StackPanel Margin="30 10 0 0">
+                <Label Content="TÊN SẢN PHẨM"></Label>
+                <ComboBox Width="169" Style="{StaticResource MaterialDesignComboBox}" ItemsSource="{Binding GetProductlist}" SelectedItem="{Binding SelectedSupplier}" Background="SkyBlue">
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Margin="30 10 0 0">
+                <Label Content="SIZE"></Label>
+                <ComboBox Width="100" Style="{StaticResource MaterialDesignComboBox}" ItemsSource="{Binding Sizelist}" SelectedItem="{Binding SelectedSupplier}" Background="SkyBlue">
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Margin="30 10 30 0">
+                <Label Content="SỐ LƯỢNG"></Label>
+                <TextBox Width="120"  ></TextBox>
+            </StackPanel>
+        </StackPanel>
+        <Button Margin="60 20 60 10" Content="Thêm sản phẩm" Command="{Binding AddProductCommand}"></Button>
+        <DataGrid ItemsSource="{Binding Productlist}" AutoGenerateColumns="False" CanUserAddRows="False" Background="SkyBlue" Margin="60 0 60 0" Height="162">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nhà cung cấp" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Tên sản phẩm" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Size" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Số lượng" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Giá" Binding="{Binding Price}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Tổng giá trị:" FontSize="30" Margin="30 0 0 0"></TextBlock>
+            <TextBlock Text="{Binding TotalPrice}" FontSize="30"></TextBlock>
+            <Button Margin="360 0 60 0" Content="Nhập hàng"></Button>
+        </StackPanel>
+    </StackPanel>
+</Window>

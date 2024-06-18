@@ -482,6 +482,7 @@
     <Compile Include="Command\RelayCommand.cs" />
     <Compile Include="VIEWMODEL\AddProductViewModel.cs" />
     <Compile Include="VIEWMODEL\AddSupplierViewModel.cs" />
+    <Compile Include="VIEWMODEL\BillViewModel.cs" />
     <Compile Include="VIEWMODEL\ChangePasswordViewModel.cs" />
     <Compile Include="VIEWMODEL\ForgetPasswordViewModel.cs" />
     <Compile Include="VIEWMODEL\GetNewPassWordViewModel.cs" />
@@ -493,6 +494,8 @@
     <Compile Include="VIEWMODEL\scrSupplierViewModel.cs" />
     <Compile Include="VIEWMODEL\scrWarehouseViewModel.cs" />
     <Compile Include="VIEWMODEL\scrAccountViewModel.cs" />
+    <Compile Include="VIEWMODEL\PurchaseOderViewModel.cs" />
+    <Compile Include="VIEWMODEL\ServiceViewModel.cs" />
     <Compile Include="VIEWMODEL\SignInViewModel.cs" />
     <Compile Include="VIEWMODEL\SignUpViewModel.cs" />
     <Compile Include="VIEWMODEL\StartViewModel.cs" />
@@ -502,6 +505,9 @@
     </Compile>
     <Compile Include="VIEW\AddSuppierView.xaml.cs">
       <DependentUpon>AddSuppierView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VIEW\BillView.xaml.cs">
+      <DependentUpon>BillView.xaml</DependentUpon>
     </Compile>
     <Compile Include="VIEW\ChangePassWordView.xaml.cs">
       <DependentUpon>ChangePassWordView.xaml</DependentUpon>
@@ -517,6 +523,9 @@
     </Compile>
     <Compile Include="VIEW\PasswordControl.xaml.cs">
       <DependentUpon>PasswordControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VIEW\PurchaseOrderView.xaml.cs">
+      <DependentUpon>PurchaseOrderView.xaml</DependentUpon>
     </Compile>
     <Compile Include="VIEW\RepasswordControl.xaml.cs">
       <DependentUpon>RepasswordControl.xaml</DependentUpon>
@@ -544,6 +553,9 @@
     </Compile>
     <Compile Include="VIEWMODEL\BaseViewModel.cs" />
     <Compile Include="VIEWMODEL\TestViewModel.cs" />
+    <Compile Include="VIEW\ServiceView.xaml.cs">
+      <DependentUpon>ServiceView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VIEW\SignInView.xaml.cs">
       <DependentUpon>SignInView.xaml</DependentUpon>
     </Compile>
@@ -567,6 +579,13 @@
     <Compile Include="VIEW\VerifyCodeView.xaml.cs">
       <DependentUpon>VerifyCodeView.xaml</DependentUpon>
     </Compile>
+    <Page Include="VIEW\BillView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="VIEW\VerifyCodeView.xaml.cs">
+      <DependentUpon>VerifyCodeView.xaml</DependentUpon>
+    </Compile>
     <Page Include="VIEW\ChangePassWordView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -584,6 +603,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="VIEW\PasswordControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VIEW\PurchaseOrderView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -633,6 +656,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="ResourceXAML\MainResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VIEW\ServiceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -724,6 +751,14 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Drawable\Icons\icon_avatar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Drawable\Icons\icon_filter.png" />
+    <Resource Include="Drawable\Icons\icon_search.png" />
+    <Resource Include="Drawable\Icons\icon_sort.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Drawable\Icons\icon_detail.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Google.Api.CommonProtos.2.15.0\build\Google.Api.CommonProtos.targets" Condition="Exists('..\packages\Google.Api.CommonProtos.2.15.0\build\Google.Api.CommonProtos.targets')" />
