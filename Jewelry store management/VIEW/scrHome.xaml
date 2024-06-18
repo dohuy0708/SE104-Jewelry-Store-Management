@@ -4,9 +4,39 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Jewelry_store_management.GUI"
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <!-- Define the color you want to use for the text -->
+        <SolidColorBrush x:Key="ChartTextColor" Color="Black"/>
+    </UserControl.Resources>
     <Grid>
-        <TextBlock>Home</TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="10">
+            <Button Content="Thêm đơn hàng" Margin="0,0,10,0" />
+            <Button Content="Thêm đơn dịch vụ" Margin="0,0,10,0" />
+            <Button Content="Xem giá vàng" />
+        </StackPanel>
+
+        <!-- Chart -->
+        <lvc:CartesianChart Grid.Row="1" Series="{Binding SalesSeries}" Margin="10" >
+            <lvc:CartesianChart.AxisX>
+                <lvc:Axis  Labels="{Binding Weeks}" Foreground="{StaticResource ChartTextColor}">
+                    <lvc:Axis.Separator>
+                        <lvc:Separator Step="1" />
+                    </lvc:Axis.Separator>
+                </lvc:Axis>
+            </lvc:CartesianChart.AxisX>
+            <lvc:CartesianChart.AxisY>
+                <lvc:Axis Title="Doanh thu (triệu đồng)" Foreground="{StaticResource ChartTextColor}">
+                </lvc:Axis>
+            </lvc:CartesianChart.AxisY>
+        </lvc:CartesianChart>
     </Grid>
 </UserControl>
