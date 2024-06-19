@@ -1,29 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using Jewelry_store_management.MODELS;
+using Jewelry_store_management.HELPER;
 using Jewelry_store_management.VIEW;
 
 namespace Jewelry_store_management.VIEWMODEL
 {
-    public class scrWarehouseViewModel :BaseViewModel
+    public class scrWarehouseViewModel : BaseViewModel
     {
+        private ProductHelper _productHelper;
 
-        // khai báo command
+        // Khai báo command
         public ICommand SearchCommand { get; set; }
-
         public ICommand AddCommand { get; set; }
 
-
-        // khai báo trường dữ liệu
+        // Khai báo trường dữ liệu
         private ObservableCollection<Product> productEntries;
-
         public ObservableCollection<Product> ProductEntries
         {
             get { return productEntries; }
@@ -34,31 +29,114 @@ namespace Jewelry_store_management.VIEWMODEL
             }
         }
 
-     
+        private string searchText;
+        public string SearchText
+        {
+            get { return searchText; }
+            set
+            {
+                searchText = value;
+                OnPropertyChanged();
+            }
+        }
 
+        // Các thuộc tính cho sản phẩm
+        private string pid;
+        public string PID
+        {
+            get { return pid; }
+            set
+            {
+                pid = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private int number;
+        public int Number
+        {
+            get { return number; }
+            set
+            {
+                number = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string image;
+        public string Image
+        {
+            get { return image; }
+            set
+            {
+                image = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        // Hàm chính    
         public scrWarehouseViewModel()
         {
-            // Khởi tạo danh sách pro
+            _productHelper = new ProductHelper();
+
+            // Khởi tạo danh sách product
             ProductEntries = new ObservableCollection<Product>();
 
-
-            AddCommand = new RelayCommand(async _ => await AddClick());
+            AddCommand = new RelayCommand(async _ => await AddClick()); // True để bật lệnh mặc định
             SearchCommand = new RelayCommand(Search);
+
+            // Lấy tất cả sản phẩm khi khởi tạo ViewModel
+            LoadAllProducts();
+        }
+
+        private async void LoadAllProducts()
+        {
+            try
+            {
+                var products = await _productHelper.GetAllProducts();
+                ProductEntries.Clear();
+                foreach (var product in products)
+                {
+                    // Kiểm tra và xử lý trường hợp dữ liệu null ở đây
+                    if (product.ImageURL == null)
+                    {
+                        // Nếu ImageURL null, có thể gán một giá trị mặc định hoặc báo lỗi
+                        product.ImageURL = "/Drawable/Images/Logo.png"; // Đường dẫn tới hình ảnh mặc định
+                    }
+                    ProductEntries.Add(product);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Xử lý ngoại lệ ở đây (ví dụ: logging, thông báo lỗi cho người dùng, ...)
+                MessageBox.Show($"Error loading products: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private async Task AddClick()
         {
-            var addProView = new AddProductView
+            try
             {
-                DataContext = new AddProductViewModel()
-            };
-            addProView.ShowDialog();
+                var addProView = new AddProductView
+                {
+                    DataContext = new AddProductViewModel()
+                };
+                addProView.ShowDialog();
+                // Sau khi thêm sản phẩm mới, tải lại danh sách sản phẩm
+                  LoadAllProducts();
+            }
+            catch (Exception ex)
+            {
+                // Xử lý ngoại lệ ở đây (ví dụ: logging, thông báo lỗi cho người dùng, ...)
+                MessageBox.Show($"Error adding product: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void Search(object parameter)
         {
-            // Thực hiện logic tìm kiếm ở đây
+            // Thực hiện logic tìm kiếm sản phẩm theo tên
+           
         }
-      
     }
 }

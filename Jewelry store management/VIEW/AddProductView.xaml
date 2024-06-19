@@ -22,14 +22,13 @@
         <!--Phần ảnh-->
         <Border Grid.Column="0">
             <StackPanel>
-                <Image Source="{Binding Image}" Margin=" 0 80 0 10" Stretch="Uniform" Height="150" Width="150" />
+                <Image x:Name="ImageBox" Source="{Binding Image}" Margin=" 0 80 0 10" Stretch="Uniform" Height="150" Width="150" />
                 <Button Margin="20 0 20 0"   Style="{StaticResource MaterialDesignFlatButton}" 
                         md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="Aqua"  Background="Aqua" Foreground="White" Content="Chọn hình ảnh"
                         Command="{Binding AddImageCommand}">
                 </Button>
 
-                <Button Grid.Row="1" Content="Thay đổi hình ảnh" Command="{Binding RemoveImageCommand}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,10"
-                Visibility="{Binding HasImage, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                
             </StackPanel>
         </Border>
         <!--Phần thêm sp-->
