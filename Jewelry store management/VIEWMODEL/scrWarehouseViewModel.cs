@@ -1,22 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Data;
 using System.Windows.Input;
 using Jewelry_store_management.MODELS;
-using Microsoft.AspNetCore.Mvc.Filters;
+using Jewelry_store_management.HELPER;
+using Jewelry_store_management.VIEW;
 
 namespace Jewelry_store_management.VIEWMODEL
 {
     public class scrWarehouseViewModel : BaseViewModel
     {
+        private ProductHelper _productHelper;
+
+        // Khai báo command
+        public ICommand SearchCommand { get; set; }
+        public ICommand AddCommand { get; set; }
+
+        // Khai báo trường dữ liệu
         private ObservableCollection<Product> productEntries;
         public ObservableCollection<Product> ProductEntries
         {
@@ -34,36 +39,89 @@ namespace Jewelry_store_management.VIEWMODEL
         public ICollectionView CategoryFilteredItems { get; set; }
 
 
-        public ICommand SearchCommand { get; set; }
+        private string searchText;
+        public string SearchText
+        {
+            get { return searchText; }
+            set
+            {
+                searchText = value;
+                OnPropertyChanged();
+            }
+        }
 
+        // Các thuộc tính cho sản phẩm
+        private string pid;
+        public string PID
+        {
+            get { return pid; }
+            set
+            {
+                pid = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private int number;
+        public int Number
+        {
+            get { return number; }
+            set
+            {
+                number = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string image;
+        public string Image
+        {
+            get { return image; }
+            set
+            {
+                image = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        // Hàm chính    
         public scrWarehouseViewModel()
         {
-            // Khởi tạo danh sách pro
-            ProductEntries = new ObservableCollection<Product>
-        {
-            new Product { PID = "SP11", Name = "Dây chuyền lục bảo", Number=200, ImageURL="/Drawble/Images/Logo.png" },
-            new Product { PID = "SP66", Name = "Ngọc đại pháp sư", Number=100, ImageURL="/Drawble/Images/Logo.png" },
-            new Product { PID = "SP33", Name = "Nhẫn máu", Number=300, ImageURL="/Drawble/Images/Logo.png" },
-            new Product { PID = "SP34", Name = "Nhẫn máu cam", Number=400, ImageURL="/Drawble/Images/Logo.png" },
-            new Product { PID = "SP35", Name = "Nhẫn máu xanh", Number=600, ImageURL="/Drawble/Images/Logo.png" },
-            new Product { PID = "SP36", Name = "Nhẫn máu cam xanh", Number=500, ImageURL="/Drawble/Images/Logo.png" },
-            new Product { PID = "SP37", Name = "Nhẫn máu blue", Number=700, ImageURL="/Drawble/Images/Logo.png" },
-            new Product { PID = "SP38", Name = "Nhẫn máu orange", Number=900, ImageURL="/Drawble/Images/Logo.png" },
-            new Product { PID = "SP39", Name = "Nhẫn máu blue orange", Number=800, ImageURL="/Drawble/Images/Logo.png" },
-            new Product { PID = "SP23", Name = "Nhẫn máu orange blue", Number=1100, ImageURL="/Drawble/Images/Logo.png" },
-            new Product { PID = "SP13", Name = "Nhẫn máu xanh cam", Number=1000, ImageURL="/Drawble/Images/Logo.png" },
-            //new Supplier { SID = "NCC2", Name = "Cty TNHH TV2", Address="TP. Hà Nội" },
-            //new Supplier { SID = "NCC3", Name = "Cty H-Jewelry", Address="Bình Dương" },
-            // Thêm các mục khác nếu cần thiết
-        };
+            _productHelper = new ProductHelper();
 
-            // Khởi tạo lệnh tìm kiếm
+            // Khởi tạo danh sách product
+            ProductEntries = new ObservableCollection<Product>();
+
+            AddCommand = new RelayCommand(async _ => await AddClick()); // True để bật lệnh mặc định
             SearchCommand = new RelayCommand(Search);
-            //Khởi tạo danh sách category
-           CategoryList = new ObservableCollection<string> { "Vàng", "Trang Sức" };
-            CategoryFilterList = new ObservableCollection<Filter>(CategoryList.Select(c => new Filter { Name = c }));
-            CategoryFilteredItems = CollectionViewSource.GetDefaultView(ProductEntries);
-            CategoryFilteredItems.Filter = FilterItems;
+
+            // Lấy tất cả sản phẩm khi khởi tạo ViewModel
+            LoadAllProducts();
+        }
+
+        private async void LoadAllProducts()
+        {
+            try
+            {
+                var products = await _productHelper.GetAllProducts();
+                ProductEntries.Clear();
+                foreach (var product in products)
+                {
+                    // Kiểm tra và xử lý trường hợp dữ liệu null ở đây
+                    if (product.ImageURL == null)
+                    {
+                        // Nếu ImageURL null, có thể gán một giá trị mặc định hoặc báo lỗi
+                        product.ImageURL = "/Drawable/Images/Logo.png"; // Đường dẫn tới hình ảnh mặc định
+                    }
+                    ProductEntries.Add(product);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Xử lý ngoại lệ ở đây (ví dụ: logging, thông báo lỗi cho người dùng, ...)
+                MessageBox.Show($"Error loading products: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         private bool FilterItems(object item)
         {
@@ -74,28 +132,29 @@ namespace Jewelry_store_management.VIEWMODEL
             return false;
         }
 
-        private void Search(object parameter)
+        private async Task AddClick()
         {
-            // Thực hiện logic tìm kiếm ở đây
+            try
+            {
+                var addProView = new AddProductView
+                {
+                    DataContext = new AddProductViewModel()
+                };
+                addProView.ShowDialog();
+                // Sau khi thêm sản phẩm mới, tải lại danh sách sản phẩm
+                  LoadAllProducts();
+            }
+            catch (Exception ex)
+            {
+                // Xử lý ngoại lệ ở đây (ví dụ: logging, thông báo lỗi cho người dùng, ...)
+                MessageBox.Show($"Error adding product: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
-        public class Filter: BaseViewModel
+        private void Search(object parameter)
         {
-            private bool isSelected;
-            public string Name { get; set; }
-
-            public bool IsSelected
-            {
-                get => isSelected;
-                set
-                {
-                    if (isSelected != value)
-                    {
-                        isSelected = value;
-                        OnPropertyChanged(nameof(IsSelected));
-                    }
-                }
-            }
+            // Thực hiện logic tìm kiếm sản phẩm theo tên
+           
         }
     }
 }

@@ -1,20 +1,25 @@
-﻿using FireSharp.Interfaces;
+﻿using Firebase.Storage;
+using FireSharp.Interfaces;
 using FireSharp.Response;
 using Jewelry_store_management.MODELS;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace Jewelry_store_management.HELPER
 {
     public class ProductHelper
     {
         private readonly IFirebaseClient _client;
+        private readonly FirebaseStorage _storage;
+
         public ProductHelper()
         {
             _client = FirebaseConfigSingleton.GetClient();
+            _storage = new FirebaseStorage("test-382ab.appspot.com");
         }
 
         // Thêm product
@@ -63,5 +68,51 @@ namespace Jewelry_store_management.HELPER
         {
             return await GetProduct(productId);
         }
+
+        // Upload image to FirebaseStorage and get the URL
+        // Upload image to FirebaseStorage and get the URL
+        // Upload image to FirebaseStorage and get the URL
+        public async Task<string> UploadImageAsync(string filePath)
+        {
+            using (var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read))
+            {
+                var imageUrl = await _storage
+                    .Child("images")
+                    .Child(Path.GetFileName(filePath))
+                    .PutAsync(stream);
+
+                return   imageUrl;
+            }
+        }
+        private string ConvertBitmapImageToBase64(BitmapImage bitmapImage)
+        {
+            if (bitmapImage == null)
+                throw new ArgumentNullException(nameof(bitmapImage));
+
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                BitmapEncoder encoder = new PngBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create(bitmapImage));
+                encoder.Save(memoryStream);
+                byte[] imageBytes = memoryStream.ToArray();
+                return Convert.ToBase64String(imageBytes);
+            }
+        }
+
+        public BitmapImage ConvertBase64ToBitmapImage(string base64String)
+        {
+            byte[] imageBytes = Convert.FromBase64String(base64String);
+            BitmapImage bitmapImage = new BitmapImage();
+            using (MemoryStream memoryStream = new MemoryStream(imageBytes))
+            {
+                bitmapImage.BeginInit();
+                bitmapImage.StreamSource = memoryStream;
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.EndInit();
+            }
+            return bitmapImage;
+        }
+
+
     }
 }

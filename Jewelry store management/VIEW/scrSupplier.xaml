@@ -4,14 +4,34 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Jewelry_store_management.GUI"
-              xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="700" d:DesignWidth="1000">
     <Grid Background="SkyBlue">
-        <StackPanel>
-            <TextBox Width="300" HorizontalAlignment="Left" Margin="10" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}">
+        <!-- Define Row Definitions -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Background="AliceBlue" Grid.Row="0" Padding="10" BorderBrush="Gray" BorderThickness="0,0,0,1">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Nhà Cung Cấp" FontSize="24" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Left"/>
+                <TextBlock Margin="650,0,10,0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontFamily="Gigi" FontWeight="Bold" FontStyle="Italic">H-Jewelry</TextBlock>
+                <Border Height="30" Width="45" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Image Source="/Drawable/Images/Logo.png" Margin="0,0,0,0"/>
+                </Border>
+            </StackPanel>
+        </Border>
+
+        <!-- Search Box -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0">
+            <TextBox Width="600" HorizontalAlignment="Left" Margin="10" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}">
                 <TextBox.Style>
-                    <Style TargetType="TextBox"> 
+                    <Style TargetType="TextBox">
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="TextBox">
@@ -19,62 +39,26 @@
                                         <Border Background="White" BorderBrush="Gray" BorderThickness="1" CornerRadius="5">
                                             <Grid Margin="0,0,-1,2">
                                                 <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="*" />
                                                     <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="*" />
                                                 </Grid.ColumnDefinitions>
-                                                <ScrollViewer x:Name="PART_ContentHost" Margin="5,0,0,0" />
-                                                <TextBlock x:Name="Placeholder" Text="Tìm kiếm" Margin="5,0,0,0" 
-                                                        Foreground="Gray" IsHitTestVisible="False" 
-                                                        VerticalAlignment="Center" />
-                                                <Button Margin="241,1,5,1" Background="Transparent" BorderBrush="AliceBlue"
-                                                     Command="{Binding SearchCommand}" Grid.ColumnSpan="2">
-                                                    <Image Source="/Drawable/Icons/icon_service.png" Width="20" Height="20" />
+
+                                                <Button Margin="5,0,0,0" Background="Transparent" BorderBrush="AliceBlue"
+                                                       Command="{Binding SearchCommand}" Grid.Column="0">
+                                                    <Image Source="/Drawable/Icons/icon_search.png" Width="20" Height="20" />
                                                 </Button>
+
+                                                <ScrollViewer x:Name="PART_ContentHost" Margin="5,0,0,0" />
+                                                <TextBlock  Grid.Column="1"
+                                                    x:Name="Placeholder" Text="Tìm kiếm" Margin="5,0,0,0" 
+                                                           Foreground="Gray" IsHitTestVisible="False" 
+                                                           VerticalAlignment="Center" Visibility="Collapsed"/>
                                             </Grid>
                                         </Border>
                                     </Grid>
                                     <ControlTemplate.Triggers>
                                         <Trigger Property="Text" Value="">
                                             <Setter TargetName="Placeholder" Property="Visibility" Value="Visible" />
-                                        </Trigger>
-                                        <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
-                                            <Setter TargetName="Placeholder" Property="Visibility" Value="Visible" />
-                                        </Trigger>
-                                        <Trigger Property="Text" Value="{x:Null}">
-                                            <Setter TargetName="Placeholder" Property="Visibility" Value="Visible" />
-                                        </Trigger>
-                                        <Trigger Property="Text" Value="0">
-                                            <Setter TargetName="Placeholder" Property="Visibility" Value="Visible" />
-                                        </Trigger>
-                                        <Trigger Property="Text" Value="1">
-                                            <Setter TargetName="Placeholder" Property="Visibility" Value="Collapsed" />
-                                        </Trigger>
-                                        <Trigger Property="Text" Value="2">
-                                            <Setter TargetName="Placeholder" Property="Visibility" Value="Collapsed" />
-                                        </Trigger>
-                                        <Trigger Property="Text" Value="3">
-                                            <Setter TargetName="Placeholder" Property="Visibility" Value="Collapsed" />
-                                        </Trigger>
-                                        <Trigger Property="Text" Value="4">
-                                            <Setter TargetName="Placeholder" Property="Visibility" Value="Collapsed" />
-                                        </Trigger>
-                                        <Trigger Property="Text" Value="5">
-                                            <Setter TargetName="Placeholder" Property="Visibility" Value="Collapsed" />
-                                        </Trigger>
-                                        <Trigger Property="Text" Value="6">
-                                            <Setter TargetName="Placeholder" Property="Visibility" Value="Collapsed" />
-                                        </Trigger>
-                                        <Trigger Property="Text" Value="7">
-                                            <Setter TargetName="Placeholder" Property="Visibility" Value="Collapsed" />
-                                        </Trigger>
-                                        <Trigger Property="Text" Value="8">
-                                            <Setter TargetName="Placeholder" Property="Visibility" Value="Collapsed" />
-                                        </Trigger>
-                                        <Trigger Property="Text" Value="9">
-                                            <Setter TargetName="Placeholder" Property="Visibility" Value="Collapsed" />
-                                        </Trigger>
-                                        <Trigger Property="Text" Value="10">
-                                            <Setter TargetName="Placeholder" Property="Visibility" Value="Collapsed" />
                                         </Trigger>
                                     </ControlTemplate.Triggers>
                                 </ControlTemplate>
@@ -83,27 +67,37 @@
                     </Style>
                 </TextBox.Style>
             </TextBox>
-            <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <DataGrid x:Name="OrderDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" Margin="10"
-                       ItemsSource="{Binding SupplierEntries}" ColumnWidth="*">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Mã nhà cung cấp" Binding="{Binding SID}" Width="*"  IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Tên nhà cung cấp" Binding="{Binding Name}" Width="*" IsReadOnly="True" />
-                        <DataGridTextColumn Header="Địa chỉ" Binding="{Binding Address}" Width="*" IsReadOnly="True" />
-                        <DataGridTemplateColumn Header="">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <Button Width="30" Height="30" Margin="5" Background="Transparent">
-                                            <Image Source="/Drawable/Icons/icon_attention.png" Width="20" Height="20" />
-                                        </Button>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
-            </ScrollViewer>
+
+            <!--Nút thêm nhà cung cấp-->
+            <Button Width="160" Height="40" Style="{StaticResource MaterialDesignRaisedButton}" Margin="170 0 0 0"
+          md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="AliceBlue"  Background="Aqua" 
+          Foreground="White" Content="Thêm nhà cung cấp"  Command="{Binding  AddSupCommand}" />
         </StackPanel>
+
+        <!-- DataGrid -->
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" Margin="10">
+            <DataGrid x:Name="SupplierDataGrid" AutoGenerateColumns="False" CanUserAddRows="False"
+                      ItemsSource="{Binding SupplierEntries}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Mã nhà cung cấp" Binding="{Binding SID}" Width="*" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Tên nhà cung cấp" Binding="{Binding Name}" Width="*" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Địa chỉ" Binding="{Binding Address}" Width="*" IsReadOnly="True" />
+                    <DataGridTemplateColumn Header="">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Image Source="{Binding statusImage}" Width="20" Height="20" Margin="5" />
+                                    <Button Width="30" Height="30" Background="Transparent" Command="{Binding ViewCommand}">
+                                        <Button.Content>
+                                            <Image Source="/Drawable/Icons/icon_detail.png" Width="30" Height="30"/>
+                                        </Button.Content>
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </ScrollViewer>
     </Grid>
 </UserControl>

@@ -6,50 +6,93 @@
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Jewelry_store_management.VIEW"
         mc:Ignorable="d"
-        Title="ServiceView" Height="470" Width="659"
+       Icon="\Drawable\Images\Logo.png"
+        Title="H-Jewelry"
+         WindowStartupLocation="CenterScreen"
+         ResizeMode="NoResize"
+        Height="600" Width="700"
         DataContext="{StaticResource Service}">
-    <StackPanel Background="SkyBlue">
+    <StackPanel Background="AliceBlue">
         <StackPanel>
-                <Label Margin="60 30 60 0" Content="DỊCH VỤ" FontSize="25" FontWeight="Bold" HorizontalAlignment="Center"></Label>
-                <StackPanel Orientation="Horizontal">
-                    <StackPanel Margin="30 10 0 0">
+                <Label Margin="60 10 60 0" Content="DỊCH VỤ" FontSize="25" FontWeight="Bold" HorizontalAlignment="Center"></Label>
+            <TextBlock Text="THÔNG TIN DỊCH VỤ: " FontWeight="DemiBold" FontSize="15 " Margin="20 0 60 0"></TextBlock>
+            <StackPanel Orientation="Horizontal">
+                    <StackPanel Margin="30 5 30 0">
                         <Label Content="MÃ DỊCH VỤ"></Label>
-                        <TextBox Width="170"  ></TextBox>
+                        <TextBox   ></TextBox>
                     </StackPanel>
-                    <StackPanel Margin="30 10 30 0">
+                
+                    <StackPanel Margin="30 5 0 0">
                         <Label Content="TÊN DỊCH VỤ"></Label>
-                        <TextBox Width="170"  ></TextBox>
+                        <TextBox    ></TextBox>
                     </StackPanel>
-                <StackPanel Margin="30 10 30 0">
+                    <StackPanel Margin="30 5 30 0">
+                       <Label Content="NGÀY LẬP"></Label>
+                       <TextBox   ></TextBox>
+                     </StackPanel>
+                    <StackPanel Margin="30 5 30 0">
+                    <Label Content="NGÀY GIAO"></Label>
+                    <TextBox    ></TextBox>
+                     </StackPanel>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Margin="30 5 30 0">
                     <Label Content="TÊN KHÁCH HÀNG"></Label>
-                    <TextBox Width="170"  ></TextBox>
+                    <TextBox    ></TextBox>
+                </StackPanel>
+                <StackPanel Margin="30 5 0 0">
+                    <Label Content="SỐ ĐIỆN THOẠI"></Label>
+                    <TextBox    ></TextBox>
+                </StackPanel>
+                <StackPanel Margin="30 5 30 0">
+                    <Label Content="EMAIL"></Label>
+                    <TextBox    ></TextBox>
                 </StackPanel>
 
+                <StackPanel Margin="30 5 30 0">
+                    <Label Content="ĐỊA CHỈ"></Label>
+                    <TextBox  ></TextBox>
+                </StackPanel>
             </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <StackPanel Margin="30 10 0 0">
-                        <Label Content="SỐ ĐIỆN THOẠI"></Label>
-                        <TextBox Width="170"  ></TextBox>
-                    </StackPanel>
-                    <StackPanel Margin="30 10 30 0">
-                        <Label Content="EMAIL"></Label>
-                        <TextBox Width="170"  ></TextBox>
-                    </StackPanel>
-                <StackPanel Margin="30 10 30 0">
-                    <Label Content="THỜI GIAN"></Label>
-                    <TextBox Width="170"  ></TextBox>
-                </StackPanel>                    
+
+
+            <TextBlock Text="THÔNG TIN SẢN PHẨM: " FontWeight="DemiBold" FontSize="15 " Margin="20 10 60 0"></TextBlock>
+
+            <StackPanel Orientation="Horizontal" >
+                <StackPanel Margin="30 5 30 0">
+                    <Label Content="SẢN PHẨM"></Label>
+                    <TextBox Width="120"  ></TextBox>
+                </StackPanel>
+                <StackPanel Margin="30 5 30 0">
+                    <Label Content="SỐ LƯỢNG"></Label>
+                    <TextBox Width="70"  ></TextBox>
+                </StackPanel>
+                <StackPanel Margin="30 5 0 0">
+                    <Label Content="ĐƠN GIÁ"></Label>
+                    <TextBox Width="100"  ></TextBox>
+                </StackPanel>
+
+                <StackPanel Margin="30 5 30 0" >
+                    <Label Content="MÔ TẢ"></Label>
+                    <TextBox  ></TextBox>
+                </StackPanel>
+                
             </StackPanel>
-            <StackPanel Margin="30 10 30 0">
-                <Label Content="ĐỊA CHỈ"></Label>
-                <TextBox Width="591"></TextBox>
-            </StackPanel>
-            <StackPanel Margin="30 10 30 0" Height="102">
-                <Label Content="MÔ TẢ"></Label>
-                <TextBox Width="591" Height="78"></TextBox>
-            </StackPanel>
+            <Button Margin="0 10 0 0" Width="160" Style="{StaticResource MaterialDesignFlatButton}" 
+          md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="Aqua"  Background="Aqua" Foreground="White" Content="THÊM SẢN PHẨM"></Button>
+            <DataGrid ItemsSource="{Binding Productlist}" AutoGenerateColumns="False" CanUserAddRows="False" Background="AliceBlue" Margin="30 10 30 0" Height="180">
+                <DataGrid.Columns>
+                    <DataGridTextColumn FontSize="14" Header="Nhà cung cấp" Binding="{Binding Name}"/>
+                    <DataGridTextColumn FontSize="14"  Header="Tên sản phẩm" Binding="{Binding Name}"/>
+                    <DataGridTextColumn FontSize="14"  Header="Size" Binding="{Binding Name}"/>
+                    <DataGridTextColumn FontSize="14"  Header="Số lượng" Binding="{Binding Name}"/>
+                    <DataGridTextColumn FontSize="14"  Header="Giá" Binding="{Binding Price}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
             <Button Margin="0 20 0 30" Width="140" Style="{StaticResource MaterialDesignFlatButton}" 
-                    md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="Aqua"  Background="Aqua" Foreground="White" Content="Thêm"></Button>
+                    md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="Aqua"  Background="Aqua" Foreground="White" Content="THÊM DỊCH VỤ"></Button>
             </StackPanel>
     </StackPanel>
 </Window>

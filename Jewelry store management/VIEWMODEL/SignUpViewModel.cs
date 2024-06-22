@@ -112,7 +112,7 @@ namespace Jewelry_store_management.VIEWMODEL
 
                 if (isRegistered)
                 {
-                    MessageBox_Window.ShowDialog("Đăng ký thành công!", "Thành công", "\\Drawable\\Icons\\icon_success", MessageBox_Window.MessageBoxButton.OK);
+                    MessageBox_Window.ShowDialog("Đăng ký thành công!", "Thành công", "\\Drawable\\Icons\\icon_success.png", MessageBox_Window.MessageBoxButton.OK);
 
                      
                     // nếu đăng ký thành công thì quay về đăng nhập
