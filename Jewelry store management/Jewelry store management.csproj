@@ -617,6 +617,7 @@
     <Compile Include="VIEWMODEL\ForgetPasswordViewModel.cs" />
     <Compile Include="VIEWMODEL\GetNewPassWordViewModel.cs" />
     <Compile Include="VIEWMODEL\MainWindowViewModel.cs" />
+    <Compile Include="VIEWMODEL\ReviewBillViewModel.cs" />
     <Compile Include="VIEWMODEL\scrAddproViewModel.cs" />
     <Compile Include="VIEWMODEL\scrHomeViewModel.cs" />
     <Compile Include="VIEWMODEL\scrOrderViewModel.cs" />
@@ -662,6 +663,9 @@
     </Compile>
     <Compile Include="VIEW\RepasswordControl.xaml.cs">
       <DependentUpon>RepasswordControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VIEW\ReviewBill.xaml.cs">
+      <DependentUpon>ReviewBill.xaml</DependentUpon>
     </Compile>
     <Compile Include="VIEW\scrAccount.xaml.cs">
       <DependentUpon>scrAccount.xaml</DependentUpon>
@@ -748,6 +752,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="VIEW\RepasswordControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VIEW\ReviewBill.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

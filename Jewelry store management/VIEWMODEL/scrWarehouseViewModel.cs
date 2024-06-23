@@ -35,7 +35,7 @@ namespace Jewelry_store_management.VIEWMODEL
         public ObservableCollection<String> CategoryList;
         public ObservableCollection<String> TypeList;
         public ObservableCollection<String> MaterialList;
-        public ObservableCollection<Filter> CategoryFilterList;
+       // public ObservableCollection<Filter> CategoryFilterList;
         public ICollectionView CategoryFilteredItems { get; set; }
 
 
@@ -123,7 +123,7 @@ namespace Jewelry_store_management.VIEWMODEL
                 MessageBox.Show($"Error loading products: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        private bool FilterItems(object item)
+       /* private bool FilterItems(object item)
         {
             if (item is Product currentItem)
             {
@@ -131,7 +131,7 @@ namespace Jewelry_store_management.VIEWMODEL
             }
             return false;
         }
-
+*/
         private async Task AddClick()
         {
             try

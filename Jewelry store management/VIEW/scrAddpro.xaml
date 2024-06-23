@@ -85,10 +85,10 @@
                     <DataGridTextColumn Header="Số lượng" Binding="{Binding TotalPrice}" Width="*" IsReadOnly="True" />
                     <DataGridTemplateColumn Header="">
                         <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                    <Button Width="30" Height="30" Margin="5" Background="Transparent">
-                                        <Image Source="/Drawable/Icons/icon_detail.png" Width="20" Height="20" />
-                                    </Button>
+                            <DataTemplate  >
+                                <Button  Background="Transparent" HorizontalAlignment="Center" BorderBrush="Transparent">
+                                    <Image Source="/Drawable/Icons/icon_detail.png" Width="30" Height="30"/>
+                                </Button>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

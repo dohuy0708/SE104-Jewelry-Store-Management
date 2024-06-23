@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Jewelry_store_management.HELPER;
 using Jewelry_store_management.MODELS;
 using Jewelry_store_management.VIEW;
 
@@ -14,7 +15,7 @@ namespace Jewelry_store_management.VIEWMODEL
 {
     public class scrOrderViewModel : BaseViewModel
     {
-
+        private readonly SaleOrderHelper _saleOrderHelper;
         public ICommand SearchCommand { get; set; }
         public ICommand AddOrderCommand { get; set; }
 
@@ -34,6 +35,8 @@ namespace Jewelry_store_management.VIEWMODEL
 
         public scrOrderViewModel()
         {
+            _saleOrderHelper = new SaleOrderHelper();
+
             // Khởi tạo danh sách đơn hàng
             OrderEntries = new ObservableCollection<SaleOrder>();
        
@@ -41,8 +44,19 @@ namespace Jewelry_store_management.VIEWMODEL
             // Khởi tạo lệnh tìm kiếm
             SearchCommand = new RelayCommand(Search);
            AddOrderCommand = new RelayCommand(async _ => await AddOrderClick());
-        }
+            LoadAllSaleOrders();
 
+
+        }
+        private async void LoadAllSaleOrders()
+        {
+            var allSaleOrders = await _saleOrderHelper.GetAllSaleOrders();
+            OrderEntries.Clear();
+            foreach (var saleOrder in allSaleOrders)
+            {
+                OrderEntries.Add(saleOrder);
+            }
+        }
         private async Task AddOrderClick()
         {
 
@@ -51,6 +65,8 @@ namespace Jewelry_store_management.VIEWMODEL
                 DataContext = new BillViewModel()
             };
             BillView.ShowDialog();
+            LoadAllSaleOrders();
+
         }
 
         private void Search(object parameter)

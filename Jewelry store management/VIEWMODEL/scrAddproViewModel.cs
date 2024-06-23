@@ -47,7 +47,7 @@ namespace Jewelry_store_management.VIEWMODEL
             SearchCommand = new RelayCommand(Search);
             PurchaseProCommand = new RelayCommand(async _ => await AddProClick());
 
-            LoadPurchase();
+             LoadPurchase();
         }
 
 
@@ -92,7 +92,8 @@ namespace Jewelry_store_management.VIEWMODEL
             };
            PurchaseProView.ShowDialog();
 
-             
+            LoadPurchase();
+
         }
 
         private void Search(object parameter)

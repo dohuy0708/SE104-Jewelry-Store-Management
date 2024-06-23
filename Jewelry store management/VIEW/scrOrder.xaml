@@ -84,19 +84,13 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Mã đơn" Binding="{Binding SaleId}" Width="*" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Tên khách hàng" Binding="{Binding CustomerName}" Width="*" IsReadOnly="True" />
-                    <DataGridTextColumn Header="Ngày nhận đơn" Binding="{Binding DateSale}" Width="*" IsReadOnly="True" />
-                    <DataGridTextColumn Header="Tổng tiền" Binding="{Binding Cost}" Width="*" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Ngày xuất" Binding="{Binding DateSale}" Width="*" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Tổng tiền" Binding="{Binding TotalPrice}" Width="*" IsReadOnly="True" />
                     <DataGridTemplateColumn Header="">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate  >
                                 <Button  Background="Transparent" HorizontalAlignment="Center" BorderBrush="Transparent">
                                     <Image Source="/Drawable/Icons/icon_detail.png" Width="30" Height="30"/>
-
-                                    <!--<Button Width="30" Height="30" Background="Transparent" Command="{Binding ViewCommand}">
-                                        <Button.Content>
-                                            <Image Source="/Drawable/Icons/icon_detail.png" Width="30" Height="30"/>
-                                        </Button.Content>
-                                    </Button>-->
                                 </Button>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
