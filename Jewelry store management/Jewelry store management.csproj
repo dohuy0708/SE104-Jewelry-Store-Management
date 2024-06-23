@@ -609,6 +609,7 @@
     <Compile Include="MODELS\ServiceOrder.cs" />
     <Compile Include="MODELS\Supplier.cs" />
     <Compile Include="Command\RelayCommand.cs" />
+    <Compile Include="VIEWMODEL\AddBillViewModel.cs" />
     <Compile Include="VIEWMODEL\AddProductViewModel.cs" />
     <Compile Include="VIEWMODEL\AddSupplierViewModel.cs" />
     <Compile Include="VIEWMODEL\BillViewModel.cs" />
@@ -629,6 +630,9 @@
     <Compile Include="VIEWMODEL\SignUpViewModel.cs" />
     <Compile Include="VIEWMODEL\StartViewModel.cs" />
     <Compile Include="VIEWMODEL\VerifyCodeViewModel.cs" />
+    <Compile Include="VIEW\AddBillView.xaml.cs">
+      <DependentUpon>AddBillView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VIEW\AddProductView.xaml.cs">
       <DependentUpon>AddProductView.xaml</DependentUpon>
     </Compile>
@@ -697,6 +701,10 @@
     <Compile Include="VIEW\TestView.xaml.cs">
       <DependentUpon>TestView.xaml</DependentUpon>
     </Compile>
+    <Page Include="VIEW\AddBillView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="VIEW\AddProductView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

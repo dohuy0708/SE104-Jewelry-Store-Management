@@ -43,6 +43,7 @@ namespace Jewelry_store_management.MODELS
             Status = status;
             statusImage = StatusImage;
         }
+        
 
         public void CalculateTotalPrice()
         {

@@ -5,50 +5,65 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Jewelry_store_management.VIEW"
         mc:Ignorable="d"
-        Title="BillView" Height="479" Width="789"
+        Title="BillView" Height="557" Width="778"
         DataContext="{StaticResource Bill}">
-    <StackPanel Background="SkyBlue" Margin="0,0,0,-6">
-        <TextBlock Text="HÓA ĐƠN" FontSize="36" Margin="60 20 60 10"></TextBlock>
-        <StackPanel Orientation="Horizontal">
-            <StackPanel Margin="80 10 0 0 ">
-                <Label Content="SỐ HÓA ĐƠN"></Label>
+    <StackPanel Background="AliceBlue">
+        <StackPanel x:Name="ExportBill" >
+            <TextBlock Text="HÓA ĐƠN" FontSize="36" Margin="60 20 60 10"></TextBlock>
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Margin="80 10 0 0 ">
+                    <Label Content="SỐ HÓA ĐƠN"></Label>
+                    <TextBlock DataContext="{Binding Bill.SaleId}"></TextBlock>
+                </StackPanel>
+                <StackPanel Margin="30 10 0 0">
+                    <Label Content="THỜI GIAN"></Label>
+                    <TextBlock Width="86"></TextBlock>
+                </StackPanel>
+                <StackPanel Margin="30 10 0 0">
+                    <Label Content="TÊN KHÁCH HÀNG"></Label>
+                    <TextBlock></TextBlock>
+                </StackPanel>
+                <StackPanel Margin="30 10 30 0">
+                    <Label Content="SỐ ĐIỆN THOẠI"></Label>
+                    <TextBlock></TextBlock>
+                </StackPanel>
+                <StackPanel Margin="30 10 30 0">
+                    <Label Content="EMAIL"></Label>
+                    <TextBlock Width="103"></TextBlock>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Margin="80 10 30 0">
+                <Label Content="ĐỊA CHỈ"></Label>
                 <TextBlock></TextBlock>
             </StackPanel>
-            <StackPanel Margin="30 10 0 0">
-                <Label Content="THỜI GIAN"></Label>
-                <TextBlock></TextBlock>
+            <DataGrid ItemsSource="{Binding Bill.ListSaleProduct}" AutoGenerateColumns="False" IsReadOnly="True"  Background="Transparent" Margin="60 10 60 0" Height="162" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Nhà cung cấp" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="Tên sản phẩm" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="Size" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="Số lượng" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="Giá" Binding="{Binding SalePrice}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <StackPanel Margin="280 0 0 0">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Tổng giá trị:   " FontSize="20" Margin="30 0 0 0"/>
+                    <TextBlock Text="{Binding Bill.TotalPrice}" FontSize="20"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Tổng giá trị:   " FontSize="20" Margin="30 0 0 0"/>
+                    <TextBlock Text="{Binding Bill.Voucher}" FontSize="20"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Tổng giá trị:   " FontSize="20" Margin="30 0 0 0"/>
+                    <TextBlock Text="{Binding Bill.Cost}" FontSize="20"/>
+                </StackPanel>
             </StackPanel>
-            <StackPanel Margin="30 10 0 0">
-                <Label Content="TÊN KHÁCH HÀNG"></Label>
-                <TextBlock></TextBlock>
-            </StackPanel>
-            <StackPanel Margin="30 10 30 0">
-                <Label Content="SỐ ĐIỆN THOẠI"></Label>
-                <TextBlock></TextBlock>
-            </StackPanel>
-            <StackPanel Margin="30 10 30 0">
-                <Label Content="EMAIL"></Label>
-                <TextBlock></TextBlock>
-            </StackPanel>
+
         </StackPanel>
-        <StackPanel Margin="80 10 30 0">
-            <Label Content="ĐỊA CHỈ"></Label>
-            <TextBlock></TextBlock>
-        </StackPanel>
-        <Button Margin="60 20 60 10" Content="Thêm sản phẩm" Command="{Binding AddProductCommand}"></Button>
-        <DataGrid ItemsSource="{Binding Productlist}" AutoGenerateColumns="False" CanUserAddRows="False" Background="SkyBlue" Margin="60 0 60 0" Height="162">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Nhà cung cấp" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Tên sản phẩm" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Size" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Số lượng" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Giá" Binding="{Binding Price}"/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Text="Tổng giá trị:" FontSize="30" Margin="30 0 0 0"></TextBlock>
-            <TextBlock Text="{Binding TotalPrice}" FontSize="30"></TextBlock>
-            <Button Margin="300 0 60 0" Content="XÓA HÓA ĐƠN"></Button>
+        <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
+            <Button Margin="150 0 60 0" Content="XÓA HÓA ĐƠN"></Button>
+            <Button Margin="0 0 60 0" Content="XUẤT HÓA ĐƠN" Command="{Binding ExportBillCommand}" CommandParameter="{Binding ElementName=ExportBill}" ></Button>
         </StackPanel>
     </StackPanel>
 </Window>

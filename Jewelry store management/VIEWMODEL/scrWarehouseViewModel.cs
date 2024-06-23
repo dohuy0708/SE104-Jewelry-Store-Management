@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -28,6 +32,12 @@ namespace Jewelry_store_management.VIEWMODEL
                 OnPropertyChanged();
             }
         }
+        public ObservableCollection<String> CategoryList;
+        public ObservableCollection<String> TypeList;
+        public ObservableCollection<String> MaterialList;
+        public ObservableCollection<Filter> CategoryFilterList;
+        public ICollectionView CategoryFilteredItems { get; set; }
+
 
         private string searchText;
         public string SearchText
@@ -112,6 +122,14 @@ namespace Jewelry_store_management.VIEWMODEL
                 // Xử lý ngoại lệ ở đây (ví dụ: logging, thông báo lỗi cho người dùng, ...)
                 MessageBox.Show($"Error loading products: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+        private bool FilterItems(object item)
+        {
+            if (item is Product currentItem)
+            {
+                return CategoryFilterList.Any(f => f.IsSelected && f.Name == currentItem.Category);
+            }
+            return false;
         }
 
         private async Task AddClick()

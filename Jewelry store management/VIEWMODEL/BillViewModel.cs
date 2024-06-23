@@ -5,12 +5,26 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Jewelry_store_management.VIEWMODEL
 {
     public class BillViewModel:BaseViewModel
     {
+        private SaleOrder bill { get; set; }
+        public SaleOrder Bill
+        {
+            get { return bill; }
+            set
+            {
+                bill = value;
+                OnPropertyChanged();
+            }
+        }
         private ObservableCollection<Product> productlist { get; set; }
         public ObservableCollection<Product> Productlist
         {
@@ -19,28 +33,47 @@ namespace Jewelry_store_management.VIEWMODEL
             {
                 productlist = value;
                 OnPropertyChanged();
-                OnPropertyChanged(nameof(TotalPrice));
             }
         }
-        public int TotalPrice
-        {
-            get { return GetTotalPrice(); }
-        }
-        public ICommand AddProductCommand { get; set; }
+        private string _printContent;
+
+        public ICommand ExportBillCommand { get; set; }
 
         public BillViewModel()
         {
-            productlist = new ObservableCollection<Product>();
-            AddProductCommand = new RelayCommand(_ => AddProduct());
+            Productlist = new ObservableCollection<Product>();
+            List<Product> products = new List<Product>();
+            //dòng này để text
+            products.Add(new Product("abc", "aa", 256, "s", 25));
+            Bill = new SaleOrder(products);
+            GetSaleOrder();
+            GetProductList();
+            ExportBillCommand=new RelayCommand<object>(ExportBill);
         }
-        public void AddProduct()
+        //Hàm xuất hóa đơn
+        public void ExportBill(object obj)
+        {        
+                System.Windows.Controls.PrintDialog printdialog = new System.Windows.Controls.PrintDialog();
+                if (printdialog.ShowDialog() == true)
+                {
+                if (obj is Visual visual)
+                {
+                    printdialog.PrintVisual(visual, "Invoice");
+                }
+            }
+        }
+        //Hàm lấy bill
+        public void GetSaleOrder()
         {
-            Productlist.Add(new Product("Nhẫn", "abx", 45000000, "M", 5));
 
         }
-        public int GetTotalPrice()
+        //Hàm lấy danh sách sản phẩm
+        public void GetProductList()
         {
-            return 800000;
+            foreach(var product in Bill.ListSaleProduct)
+            {
+                productlist.Add(product);
+            }
         }
     }
 }
