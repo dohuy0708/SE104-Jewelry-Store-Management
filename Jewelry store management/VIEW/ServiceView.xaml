@@ -17,42 +17,45 @@
                 <Label Margin="60 10 60 0" Content="DỊCH VỤ" FontSize="25" FontWeight="Bold" HorizontalAlignment="Center"></Label>
             <TextBlock Text="THÔNG TIN DỊCH VỤ: " FontWeight="DemiBold" FontSize="15 " Margin="20 0 60 0"></TextBlock>
             <StackPanel Orientation="Horizontal">
-                    <StackPanel Margin="30 5 30 0">
-                        <Label Content="MÃ DỊCH VỤ"></Label>
-                        <TextBox   ></TextBox>
+                    <StackPanel Margin="30 5 10 0">
+                    <Label Content="MÃ DỊCH VỤ"  HorizontalAlignment="Left"></Label>
+                        <TextBox FontSize="14"   ></TextBox>
                     </StackPanel>
                 
-                    <StackPanel Margin="30 5 0 0">
-                        <Label Content="TÊN DỊCH VỤ"></Label>
-                        <TextBox    ></TextBox>
-                    </StackPanel>
-                    <StackPanel Margin="30 5 30 0">
-                       <Label Content="NGÀY LẬP"></Label>
-                       <TextBox   ></TextBox>
-                     </StackPanel>
-                    <StackPanel Margin="30 5 30 0">
-                    <Label Content="NGÀY GIAO"></Label>
-                    <TextBox    ></TextBox>
-                     </StackPanel>
+                    <StackPanel Margin="30 5 10 0">
+                        <Label Content="TÊN DỊCH VỤ" Width="110"  HorizontalAlignment="Left"></Label>
+                    <ComboBox  FontSize="14" Width="200" Style="{StaticResource MaterialDesignComboBox}" ItemsSource="{Binding Supplierlist}" SelectedItem="{Binding SelectedSupplier}" Background="AliceBlue"/>
+
+                </StackPanel>
+                    <StackPanel Margin="30 5 10 0">
+                       <Label Content="NGÀY LẬP" Width="100"></Label>
+                    <DatePicker   SelectedDate="{Binding InitialDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="14" Width="100"/>
+
+                </StackPanel>
+                    <StackPanel Margin="30 5 10 0">
+                    <Label Content="NGÀY GIAO" Width="100"></Label>
+                    <DatePicker    SelectedDate="{Binding DeliveryDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="14" Width="100"/>
+
+                </StackPanel>
             </StackPanel>
             
             <StackPanel Orientation="Horizontal">
-                <StackPanel Margin="30 5 30 0">
-                    <Label Content="TÊN KHÁCH HÀNG"></Label>
-                    <TextBox    ></TextBox>
+                <StackPanel Margin="30 5 10 0">
+                    <Label Content="TÊN KHÁCH HÀNG" Width="130" ></Label>
+                    <TextBox  FontSize="14"  ></TextBox>
                 </StackPanel>
-                <StackPanel Margin="30 5 0 0">
+                <StackPanel Margin="30 5 10 0" Width="100">
                     <Label Content="SỐ ĐIỆN THOẠI"></Label>
-                    <TextBox    ></TextBox>
+                    <TextBox  FontSize="14"  ></TextBox>
                 </StackPanel>
-                <StackPanel Margin="30 5 30 0">
-                    <Label Content="EMAIL"></Label>
-                    <TextBox    ></TextBox>
+                <StackPanel Margin="30 5 10 0">
+                    <Label Content="EMAIL" Width="100"></Label>
+                    <TextBox  FontSize="14"  ></TextBox>
                 </StackPanel>
 
-                <StackPanel Margin="30 5 30 0">
+                <StackPanel Margin="30 5 30 0" Width="150">
                     <Label Content="ĐỊA CHỈ"></Label>
-                    <TextBox  ></TextBox>
+                    <TextBox FontSize="14" ></TextBox>
                 </StackPanel>
             </StackPanel>
 
@@ -60,22 +63,22 @@
             <TextBlock Text="THÔNG TIN SẢN PHẨM: " FontWeight="DemiBold" FontSize="15 " Margin="20 10 60 0"></TextBlock>
 
             <StackPanel Orientation="Horizontal" >
-                <StackPanel Margin="30 5 30 0">
-                    <Label Content="SẢN PHẨM"></Label>
-                    <TextBox Width="120"  ></TextBox>
+                <StackPanel Margin="30 5 10 0">
+                    <Label Content="SẢN PHẨM" Width="140"></Label>
+                    <TextBox Width="120" FontSize="14"  ></TextBox>
                 </StackPanel>
-                <StackPanel Margin="30 5 30 0">
-                    <Label Content="SỐ LƯỢNG"></Label>
-                    <TextBox Width="70"  ></TextBox>
+                <StackPanel Margin="30 5 10 0">
+                    <Label Content="SỐ LƯỢNG" Width="70"></Label>
+                    <TextBox Width="70" FontSize="14"  ></TextBox>
                 </StackPanel>
                 <StackPanel Margin="30 5 0 0">
                     <Label Content="ĐƠN GIÁ"></Label>
-                    <TextBox Width="100"  ></TextBox>
+                    <TextBox Width="100" FontSize="14"  ></TextBox>
                 </StackPanel>
 
                 <StackPanel Margin="30 5 30 0" >
-                    <Label Content="MÔ TẢ"></Label>
-                    <TextBox  ></TextBox>
+                    <Label Content="MÔ TẢ" Width="170"></Label>
+                    <TextBox FontSize="14" Width="170" ></TextBox>
                 </StackPanel>
                 
             </StackPanel>

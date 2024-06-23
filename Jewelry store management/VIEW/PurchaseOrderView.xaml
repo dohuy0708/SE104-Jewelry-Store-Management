@@ -15,7 +15,7 @@
     
     
     <StackPanel Background="AliceBlue" >
-        <TextBlock Text="NHẬP HÀNG" FontSize="36" Margin="40 20 60 10"></TextBlock>
+        <TextBlock TextAlignment="Center" Text="NHẬP HÀNG" FontSize="36" Margin="40 20 60 10"></TextBlock>
         <TextBlock Text="THÔNG TIN ĐƠN HÀNG: " FontWeight="DemiBold" FontSize="16 " Margin="20 10 60 0"></TextBlock>
 
         <!-- THÔNG TIN ĐƠN HÀNG -->
@@ -23,7 +23,7 @@
             
             <StackPanel Orientation="Horizontal"  Margin="30 10 0 0">
                 <Label Content="MÃ ĐƠN HÀNG:" FontSize="14"   VerticalAlignment="Center"></Label>
-                <TextBox   FontSize="14"   Width="100" ></TextBox>
+                <TextBox Text="{Binding PurchaseID}" FontSize="14"   Width="100" ></TextBox>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="30 10 0 0 ">
@@ -34,8 +34,8 @@
             </StackPanel>
 
             <StackPanel Margin="30 10 0 0 "  Orientation="Horizontal">
-                <Label Content="NGÀY NHẬP:" FontSize="14"  VerticalAlignment="Center"></Label>
-                <TextBox  FontSize="14" Width="140" ></TextBox>
+                <Label Content="NGÀY NHẬP:" FontSize="14" VerticalAlignment="Center"></Label>
+                <DatePicker SelectedDate="{Binding EntryDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="14" Width="100"/>
             </StackPanel>
 
         </StackPanel>
@@ -48,42 +48,54 @@
         <StackPanel Orientation="Horizontal">
             <StackPanel   Orientation="Horizontal" Margin="30 10 0 0">
                 <Label Content="MASP/TÊN SẢN PHẨM:" FontSize="14"   VerticalAlignment="Center" ></Label>
-                <ComboBox Width="220"  FontSize="14" Style="{StaticResource MaterialDesignComboBox}" ItemsSource="{Binding GetProductlist}" SelectedItem="{Binding SelectedSupplier}" Background="AliceBlue">
+                <ComboBox Width="260"  FontSize="14" Style="{StaticResource MaterialDesignComboBox}" ItemsSource="{Binding Productlist}" SelectedItem="{Binding SelectedProduct}"    Background="AliceBlue">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding PID}" Margin="0,0,5,0"/>
+
+                                <TextBlock Text="{Binding Name}" Margin="0,0,5,0"/>
+                                <TextBlock Text="( size: " Margin="0,0,0,0"/>
+
+                                <TextBlock Text="{Binding Size}"/>
+                                <TextBlock Text=")" Margin="0,0,0,0"/>
+
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
                 </ComboBox>
             </StackPanel>
-
-            <StackPanel   Orientation="Horizontal"  Margin="15 10 0 0">
-                <Label Content="SIZE:" FontSize="14"   VerticalAlignment="Center" ></Label>
-                <TextBox Width="40"  FontSize="14"></TextBox>
-            </StackPanel>
+ 
 
             <StackPanel  Orientation="Horizontal" Margin="15 10 0 0">
                 <Label Content="SỐ LƯỢNG:" FontSize="14"   VerticalAlignment="Center" ></Label>
-                <TextBox Width="40"  FontSize="14" ></TextBox>
+                <TextBox Text="{Binding Quantity}" Width="40"  FontSize="14" ></TextBox>
             </StackPanel>
 
             <StackPanel  Orientation="Horizontal"  Margin="15 10 0 0">
                 <Label Content="GIÁ NHẬP:" FontSize="14"   VerticalAlignment="Center"></Label>
-                <TextBox Width="140"  FontSize="14" ></TextBox>
+                <TextBox Text="{Binding PurchasePrice}"  Width="160"  FontSize="14" ></TextBox>
             </StackPanel>
 
         </StackPanel>
 
         <Button Margin="60 20 60 10" Content="Thêm sản phẩm" Command="{Binding AddProductCommand}"></Button>
         
-        <DataGrid ItemsSource="{Binding Productlist}" AutoGenerateColumns="False" CanUserAddRows="False" Background="AliceBlue" Margin="50 0 50 0" Height="240">
+        <DataGrid ItemsSource="{Binding ListPurChase}" AutoGenerateColumns="False" CanUserAddRows="False" Background="AliceBlue" Margin="50 0 50 0" Height="240">
             <DataGrid.Columns>
-                <DataGridTextColumn FontSize="14" Header="Nhà cung cấp" Binding="{Binding Name}"/>
+                <DataGridTextColumn FontSize="14"  Header="Mã sản phẩm" Binding="{Binding PID}"/>
+
                 <DataGridTextColumn FontSize="14"  Header="Tên sản phẩm" Binding="{Binding Name}"/>
-                <DataGridTextColumn FontSize="14"  Header="Size" Binding="{Binding Name}"/>
-                <DataGridTextColumn FontSize="14"  Header="Số lượng" Binding="{Binding Name}"/>
-                <DataGridTextColumn FontSize="14"  Header="Giá" Binding="{Binding Price}"/>
+
+                <DataGridTextColumn FontSize="14"  Header="Size" Binding="{Binding Size}"/>
+                <DataGridTextColumn FontSize="14"  Header="Số lượng" Binding="{Binding Quantity}"/>
+                <DataGridTextColumn FontSize="14"  Header="Giá" Binding="{Binding PurchasePrice}"/>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Orientation="Horizontal" Margin="10 20 10 10">
             <TextBlock Text="Tổng giá trị (VND):" FontWeight="DemiBold" FontSize="18" Margin="30 0 10 0"></TextBlock>
             <TextBlock Text="{Binding TotalPrice}" FontSize="18"></TextBlock>
-            <Button Margin="490 0 60 0" Content="Nhập hàng"></Button>
+            <Button Margin="450 0 60 0" Content="Nhập hàng" Command="{Binding ImportCommand}"  ></Button>
         </StackPanel>
     </StackPanel>
 </Window>

@@ -1,36 +1,51 @@
-﻿using Jewelry_store_management.MODELS;
+﻿using Jewelry_store_management.HELPER;
+using Jewelry_store_management.MODELS;
+using Jewelry_store_management.VIEW;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Jewelry_store_management.VIEWMODEL
 {
     public class PurchaseOderViewModel:BaseViewModel
     {
-        private ObservableCollection<Supplier>suppliertlist { get; set; }
-        public ObservableCollection<Supplier> Suppliertlist
+        public ICommand AddProductCommand { get; set; }
+        public ICommand ImportCommand { get; set; }
+
+        private readonly SupplierHelper _supplierHelper;
+        private readonly ProductHelper _productHelper;
+        private readonly PurchaseOrderHelper _purchaseOrderHelper;
+
+        // List nhà cung cấp
+        private ObservableCollection<String> supplierlist { get; set; }
+        public ObservableCollection<String> Supplierlist
         {
-            get { return suppliertlist; }
+            get { return supplierlist; }
             set
             {
-                suppliertlist = value;
+                supplierlist = value;
                 OnPropertyChanged();
             }
         }
-        private ObservableCollection<String> getproductlist { get; set; }
-        public ObservableCollection<String> GetProductlist
+
+        private String selectedSupplier;
+        public String SelectedSupplier
         {
-            get { return getproductlist; }
+            get { return selectedSupplier; }
             set
             {
-                getproductlist = value;
+                selectedSupplier = value;
                 OnPropertyChanged();
             }
         }
+
+
+     
         private ObservableCollection<String> sizelist { get; set; }
         public ObservableCollection<String> Sizelist
         {
@@ -41,6 +56,8 @@ namespace Jewelry_store_management.VIEWMODEL
                 OnPropertyChanged();
             }
         }
+
+        // List sản phẩm
         private ObservableCollection<Product> productlist { get; set; }
         public ObservableCollection<Product> Productlist
         {
@@ -49,46 +66,311 @@ namespace Jewelry_store_management.VIEWMODEL
             {
                 productlist = value;
                 OnPropertyChanged();
+                
+            }
+        }
+        private Product selectedProduct;
+        public Product SelectedProduct
+        {
+            get { return selectedProduct; }
+            set
+            {
+                selectedProduct = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        // date
+        private DateTime? entryDate;
+        public DateTime? EntryDate
+        {
+            get { return entryDate; }
+            set
+            {
+                entryDate = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+
+        //  Danh sách các sản phẩm nhập hàng 
+        private ObservableCollection<Product> _listpurchase;
+        public ObservableCollection<Product> ListPurChase
+        {
+            get { return _listpurchase; }
+            set
+            {
+                _listpurchase = value;
+                OnPropertyChanged(nameof(ListPurChase));
+            }
+        }
+
+
+        // tính tổng Giá trị đơn nhập 
+        public decimal totalprice;
+        public decimal TotalPrice
+        {
+            get
+            {
+               return  totalprice;
+            }
+            set
+            {
+                totalprice = value;
                 OnPropertyChanged(nameof(TotalPrice));
             }
         }
-        public int TotalPrice
+        // mã đơn mua 
+        private String purchaseID;
+        public String PurchaseID
         {
-            get { return GetTotalPrice(); }
+            get { return purchaseID; }
+            set
+            {
+                purchaseID = value;
+                OnPropertyChanged();
+            }
         }
-        public ICommand AddProductCommand { get; set; }
+
+        // nhà cung cấp
+        private String supplierID;
+        public String SupplierID
+        {
+            get { return supplierID; }
+            set
+            {
+                supplierID = value;
+                OnPropertyChanged();
+            }
+        }
+
+        // Ngày mua 
+        public string date;
+        public String Date
+        {
+            get
+            {
+                return date;
+            }
+            set
+            {
+                date = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string productName;
+        public String ProductName
+        {
+            get
+            {
+                return productName;
+            }
+            set
+            {
+                productName = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string productID;
+        public String ProductID
+        {
+            get
+            {
+                return productID;
+            }
+            set
+            {
+                productID = value;
+                OnPropertyChanged();
+            }
+        }
+        public string size;
+        public String Size
+        {
+            get
+            {
+                return size;
+            }
+            set
+            {
+                size = value;
+                OnPropertyChanged();
+            }
+        }
+        public int quantity;
+        public int Quantity
+        {
+            get
+            {
+                return quantity;
+            }
+            set
+            {
+                quantity = value;
+                OnPropertyChanged();
+            }
+        }
+        public decimal purchaseprice;
+        public decimal PurchasePrice
+        {
+            get
+            {
+                return purchaseprice;
+            }
+            set
+            {
+                purchaseprice = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+
+        // hàm chính
         public PurchaseOderViewModel()
         {
-            Suppliertlist = new ObservableCollection<Supplier>();
-            Getsupplier();
-            GetProductlist = new ObservableCollection<string>();
-            GetProduct();          
-            Sizelist = new ObservableCollection<string>();
-            GetSize();
-            Productlist = new ObservableCollection<Product>();
-            AddProductCommand = new RelayCommand(_ => AddProduct());
-        }
-        public void AddProduct()
-        {
-            Productlist.Add(new Product("Nhẫn", "abx", 45000000, "M", 5));
-            
-        }
-        public void Getsupplier()
-        {
-            Suppliertlist.Add(new Supplier("nxx", "byz", "0793384989", "45 Hoàng Diệu"));
-        }
-        public void GetSize()
-        {
-            Sizelist.Add("M");
-        }
-        public void GetProduct()
-        {
-            GetProductlist.Add("Nhẫn");
+            _supplierHelper = new SupplierHelper();
+            _productHelper = new ProductHelper();
+            _purchaseOrderHelper = new PurchaseOrderHelper();
 
+            ListPurChase = new ObservableCollection<Product>();
+            //
+            Productlist = new ObservableCollection<Product>();
+           Task tas= GetProductlist();
+            Supplierlist = new ObservableCollection<string>();
+            Task task = GetSupplierlist();
+            EntryDate = DateTime.Now;
+            //
+
+
+             
+            AddProductCommand = new RelayCommand(async _ => await AddClick());
+            ImportCommand = new RelayCommand(async _ => await ImportClick());
         }
-        public int GetTotalPrice()
+
+
+
+
+
+        // hàm chức năng
+
+        private async Task ImportClick()
         {
-            return 800000;
+            try
+            {
+                // Check if required fields are not null or empty
+                if (!string.IsNullOrEmpty(PurchaseID) && !string.IsNullOrEmpty(SelectedSupplier) && ListPurChase.Any())
+                {
+                    // Create a new PurchaseOrder object
+                    var newPurchaseOrder = new PurchaseOrder
+                    {
+                        PurchaseID = PurchaseID,
+                        SupplierName = SelectedSupplier,
+                        SID = SupplierID,
+                        DatePurchase = EntryDate.HasValue ? EntryDate.Value.ToString("yyyy-MM-dd") : DateTime.Now.ToString("yyyy-MM-dd"),
+                        TotalPrice = (double)TotalPrice,
+                        ListPurchaseProduct = ListPurChase.ToList()
+                    };
+
+                    // Add the purchase order to Firebase
+                    await _purchaseOrderHelper.AddPurchaseOrder(newPurchaseOrder);
+
+                    // Reset the fields after successful import
+                    PurchaseID = string.Empty;
+                    SupplierID = string.Empty;
+                    SelectedSupplier = null;
+                    ListPurChase.Clear();
+                    TotalPrice = 0;
+
+                    MessageBox_Window.ShowDialog("Nhập hàng thành công!", "Thành công", "\\Drawable\\Icons\\icon_success.png", MessageBox_Window.MessageBoxButton.OK);
+                }
+                else
+                {
+                    MessageBox_Window.ShowDialog("Vui lòng nhập đầy đủ thông tin đơn hàng!", "Chú ý", "\\Drawable\\Icons\\icon_attention.png", MessageBox_Window.MessageBoxButton.OK);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox_Window.ShowDialog($"Đã có lỗi xảy ra: {ex.Message}", "Lỗi", "\\Drawable\\Icons\\icon_error.png", MessageBox_Window.MessageBoxButton.OK);
+            }
         }
+
+        private async Task AddClick()
+        {
+            if (SelectedProduct != null &&   quantity > 0 && PurchasePrice > 0)
+            {
+                var newProduct = new Product
+                {
+                    PID = SelectedProduct.PID,
+                    Name = SelectedProduct.Name,
+                    Size = SelectedProduct.Size,
+                    Quantity = quantity,
+                    PurchasePrice = PurchasePrice
+                };
+
+                ListPurChase.Add(newProduct);
+                OnPropertyChanged(nameof(ListPurChase));
+
+                // Reset các trường nhập liệu sau khi thêm sản phẩm
+                SelectedProduct = null;
+                Quantity = 0;
+                PurchasePrice = 0;
+
+                decimal total = 0;
+                foreach (var product in ListPurChase)
+                {
+                    total += product.PurchasePrice * product.Quantity;
+                }
+                TotalPrice = total;
+
+            }
+            else
+            {
+                MessageBox_Window.ShowDialog("Vui lòng nhập đầy đủ thông tin giá và số lượng hợp lệ!", "Chú ý", "\\Drawable\\Icons\\icon_attention.png", MessageBox_Window.MessageBoxButton.OK);
+
+            }
+        }
+        private async Task GetSupplierlist()
+        {
+
+            try
+            {
+                var suppliers = await _supplierHelper.GetAllSuppliers();
+                Supplierlist.Clear();
+                foreach (var supplier in suppliers)
+                { 
+                    Supplierlist.Add(supplier.Name);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions
+
+            }
+        }
+        private async Task GetProductlist()
+        {   
+
+            try
+            {
+                var Products = await _productHelper.GetAllProducts();
+                Productlist.Clear();
+                foreach (var product in Products)
+                {
+
+                    Productlist.Add(product);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions
+
+            }
+        }
+
     }
 }

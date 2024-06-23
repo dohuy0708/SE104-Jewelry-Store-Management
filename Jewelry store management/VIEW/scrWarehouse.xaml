@@ -90,15 +90,17 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border Width="160" Height="220" BorderBrush="Gray" BorderThickness="1" Margin="10" Padding="0" CornerRadius="5">
+                            <Border Width="160" Height="250" BorderBrush="Gray" BorderThickness="1" Margin="10" Padding="0" CornerRadius="5">
                                 <StackPanel>
                                     <Image Source="{Binding ImageURL, Converter={StaticResource Base64ToBitmapImageConverter}, FallbackValue='/Drawable/Images/Logo.png'}"
                                          Width="120" Height="130"   />
                                     
 
-                                    <TextBlock Text="{Binding PID, StringFormat='Mã sản phẩm: {0}'}" HorizontalAlignment="Center" Margin="0 0 5 5 " />
-                                    <TextBlock Text="{Binding Name, StringFormat='Tên: {0}'}" HorizontalAlignment="Center" Margin="0 0 5 5" />
+                                    <TextBlock Text="{Binding PID, StringFormat='Mã SP: {0}'}" HorizontalAlignment="Center" Margin="0 0 5 5 " FontWeight="DemiBold"   />
+                                    <TextBlock Text="{Binding Name}" HorizontalAlignment="Center" Margin="5 0 5 5" TextWrapping="Wrap" TextAlignment="Center" FontFamily="Cambria" FontSize="13" FontStyle="Italic" FontWeight="SemiBold"  />
+
                                     <TextBlock Text="{Binding SalePrice, StringFormat='Giá: {0}'}" HorizontalAlignment="Center" Margin="0 0 5 5" />
+                                    <TextBlock Text="{Binding Size, StringFormat='Size: {0}'}" HorizontalAlignment="Center" Margin="0 0 5 5" />
 
                                     <TextBlock Text="{Binding Quantity, StringFormat='Số lượng: {0}'}" HorizontalAlignment="Center" Margin="0 0 5 5" />
                                 </StackPanel>

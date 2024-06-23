@@ -79,19 +79,16 @@
             <DataGrid x:Name="AddproDataGrid" AutoGenerateColumns="False" CanUserAddRows="False"
                       ItemsSource="{Binding AddproEntries}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Tên sản phẩm"   Binding="{Binding ProductName}" Width="*" IsReadOnly="True"  />
+                    <DataGridTextColumn Header="Mã đơn hàng nhập" Binding="{Binding PurchaseID }" Width="*" IsReadOnly="True" />
                     <DataGridTextColumn Header="Tên nhà cung cấp" Binding="{Binding SupplierName}" Width="*" IsReadOnly="True" />
-                    <DataGridTextColumn Header="Ngày nhập" Binding="{Binding AddDate}" Width="*" IsReadOnly="True" />
-                    <DataGridTextColumn Header="Số lượng" Binding="{Binding Amount}" Width="*" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Ngày nhập" Binding="{Binding DatePurchase}" Width="*" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Số lượng" Binding="{Binding TotalPrice}" Width="*" IsReadOnly="True" />
                     <DataGridTemplateColumn Header="">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Image Source="{Binding StatusImage}" Width="20" Height="20" Margin="5" />
                                     <Button Width="30" Height="30" Margin="5" Background="Transparent">
                                         <Image Source="/Drawable/Icons/icon_detail.png" Width="20" Height="20" />
                                     </Button>
-                                </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
