@@ -664,8 +664,20 @@
     <Compile Include="VIEW\RepasswordControl.xaml.cs">
       <DependentUpon>RepasswordControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="VIEW\ReviewAddProduct.xaml.cs">
+      <DependentUpon>ReviewAddProduct.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VIEW\ReviewAddSupplier.xaml.cs">
+      <DependentUpon>ReviewAddSupplier.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VIEW\ReviewBill.xaml.cs">
       <DependentUpon>ReviewBill.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VIEW\ReviewPurchaseOrder.xaml.cs">
+      <DependentUpon>ReviewPurchaseOrder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VIEW\ReviewService.xaml.cs">
+      <DependentUpon>ReviewService.xaml</DependentUpon>
     </Compile>
     <Compile Include="VIEW\scrAccount.xaml.cs">
       <DependentUpon>scrAccount.xaml</DependentUpon>
@@ -755,7 +767,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="VIEW\ReviewAddProduct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VIEW\ReviewAddSupplier.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="VIEW\ReviewBill.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VIEW\ReviewPurchaseOrder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VIEW\ReviewService.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
