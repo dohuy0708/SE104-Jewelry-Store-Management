@@ -8,7 +8,8 @@
         mc:Ignorable="d"
         Icon="\Drawable\Images\Logo.png"
         Title="H-Jewelry" Height="450" Width="800"
-        DataContext="{StaticResource StartVM}" WindowStartupLocation="CenterScreen">
+        DataContext="{StaticResource StartVM}" WindowStartupLocation="CenterScreen"
+          ResizeMode="NoResize">
 
     <Grid>
         <Grid.ColumnDefinitions>

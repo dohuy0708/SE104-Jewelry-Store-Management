@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+               x:Name="scrServiceControl"
              xmlns:local="clr-namespace:Jewelry_store_management.GUI"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
@@ -24,7 +25,7 @@
                     <Image Source="/Drawable/Images/Logo.png" Margin="0,0,0,0"/>
                 </Border>
             </StackPanel>
-             
+
         </Border>
 
         <!-- Search Box -->
@@ -77,7 +78,7 @@
 
         <!-- DataGrid -->
         <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" Margin="10">
-            <DataGrid x:Name="ServiceDataGrid" AutoGenerateColumns="False" CanUserAddRows="False"
+            <DataGrid x:Name="ServiceDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" SelectedItem="{Binding SelectedServiceOrder}"
                       ItemsSource="{Binding ServiceEntries}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Mã dịch vụ" Binding="{Binding ServiceID}" Width="*" IsReadOnly="True"/>
@@ -87,12 +88,28 @@
                     <DataGridTextColumn Header="Ngày nhận đơn" Binding="{Binding DateOrder}" Width="*" IsReadOnly="True" />
                     <DataGridTextColumn Header="Tổng tiền" Binding="{Binding TotalPrice}" Width="*" IsReadOnly="True" />
                     <DataGridTextColumn Header="Tình trạng" Binding="{Binding Status}" Width="*" IsReadOnly="True" />
-                    <DataGridTemplateColumn Header="">
+                    <DataGridTemplateColumn Header="" >
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate  >
-                                <Button  Background="Transparent" HorizontalAlignment="Center" BorderBrush="Transparent">
-                                    <Image Source="/Drawable/Icons/icon_detail.png" Width="30" Height="30"/>
-                                </Button>
+                                <StackPanel Orientation="Horizontal" >
+                                    <Button x:Name="EditButton" Command="{Binding DataContext.ShowDetailCommand, ElementName=scrServiceControl}"
+                                                      CommandParameter="{Binding}" 
+                                              Background="Transparent" 
+                                          HorizontalAlignment="Center" 
+                                         BorderBrush="Transparent">
+
+                                        <Image Source="/Drawable/Icons/icon_edit.png" Stretch="UniformToFill"/>
+                                    </Button>
+                                    <Button x:Name="DeleteButton" Command="{Binding DataContext.DeleteRowCommand, ElementName=scrServiceControl}"
+                                              CommandParameter="{Binding}" 
+                                              Background="Transparent" 
+                                              HorizontalAlignment="Center" 
+                                              BorderBrush="Transparent">
+
+                                        <Image Source="/Drawable/Icons/icon_delete.png" Stretch="UniformToFill"/>
+                                    </Button>
+                                </StackPanel>
+
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

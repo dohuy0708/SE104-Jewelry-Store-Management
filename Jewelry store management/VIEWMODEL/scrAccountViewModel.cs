@@ -8,7 +8,10 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
+ 
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
+using System.Windows.Xps.Packaging;
 using System.Xml.Linq;
  
 
@@ -240,7 +243,7 @@ namespace Jewelry_store_management.VIEWMODEL
 
         private async Task ChangeImage()
         {
-           
+            
         }
       
 

@@ -10,7 +10,8 @@
         WindowStartupLocation="CenterScreen"
         Height="600"   Width="900" ResizeMode="NoResize"
         Icon="\Drawable\Images\Logo.png"
-        Title="H-Jewelry"  >
+        Title="H-Jewelry"
+          DataContext="{StaticResource ReviewPurVM}">
 
 
 

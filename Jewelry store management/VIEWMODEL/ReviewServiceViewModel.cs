@@ -2,44 +2,43 @@
 using Jewelry_store_management.MODELS;
 using Jewelry_store_management.VIEW;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 
 namespace Jewelry_store_management.VIEWMODEL
 {
-    public class ServiceViewModel : BaseViewModel
+    public class ReviewServiceViewModel:BaseViewModel
     {
         public ICommand AddProCommand { get; set; }
         public ICommand AddServiceOrderCommand { get; set; }
-        public ICommand DeleteRowCommand { get; set; }
 
         private readonly ServiceOrderHelper _serviceHelper;
-     
+
         private readonly ProductHelper _productHelper;
 
         // Constructor
-        public ServiceViewModel()
+
+        // thêm constructor không có tham số chứ không sẽ bị lỗi
+        public ReviewServiceViewModel()
+        {
+
+        }
+        public ReviewServiceViewModel(ServiceOrder serviceOrder)
         {
             _serviceHelper = new ServiceOrderHelper();
-           
+
             _productHelper = new ProductHelper();
 
             Productlist = new ObservableCollection<Product>();
-         
 
 
-            ServiceNameType = new ObservableCollection<string>
-            {
-                "Đánh bóng, làm sạch trang sức",
-                "Gia công trang sức",
-                "Mạ trang sức"
 
-
-            };
-
+            
             StatusType = new ObservableCollection<string>
             {
                 "Hoàn Thành",
@@ -47,19 +46,69 @@ namespace Jewelry_store_management.VIEWMODEL
             };
             SelectedStatus = "Chờ xử lý";
 
-            InitialDate = DateTime.Now;
+             
 
             AddProCommand = new RelayCommand(async _ => await AddProduct());
             AddServiceOrderCommand = new RelayCommand(async _ => await AddServiceOrder());
 
-            DeleteRowCommand = new RelayCommand<Product>(async product => await DeleteRow(product));
+            // initial field
+            if (serviceOrder != null)
+            {
+                SerID = serviceOrder.ServiceID;
+                CusName = serviceOrder.CustomerName;
+                SDT = serviceOrder.CPhone;
+                Email = serviceOrder.CEmail;
+                Address = serviceOrder.CAddress;
+                ServiceNameType = serviceOrder.ServiceName;
+                SelectedStatus = serviceOrder.Status;
+                InitialDate =  serviceOrder.DateOrder;
+                DeliveryDate = serviceOrder.DateDelivery;
+                TotalPrice = (decimal)serviceOrder.TotalPrice;
 
+                // Assuming serviceOrder.Products is a collection of Product
+                foreach (var product in serviceOrder.ListServiceProduct)
+                {
+                    Productlist.Add(product);
+                }
+            }
+        }
+
+        private async Task AddServiceOrder()
+        {
+            if (!string.IsNullOrEmpty(CusName) && !string.IsNullOrEmpty(SDT) && Productlist.Any())
+            {
+                var newServiceOrder = new ServiceOrder
+                {
+                    ServiceID =  SerID,
+                    CustomerName = CusName,
+                    CPhone = SDT,
+                    CEmail = Email,
+                    CAddress = Address,
+                    DateOrder = InitialDate,
+                    DateDelivery = DeliveryDate ,
+                    ServiceName= ServiceNameType,
+                    Status = SelectedStatus,
+                    TotalPrice = (double)TotalPrice,
+                    ListServiceProduct = Productlist.ToList()
+                };
+
+                // Add the service order to the database
+                await _serviceHelper.UpdateServiceOrder(newServiceOrder);
+
+               
+
+                MessageBox_Window.ShowDialog("Cập nhật dịch vụ thành công!", "Thành công", "\\Drawable\\Icons\\icon_success.png", MessageBox_Window.MessageBoxButton.OK);
+            }
+            else
+            {
+                MessageBox_Window.ShowDialog("Vui lòng nhập đầy đủ thông tin dịch vụ!", "Chú ý", "\\Drawable\\Icons\\icon_attention.png", MessageBox_Window.MessageBoxButton.OK);
+            }
         }
 
         // Properties for data binding
 
-        private ObservableCollection<string> serviceNameType;
-        public ObservableCollection<string> ServiceNameType
+        private string serviceNameType;
+        public string ServiceNameType
         {
             get { return serviceNameType; }
             set
@@ -92,7 +141,7 @@ namespace Jewelry_store_management.VIEWMODEL
         }
 
         private string selectedStatus;
-        public string SelectedStatus 
+        public string SelectedStatus
         {
             get { return selectedStatus; }
             set
@@ -123,10 +172,10 @@ namespace Jewelry_store_management.VIEWMODEL
                 OnPropertyChanged();
             }
         }
-      
 
-        private DateTime? initialDate;
-        public DateTime? InitialDate
+
+        private string initialDate;
+        public string InitialDate
         {
             get { return initialDate; }
             set
@@ -136,8 +185,8 @@ namespace Jewelry_store_management.VIEWMODEL
             }
         }
 
-        private DateTime? deliveryDate;
-        public DateTime? DeliveryDate
+        private string deliveryDate;
+        public string DeliveryDate
         {
             get { return deliveryDate; }
             set
@@ -256,27 +305,7 @@ namespace Jewelry_store_management.VIEWMODEL
         }
 
         // Commands
-        private async Task DeleteRow(Product product)
-        { 
 
-            if (product != null)
-            {
-                try
-                {
-
-                    // Xóa đơn dịch vụ khỏi danh sách trong ViewModel
-                    Productlist.Remove(product);
-                    TotalPrice -= product.SalePrice * product.Quantity;
-
-                }
-                catch (Exception ex)
-                {
-                    // Hiển thị thông báo lỗi nếu việc xóa gặp lỗi
-                    MessageBox.Show($"Error deleting service order: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-
-            }
-        }
         private async Task AddProduct()
         {
             if (!string.IsNullOrEmpty(ProductName) && Quantity > 0 && Price > 0)
@@ -308,50 +337,11 @@ namespace Jewelry_store_management.VIEWMODEL
             }
         }
 
-        private async Task AddServiceOrder()
-        {
-            if (!string.IsNullOrEmpty(CusName) && !string.IsNullOrEmpty(SDT) && Productlist.Any())
-            {
-                var newServiceOrder = new ServiceOrder
-                {
-                    ServiceID =  SerID,
-                    CustomerName = CusName,
-                    CPhone = SDT,
-                    CEmail = Email,
-                    CAddress = Address,
-                    DateOrder = InitialDate.HasValue ? InitialDate.Value.ToString("yyyy-MM-dd") : DateTime.Now.ToString("yyyy-MM-dd"),
-                    DateDelivery = DeliveryDate.HasValue ? DeliveryDate.Value.ToString("yyyy-MM-dd") : DateTime.Now.AddDays(7).ToString("yyyy-MM-dd"),
-                    ServiceName = SelectedServiceName,
-                    Status = SelectedStatus,
-                    TotalPrice = (double)TotalPrice,
-                    ListServiceProduct = Productlist.ToList()
-                };
-
-                // Add the service order to the database
-                await _serviceHelper.AddServiceOrder(newServiceOrder);
-
-                // Reset fields after successful addition
-                CusName = string.Empty;
-                SDT = string.Empty;
-                Email = string.Empty;
-                Address = string.Empty;
-                InitialDate = DateTime.Now;
-                DeliveryDate = DateTime.Now.AddDays(7);
-                SelectedServiceName = null;
-                SelectedStatus = null;
-                Productlist.Clear();
-                TotalPrice = 0;
-
-                MessageBox_Window.ShowDialog("Thêm dịch vụ thành công!", "Thành công", "\\Drawable\\Icons\\icon_success.png", MessageBox_Window.MessageBoxButton.OK);
-            }
-            else
-            {
-                MessageBox_Window.ShowDialog("Vui lòng nhập đầy đủ thông tin dịch vụ!", "Chú ý", "\\Drawable\\Icons\\icon_attention.png", MessageBox_Window.MessageBoxButton.OK);
-            }
-        }
+      
 
         // Helper methods to get service types and status types
 
-       
+
     }
+
 }
