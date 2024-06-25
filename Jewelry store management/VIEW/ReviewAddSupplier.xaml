@@ -9,7 +9,8 @@
               WindowStartupLocation="CenterScreen"
          Height="500"   Width="500" ResizeMode="NoResize"
          Icon="\Drawable\Images\Logo.png"
-         Title="H-Jewelry" >
+         Title="H-Jewelry"
+          DataContext="{StaticResource ReviewSupVM}">
 
     <StackPanel Background="AliceBlue">
         <Label Content="CHI TIẾT NHÀ CUNG CẤP" FontSize="34" Margin="70 30 40 20">

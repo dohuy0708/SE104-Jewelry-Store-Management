@@ -10,8 +10,10 @@
         Title="H-Jewelry"
          WindowStartupLocation="CenterScreen"
          ResizeMode="NoResize"
-        Height="620" Width="700"
-     >
+        Height="580" Width="720"
+         DataContext="{StaticResource ReviewSerVM}"  >
+    
+    
     <StackPanel Background="AliceBlue">
         <StackPanel>
             <Label Margin="60 10 60 0" Content="CHI TIẾT ĐƠN DỊCH VỤ" FontSize="25" FontWeight="Bold" HorizontalAlignment="Center"></Label>
@@ -19,27 +21,30 @@
             <StackPanel Orientation="Horizontal">
                 <StackPanel Margin="30 5 0 0" Width="80">
                     <Label Content="MÃ DỊCH VỤ"  HorizontalAlignment="Left" Width="80"></Label>
-                    <TextBox FontSize="14" Text="{Binding SerID}"  ></TextBox>
+                    <TextBox FontSize="14" Text="{Binding SerID}"  IsReadOnly="True" ></TextBox>
                 </StackPanel>
 
-                <StackPanel Margin="30 5 0 0">
-                    <Label Content="TÊN DỊCH VỤ" Width="110"  HorizontalAlignment="Left"></Label>
-                    <ComboBox  FontSize="14" Width="120" Style="{StaticResource MaterialDesignComboBox}" ItemsSource="{Binding ServiceNameType}" SelectedItem="{Binding SelectedServiceName }" Background="AliceBlue"/>
+                <StackPanel Margin="10 5 0 0">
+                    <Label Content="TÊN DỊCH VỤ" Width="140"  HorizontalAlignment="Left"></Label>
+                    <TextBox  Text="{Binding ServiceNameType }"  FontSize="14" Width="220"  IsReadOnly="True" ></TextBox>
+
 
                 </StackPanel>
-                <StackPanel Margin="30 5 0 0">
+                <StackPanel Margin="10 5 0 0">
                     <Label Content="NGÀY LẬP" Width="100"></Label>
-                    <DatePicker   SelectedDate="{Binding InitialDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="14" Width="100"/>
+                    <TextBox  Text="{Binding InitialDate}"  FontSize="14" Width="100"  IsReadOnly="True" ></TextBox>
 
                 </StackPanel>
-                <StackPanel Margin="30 5 0 0">
+                <StackPanel Margin="10 5 0 0">
                     <Label Content="NGÀY GIAO" Width="100"></Label>
-                    <DatePicker    SelectedDate="{Binding DeliveryDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="14" Width="100"/>
+                    <TextBox  Text="{Binding DeliveryDate}"  FontSize="14" Width="100"  IsReadOnly="True" ></TextBox>
+
 
                 </StackPanel>
-                <StackPanel Margin="30 5 10 0">
+                <StackPanel Margin="10 5 10 0">
                     <Label Content="TRẠNG THÁI" Width="100"></Label>
-                    <ComboBox  FontSize="14" Width="100" Style="{StaticResource MaterialDesignComboBox}" ItemsSource="{Binding StatusType}" SelectedItem="{Binding SelectedStatus }" Background="AliceBlue"/>
+                    
+                    <ComboBox IsReadOnly="True" FontSize="14" Width="100" Style="{StaticResource MaterialDesignComboBox}" ItemsSource="{Binding StatusType}" SelectedItem="{Binding SelectedStatus }" Background="AliceBlue"/>
 
 
                 </StackPanel>
@@ -47,33 +52,33 @@
 
             <StackPanel Orientation="Horizontal">
                 <StackPanel Margin="30 5 10 0">
-                    <Label Content="TÊN KHÁCH HÀNG" Width="130" ></Label>
-                    <TextBox  FontSize="14" Width="130" Text="{Binding CusName}" ></TextBox>
+                    <Label Content="TÊN KHÁCH HÀNG" Width="150" ></Label>
+                    <TextBox IsReadOnly="True"  FontSize="14" Width="150" Text="{Binding CusName}" ></TextBox>
                 </StackPanel>
-                <StackPanel Margin="30 5 10 0" Width="100">
+                <StackPanel Margin="0 5 10 0" Width="90">
                     <Label Content="SỐ ĐIỆN THOẠI"></Label>
-                    <TextBox  FontSize="14" Text="{Binding SDT}" ></TextBox>
+                    <TextBox IsReadOnly="True" FontSize="14" Text="{Binding SDT}" ></TextBox>
                 </StackPanel>
-                <StackPanel Margin="30 5 10 0">
-                    <Label Content="EMAIL" Width="100"></Label>
-                    <TextBox  FontSize="14" Width="100" Text="{Binding Email}" ></TextBox>
+                <StackPanel Margin="0 5 10 0">
+                    <Label Content="EMAIL" Width="160"></Label>
+                    <TextBox IsReadOnly="True" FontSize="14" Width="160" Text="{Binding Email}" ></TextBox>
                 </StackPanel>
 
-                <StackPanel Margin="30 5 30 0" Width="170">
-                    <Label Content="ĐỊA CHỈ" Width="170"/>
-                    <TextBox FontSize="14" Width="170" Text="{Binding Address}" />
+                <StackPanel Margin="0 5 30 0" Width="220">
+                    <Label Content="ĐỊA CHỈ" Width="220"/>
+                    <TextBox IsReadOnly="True" FontSize="14" Width="220" Text="{Binding Address}" />
                 </StackPanel>
             </StackPanel>
 
             <TextBlock Text="THÔNG TIN SẢN PHẨM: " FontWeight="DemiBold" FontSize="16 " Margin="20 10 60 0"></TextBlock>
 
 
-            <DataGrid ItemsSource="{Binding Productlist}" AutoGenerateColumns="False" CanUserAddRows="False" Background="AliceBlue" Margin="30 10 30 0" Height="180">
+            <DataGrid ItemsSource="{Binding Productlist}" AutoGenerateColumns="False" CanUserAddRows="False" Background="AliceBlue" Margin="30 10 30 10" Height="240">
                 <DataGrid.Columns>
-                    <DataGridTextColumn FontSize="14" Header="Sản phẩm" Binding="{Binding Name}"/>
-                    <DataGridTextColumn FontSize="14"  Header="Số lượng" Binding="{Binding Quantity}"/>
-                    <DataGridTextColumn FontSize="14"  Header="Đơn giá" Binding="{Binding SalePrice}"/>
-                    <DataGridTextColumn FontSize="14"  Header="Mô tả" Binding="{Binding Description}"/>
+                    <DataGridTextColumn FontSize="14" Header="Sản phẩm" Binding="{Binding Name}" IsReadOnly="True"/>
+                    <DataGridTextColumn FontSize="14"  Header="Số lượng" Binding="{Binding Quantity}"  IsReadOnly="True"/>
+                    <DataGridTextColumn FontSize="14"  Header="Đơn giá" Binding="{Binding SalePrice}"  IsReadOnly="True"/>
+                    <DataGridTextColumn FontSize="14"  Header="Mô tả" Binding="{Binding Description}"  IsReadOnly="True"/>
 
                 </DataGrid.Columns>
             </DataGrid>
@@ -81,8 +86,8 @@
             <StackPanel Orientation="Horizontal" Margin="0 0 0 0"  >
                 <TextBlock Text="Tổng giá trị (VND):" FontWeight="DemiBold" FontSize="16" Margin="30 0 10 0"  VerticalAlignment="Center"></TextBlock>
                 <TextBlock Text="{Binding TotalPrice}" FontSize="16" VerticalAlignment="Center" Width="200"></TextBlock>
-                <Button Margin="100 20 0 30" Width="140" Style="{StaticResource MaterialDesignFlatButton}"  Command="{Binding AddServiceOrderCommand}"
-          md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="Aqua"  Background="Aqua" Foreground="White" Content="IN ĐƠN "></Button>
+                <Button Margin="140 20 0 30" Width="140" Style="{StaticResource MaterialDesignFlatButton}"  Command="{Binding AddServiceOrderCommand}"
+          md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="Aqua"  Background="Aqua" Foreground="White" Content="CẬP NHẬT"></Button>
             </StackPanel>
 
         </StackPanel>

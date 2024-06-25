@@ -9,7 +9,12 @@
     <viewmodel:AddProductViewModel x:Key="AddProduct"></viewmodel:AddProductViewModel>
     <viewmodel:PurchaseOderViewModel x:Key="Purchase"></viewmodel:PurchaseOderViewModel>
     <viewmodel:BillViewModel x:Key="Bill"></viewmodel:BillViewModel>
-     
+    <viewmodel:ReviewAddProductViewModel x:Key="ReviewProVM"></viewmodel:ReviewAddProductViewModel>
+    <viewmodel:ReviewAddSupplierViewModel x:Key="ReviewSupVM"></viewmodel:ReviewAddSupplierViewModel>
+    <viewmodel:ReviewBillViewModel x:Key="ReviewBillVM"></viewmodel:ReviewBillViewModel>
+    <viewmodel:ReviewPurchaseOrderViewModel x:Key="ReviewPurVM"></viewmodel:ReviewPurchaseOrderViewModel>
+    <viewmodel:ReviewServiceViewModel x:Key="ReviewSerVM"></viewmodel:ReviewServiceViewModel>
+    
     <viewmodel:ServiceViewModel x:Key="Service"></viewmodel:ServiceViewModel>
    <viewmodel:scrAccountViewModel x:Key="scrAccountVM"></viewmodel:scrAccountViewModel>
     <viewmodel:ChangePasswordViewModel x:Key="ChangePassVM"></viewmodel:ChangePasswordViewModel>

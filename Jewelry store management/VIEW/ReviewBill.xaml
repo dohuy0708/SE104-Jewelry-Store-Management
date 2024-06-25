@@ -11,7 +11,8 @@
          WindowStartupLocation="CenterScreen"
          ResizeMode="NoResize"
         Height="600" Width="720"
-         >
+          DataContext="{StaticResource ReviewBillVM}">
+
     <StackPanel Background="AliceBlue">
         <StackPanel>
             <Label Margin="60 10 60 0" Content="HÓA ĐƠN" FontSize="25" FontWeight="Bold" HorizontalAlignment="Center"></Label>

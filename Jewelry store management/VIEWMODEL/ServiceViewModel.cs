@@ -5,6 +5,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Jewelry_store_management.VIEWMODEL
@@ -13,6 +14,7 @@ namespace Jewelry_store_management.VIEWMODEL
     {
         public ICommand AddProCommand { get; set; }
         public ICommand AddServiceOrderCommand { get; set; }
+        public ICommand DeleteRowCommand { get; set; }
 
         private readonly ServiceOrderHelper _serviceHelper;
      
@@ -49,6 +51,9 @@ namespace Jewelry_store_management.VIEWMODEL
 
             AddProCommand = new RelayCommand(async _ => await AddProduct());
             AddServiceOrderCommand = new RelayCommand(async _ => await AddServiceOrder());
+
+            DeleteRowCommand = new RelayCommand<Product>(async product => await DeleteRow(product));
+
         }
 
         // Properties for data binding
@@ -251,7 +256,27 @@ namespace Jewelry_store_management.VIEWMODEL
         }
 
         // Commands
+        private async Task DeleteRow(Product product)
+        { 
 
+            if (product != null)
+            {
+                try
+                {
+
+                    // Xóa đơn dịch vụ khỏi danh sách trong ViewModel
+                    Productlist.Remove(product);
+                    TotalPrice -= product.SalePrice * product.Quantity;
+
+                }
+                catch (Exception ex)
+                {
+                    // Hiển thị thông báo lỗi nếu việc xóa gặp lỗi
+                    MessageBox.Show($"Error deleting service order: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+
+            }
+        }
         private async Task AddProduct()
         {
             if (!string.IsNullOrEmpty(ProductName) && Quantity > 0 && Price > 0)

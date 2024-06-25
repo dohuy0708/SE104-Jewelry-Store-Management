@@ -16,6 +16,7 @@ namespace Jewelry_store_management.VIEWMODEL
     {
         public ICommand AddProductCommand { get; set; }
         public ICommand ImportCommand { get; set; }
+        public ICommand DeleteRowCommand { get; set; }
 
         private readonly SupplierHelper _supplierHelper;
         private readonly ProductHelper _productHelper;
@@ -247,16 +248,40 @@ namespace Jewelry_store_management.VIEWMODEL
             //
 
 
-             
+            DeleteRowCommand = new RelayCommand<Product>(async product => await DeleteRow(product));
             AddProductCommand = new RelayCommand(async _ => await AddClick());
             ImportCommand = new RelayCommand(async _ => await ImportClick());
         }
 
 
-
-
-
         // hàm chức năng
+
+        private async Task DeleteRow(Product product)
+        {
+            // Hiển thị thông báo xác nhận xóa
+
+
+            // Nếu người dùng chọn OK để xác nhận xóa
+
+            if (product != null)
+            {
+                try
+                {
+                    // Xóa đơn dịch vụ từ Firebase
+
+
+                    // Xóa đơn dịch vụ khỏi danh sách trong ViewModel
+                    ListPurChase.Remove(product);
+
+                }
+                catch (Exception ex)
+                {
+                    // Hiển thị thông báo lỗi nếu việc xóa gặp lỗi
+                    MessageBox.Show($"Error deleting service order: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+
+            }
+        }
 
         private async Task ImportClick()
         {
