@@ -73,7 +73,15 @@ namespace Jewelry_store_management.VIEWMODEL
 
         private void ExecuteViewGoldPrice(object parameter)
         {
-          
+          string url=parameter as string;
+            if (!string.IsNullOrEmpty(url))
+            {
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                {
+                    FileName=url,
+                    UseShellExecute = true
+                });
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
