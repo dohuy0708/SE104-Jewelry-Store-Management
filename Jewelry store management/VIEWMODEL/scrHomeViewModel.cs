@@ -69,7 +69,15 @@ namespace Jewelry_store_management.VIEWMODEL
 
         private async Task ViewGoldPriceClick()
         {
-          
+          string url=parameter as string;
+            if (!string.IsNullOrEmpty(url))
+            {
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                {
+                    FileName=url,
+                    UseShellExecute = true
+                });
+            }
         }
 
 
