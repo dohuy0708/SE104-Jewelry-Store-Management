@@ -30,13 +30,13 @@
             <StackPanel Orientation="Horizontal" Margin="30 10 0 0 ">
 
                 <Label Content="NHÀ CUNG CẤP:" FontSize="14"   VerticalAlignment="Center"></Label>
-                <ComboBox  FontSize="14" Width="220" Style="{StaticResource MaterialDesignComboBox}" ItemsSource="{Binding Supplierlist}" SelectedItem="{Binding SelectedSupplier}" Background="AliceBlue"/>
+                <TextBox Text="{Binding SupplierName}" FontSize="14"   Width="180" ></TextBox>
 
             </StackPanel>
 
             <StackPanel Margin="30 10 0 0 "  Orientation="Horizontal">
                 <Label Content="NGÀY NHẬP:" FontSize="14" VerticalAlignment="Center"></Label>
-                <DatePicker SelectedDate="{Binding EntryDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="14" Width="100"/>
+                <TextBox Text="{Binding EntryDate}" FontSize="14"   Width="120" ></TextBox>
             </StackPanel>
 
         </StackPanel>
@@ -59,8 +59,8 @@
         </DataGrid>
         <StackPanel Orientation="Horizontal" Margin="10 20 10 10">
             <TextBlock Text="Tổng giá trị (VND):" FontWeight="DemiBold" FontSize="18" Margin="30 0 10 0"></TextBlock>
-            <TextBlock Text="{Binding TotalPrice}" FontSize="18"></TextBlock>
-            <Button Margin="450 0 60 0" Content="IN ĐƠN" Command="{Binding ImportCommand}"  ></Button>
+            <TextBlock Text="{Binding TotalPrice}" FontSize="18" Width="200"></TextBlock>
+            <Button Margin="350 0 60 0" Content="IN ĐƠN" Command="{Binding ImportCommand}"  ></Button>
         </StackPanel>
     </StackPanel>
 </Window>
