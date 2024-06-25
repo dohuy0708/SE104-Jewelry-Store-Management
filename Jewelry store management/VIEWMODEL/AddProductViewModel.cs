@@ -1,4 +1,5 @@
-﻿using Google.Api.Gax.ResourceNames;
+﻿using FireSharp.EventStreaming;
+using Google.Api.Gax.ResourceNames;
 using Jewelry_store_management.HELPER;
 using Jewelry_store_management.MODELS;
 using Jewelry_store_management.VIEW;
@@ -7,11 +8,13 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Security.RightsManagement;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+ 
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
@@ -26,7 +29,7 @@ namespace Jewelry_store_management.VIEWMODEL
 
         // khai báo command
         public ICommand AddImageCommand { get; set; }
-        public ICommand RemoveImageCommand { get; set; }
+ 
         public ICommand AddProCommand { get; set; }
 
 
@@ -55,8 +58,8 @@ namespace Jewelry_store_management.VIEWMODEL
         }
 
         // List hình ảnh
-        private String image{ get; set; }
-        public String Image
+        private BitmapImage image{ get; set; }
+        public BitmapImage Image
         {
             get { return image; }
             set 
@@ -65,6 +68,9 @@ namespace Jewelry_store_management.VIEWMODEL
                 OnPropertyChanged();
             }
         }
+
+      
+        
 
         // List nhà cung cấp
         private ObservableCollection<String> supplierlist { get; set; }
@@ -213,7 +219,7 @@ namespace Jewelry_store_management.VIEWMODEL
             //
 
             AddImageCommand = new RelayCommand(_ => AddImage());
-            RemoveImageCommand = new RelayCommand<object>(RemoveImage);
+        
             AddProCommand = new RelayCommand (async _ => await AddProClick());
 
             //
@@ -245,7 +251,6 @@ namespace Jewelry_store_management.VIEWMODEL
                 if (string.IsNullOrEmpty(ProductID) ||
                     string.IsNullOrEmpty(ProductName) ||
                     string.IsNullOrEmpty(SelectedSupplier)
-                   
                    )
                 {
                     MessageBox_Window.ShowDialog("Vui lòng nhập đầy đủ thông tin!(ID, Tên, Nhà cung cấp)", "Chú ý", "\\Drawable\\Icons\\icon_attention.png", MessageBox_Window.MessageBoxButton.OK);
@@ -261,6 +266,16 @@ namespace Jewelry_store_management.VIEWMODEL
                     return;
                 }
 
+                // Upload image if exists
+                string imagestring = null;
+
+                if (Image!=null)
+                {
+                    imagestring = ConvertBitmapImageToBase64(Image);
+                    //  MessageBox.Show(Image+": = ");
+                    
+                }
+
                 // Tạo đối tượng Product từ các thông tin nhập vào
                 Product newProduct = new Product
                 {
@@ -273,25 +288,21 @@ namespace Jewelry_store_management.VIEWMODEL
                     Type = MaterialType,
                     Weight = ProductWeight,
                     Description = ProductDescription,
-                    SupplierName = SelectedSupplier
-                    // Thêm các thông tin khác nếu cần thiết
+                    SupplierName = SelectedSupplier,
+                    ImageURL = imagestring // Assign the image URL here
                 };
 
-                // Thêm ảnh nếu có
-                 //// Chưa tải được ảnh lên 
-
                 // Gọi phương thức AddProduct của ProductHelper để thêm sản phẩm vào Firebase
-                await _productHelper.AddProduct(newProduct);
+               await _productHelper.AddProduct(newProduct);
 
                 MessageBox_Window.ShowDialog("Thêm sản phẩm thành công!", "Thành công", "\\Drawable\\Icons\\icon_success.png", MessageBox_Window.MessageBoxButton.OK);
 
-
                 // Xóa dữ liệu sau khi thêm thành công (nếu cần)
-                ClearFields();
+               // ClearFields();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Lỗi khi thêm sản phẩm: {ex.Message}");
+               MessageBox.Show($"Lỗi khi thêm sản phẩm: {ex.Message}");
             }
         }
 
@@ -313,26 +324,27 @@ namespace Jewelry_store_management.VIEWMODEL
         // hàm chức năng
         private void AddImage()
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Image Files (*.bmp;*.jpg;*.png)|*.bmp;*.jpg;*.png|All files (*.*)|*.*";
-            openFileDialog.Multiselect = false;
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "Image Files (*.bmp;*.jpg;*.png)|*.bmp;*.jpg;*.png|All files (*.*)|*.*",
+                Multiselect = false
+            };
             if (openFileDialog.ShowDialog() == true)
             {
-                foreach (String filename in openFileDialog.FileNames)
-                {
-                    Image = filename;
-                }
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.UriSource = new Uri(openFileDialog.FileName, UriKind.Absolute);
+                bitmap.EndInit();
+
+                Image = bitmap;
+                HasImage = true;
             }
+
+             
+
+
         }
-         private void RemoveImage(object obj)
-        {
-            BitmapImage image = obj as BitmapImage;
-            if (image != null)
-            {
-                image = null;
-                image.StreamSource?.Dispose();
-            }
-        }   
+        
         // Hàm lấy list nhà cung cấp
         private async Task GetSupplierlist()
         {
@@ -352,5 +364,31 @@ namespace Jewelry_store_management.VIEWMODEL
 
             }
         }
+
+        // chuyển từ bitmap sang String để lưu lên DB
+        private string ConvertBitmapImageToBase64(BitmapImage bitmapImage)
+        {
+
+           
+            try
+            {
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    BitmapEncoder encoder = new PngBitmapEncoder();
+                    encoder.Frames.Add(BitmapFrame.Create(bitmapImage));
+                    encoder.Save(memoryStream);
+                    byte[] imageBytes = memoryStream.ToArray();
+                    return Convert.ToBase64String(imageBytes);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi chuyển đổi hình ảnh: {ex.Message}");
+                return null;
+            }
+        }
+       
+
     }
+
 }

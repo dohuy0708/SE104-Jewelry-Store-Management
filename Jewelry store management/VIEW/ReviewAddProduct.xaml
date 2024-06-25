@@ -1,4 +1,4 @@
-﻿<Window x:Class="Jewelry_store_management.VIEW.AddProductView"
+﻿<Window x:Class="Jewelry_store_management.VIEW.ReviewAddProduct"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,9 +9,9 @@
                WindowStartupLocation="CenterScreen"
              Height="530"   Width="700" ResizeMode="NoResize"
                 Icon="\Drawable\Images\Logo.png"
-               Title="H-Jewelry"  
-        
-             DataContext="{StaticResource AddProduct}">
+               Title="H-Jewelry"  >
+
+
 
     <Grid Background="AliceBlue">
 
@@ -28,13 +28,13 @@
                         Command="{Binding AddImageCommand}">
                 </Button>
 
-                
+
             </StackPanel>
         </Border>
         <!--Phần thêm sp-->
         <Border Grid.Column="1">
             <StackPanel>
-                <Label Margin="60 30 60 0" Content="THÊM SẢN PHẨM" FontSize="25" FontWeight="Bold" HorizontalAlignment="Center"></Label>
+                <Label Margin="60 30 60 0" Content="CHI TIẾT SẢN PHẨM" FontSize="25" FontWeight="Bold" HorizontalAlignment="Center"></Label>
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Margin="30 10 0 0">
                         <Label Content="MÃ SẢN PHẨM"></Label>
@@ -74,7 +74,7 @@
                         <Label Content="LOẠI"></Label>
                         <ComboBox Width="169" Style="{StaticResource MaterialDesignComboBox}" ItemsSource="{Binding ProductTypes}" Background="AliceBlue"/>
 
-                      
+
                     </StackPanel>
                     <StackPanel Margin="30 10 30 0">
                         <Label Content="NHÀ CUNG CẤP"></Label>
@@ -111,7 +111,7 @@
                     </StackPanel>
                 </StackPanel>
                 <Button Margin="0 20 0 30" Width="140" Style="{StaticResource MaterialDesignFlatButton}" 
-                        md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="Aqua"  Background="Aqua" Foreground="White" Content="Thêm sản phẩm" Command="{Binding AddProCommand}"></Button>
+                        md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="Aqua"  Background="Aqua" Foreground="White" Content="CẬP NHẬT" Command="{Binding AddProCommand}"></Button>
             </StackPanel>
         </Border>
     </Grid>

@@ -15,14 +15,13 @@ using System.Windows.Shapes;
 namespace Jewelry_store_management.VIEW
 {
     /// <summary>
-    /// Interaction logic for BillView.xaml
+    /// Interaction logic for ReviewAddProduct.xaml
     /// </summary>
-    public partial class BillView : Window
+    public partial class ReviewAddProduct : Window
     {
-        public BillView()
+        public ReviewAddProduct()
         {
             InitializeComponent();
         }
-
     }
 }

@@ -9,6 +9,7 @@
     <viewmodel:AddProductViewModel x:Key="AddProduct"></viewmodel:AddProductViewModel>
     <viewmodel:PurchaseOderViewModel x:Key="Purchase"></viewmodel:PurchaseOderViewModel>
     <viewmodel:BillViewModel x:Key="Bill"></viewmodel:BillViewModel>
+    <viewmodel:AddBillViewModel x:Key="AddBill"></viewmodel:AddBillViewModel>
     <viewmodel:ServiceViewModel x:Key="Service"></viewmodel:ServiceViewModel>
    <viewmodel:scrAccountViewModel x:Key="scrAccountVM"></viewmodel:scrAccountViewModel>
     <viewmodel:ChangePasswordViewModel x:Key="ChangePassVM"></viewmodel:ChangePasswordViewModel>
@@ -41,6 +42,7 @@
     <DataTemplate DataType="{x:Type viewmodel:scrAccountViewModel}">
         <view:scrAccount/>
     </DataTemplate>
+
 
 
 </ResourceDictionary>

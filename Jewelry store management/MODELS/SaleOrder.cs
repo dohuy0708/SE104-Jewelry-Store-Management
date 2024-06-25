@@ -16,11 +16,11 @@ namespace Jewelry_store_management.MODELS
         public string CAddress { get; set; }
         public string DateSale { get; set; }
         public double TotalPrice { get; set; }
-        public double Voucher { get; set; }
-        public double Cost { get; set; }
-        public string status {  get; set; }
-        public string statusImage {  get; set; }
-        public string Pay { get; set; } // ck hay tm
+        
+      
+   
+   
+        
 
         public List<Product> ListSaleProduct { get; set; }
 
@@ -33,21 +33,18 @@ namespace Jewelry_store_management.MODELS
             CAddress=cAddress;
             DateSale=dateSale;
             TotalPrice=totalPrice;
-            Voucher=voucher;
-            Cost=cost;
-            Pay=pay;
+          
             ListSaleProduct=listSaleProduct;
-            status = statuss;
-            statusImage = StatusImage;
+            
         }
-
+        public SaleOrder(List<Product> listSaleProduct)
+        {
+            ListSaleProduct=listSaleProduct;
+        }
         public void CalculateTotalPrice()
         {
             TotalPrice = (double)ListSaleProduct.Sum(product => product.SalePrice);
         }
-        public void CalculateCost()
-        {
-            Cost = TotalPrice - Voucher;
-        }
+        
     }
 }

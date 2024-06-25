@@ -4,74 +4,119 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Jewelry_store_management.GUI"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="700"  Width="1000">
     <UserControl.Resources>
         <!-- Define the color you want to use for the text -->
         <SolidColorBrush x:Key="ChartTextColor" Color="Black"/>
     </UserControl.Resources>
-    <Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="100" />
-			<RowDefinition Height="*" />
-		</Grid.RowDefinitions>
-		
-		
+    <Grid  Background="SkyBlue">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-		<!-- Header -->
-		<Grid Grid.Row="0" Margin="10">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="*" />
-			</Grid.ColumnDefinitions>
+        <!-- Header -->
+        <Border Background="AliceBlue" Grid.Row="0" Padding="10" BorderBrush="Gray" BorderThickness="0,0,0,1">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Trang Chủ" FontSize="24" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Left"/>
+                <TextBlock Margin="690,0,10,0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontFamily="Gigi" FontWeight="Bold" FontStyle="Italic">H-Jewelry</TextBlock>
+                <Border Height="30" Width="45" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Image Source="/Drawable/Images/Logo.png" Margin="0,0,0,0"/>
+                </Border>
+            </StackPanel>
+        </Border>
 
-			<Button Grid.Column="0" Margin="10" Padding="10" >
-				<StackPanel Orientation="Horizontal">
-					<Image Source="/Drawable/Images/Logo.png" Width="20" Height="20" Margin="0,0,10,0"/>
-					<TextBlock Text="Thêm đơn hàng" VerticalAlignment="Center"/>
-				</StackPanel>
-			</Button>
+        <!-- Main Content -->
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="140" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-			<Button Grid.Column="1" Margin="10" Padding="10">
-				<StackPanel Orientation="Horizontal">
-					<Image Source="/Drawable/Images/Logo.png" Width="20" Height="20" Margin="0,0,10,0"/>
-					<TextBlock Text="Thêm đơn dịch vụ" VerticalAlignment="Center"/>
-				</StackPanel>
-			</Button>
+            <!-- Buttons -->
+            <UniformGrid Grid.Row="0" Columns="4" Margin="10 10 20 10">
+                <Button Margin="10" Height="100"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FFADC37D" Offset="0.412"/>
+                            <GradientStop Color="#FF7FBFCC" Offset="0.609"/>
+                            <GradientStop Color="#FFC0D46C" Offset="0"/>
+                            <GradientStop Color="#FF3BA6DB" Offset="0.964"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                    <StackPanel >
+                        <TextBlock Text="ĐƠN HÀNG" HorizontalAlignment="Center" Margin="10 0 10 0" FontSize="16" Foreground="AliceBlue"  />
+                        <Image Source="/Drawable/Icons/icon_bill.png"   Height="70" Width="80"/>
 
-			<Button Grid.Column="2" Margin="10" Padding="10">
-				<StackPanel Orientation="Horizontal" >
-					<Image Source="/Drawable/Images/Logo.png" Width="20" Height="20" Margin="0,0,10,0"/>
-					<TextBlock Text="Nhập hàng" VerticalAlignment="Center" />
-				</StackPanel>
-			</Button>
+                    </StackPanel>
+                </Button>
+                <Button Margin="10" Height="100"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FFADC37D" Offset="0.412"/>
+                            <GradientStop Color="#FF7FBFCC" Offset="0.609"/>
+                            <GradientStop Color="#FFC0D46C" Offset="0"/>
+                            <GradientStop Color="#FF3BA6DB" Offset="0.964"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                    <StackPanel >
+                        <TextBlock Text="DỊCH VỤ" HorizontalAlignment="Center" Margin="10 0 10 10" FontSize="16" Foreground="AliceBlue"  />
 
-			<Button Grid.Column="3" Margin="10,24,10,24" Padding="10">
-				<StackPanel Orientation="Horizontal">
-					<Image Source="/Drawable/Images/Logo.png" Width="20" Height="20" Margin="0,0,10,0"/>
-					<TextBlock Text="Xem giá vàng" VerticalAlignment="Center"/>
-				</StackPanel>
-			</Button>
-		</Grid>
+                        <Image Source="/Drawable/Icons/icon_service.png"   Height="60" Width="80"/>
 
-		<!-- Chart -->
-		<Grid Grid.Row="1">
-			<lvc:CartesianChart Grid.Row="1" Series="{Binding SalesSeries}" Margin="10" >
-				<lvc:CartesianChart.AxisX>
-					<lvc:Axis  Labels="{Binding Weeks}" Foreground="{StaticResource ChartTextColor}">
-						<lvc:Axis.Separator>
-							<lvc:Separator Step="1" />
-						</lvc:Axis.Separator>
-					</lvc:Axis>
-				</lvc:CartesianChart.AxisX>
-				<lvc:CartesianChart.AxisY>
-					<lvc:Axis Title="Doanh thu (triệu đồng)" Foreground="{StaticResource ChartTextColor}">
-					</lvc:Axis>
-				</lvc:CartesianChart.AxisY>
-			</lvc:CartesianChart>
-		</Grid>
+                    </StackPanel>
+                </Button>
+                <Button Margin="10" Height="100"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FFADC37D" Offset="0.412"/>
+                            <GradientStop Color="#FF7FBFCC" Offset="0.609"/>
+                            <GradientStop Color="#FFC0D46C" Offset="0"/>
+                            <GradientStop Color="#FF3BA6DB" Offset="0.964"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                    <StackPanel >
+                        <TextBlock Text="NHẬP HÀNG" HorizontalAlignment="Center" Margin="10 0 10 10" FontSize="16" Foreground="AliceBlue"  />
+
+                        <md:PackIcon Kind="AddShoppingCart" Width="90" Height="60" Foreground="Black" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+                <Button Margin="10" Height="100"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FFADC37D" Offset="0.412"/>
+                            <GradientStop Color="#FF7FBFCC" Offset="0.609"/>
+                            <GradientStop Color="#FFC0D46C" Offset="0"/>
+                            <GradientStop Color="#FF3BA6DB" Offset="0.964"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                    <StackPanel >
+                        <TextBlock Text="XEM GIÁ VÀNG" HorizontalAlignment="Center" Margin="10 0 10 0" FontSize="16" Foreground="AliceBlue"  />
+
+                        <md:PackIcon Kind="PaymentSchedule" Width="90" Height="70" Foreground="Black" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </UniformGrid>
+
+            <!-- Chart -->
+            <Border Grid.Row="1" CornerRadius="15" Background="AliceBlue" Margin="30 20 30 30">
+                <lvc:CartesianChart Series="{Binding SalesSeries}" Background="AliceBlue">
+                    <lvc:CartesianChart.AxisX>
+                        <lvc:Axis Labels="{Binding Weeks}" Foreground="{StaticResource ChartTextColor}">
+                            <lvc:Axis.Separator>
+                                <lvc:Separator Step="1" />
+                            </lvc:Axis.Separator>
+                        </lvc:Axis>
+                    </lvc:CartesianChart.AxisX>
+                    <lvc:CartesianChart.AxisY>
+                        <lvc:Axis Title="Doanh thu (triệu đồng)" Foreground="{StaticResource ChartTextColor}">
+                        </lvc:Axis>
+                    </lvc:CartesianChart.AxisY>
+                </lvc:CartesianChart>
+            </Border>
+        </Grid>
     </Grid>
 </UserControl>

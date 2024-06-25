@@ -84,15 +84,10 @@
                     <DataGridTextColumn Header="Địa chỉ" Binding="{Binding Address}" Width="*" IsReadOnly="True" />
                     <DataGridTemplateColumn Header="">
                         <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Image Source="{Binding statusImage}" Width="20" Height="20" Margin="5" />
-                                    <Button Width="30" Height="30" Background="Transparent" Command="{Binding ViewCommand}">
-                                        <Button.Content>
-                                            <Image Source="/Drawable/Icons/icon_detail.png" Width="30" Height="30"/>
-                                        </Button.Content>
-                                    </Button>
-                                </StackPanel>
+                            <DataTemplate  >
+                                <Button  Background="Transparent" HorizontalAlignment="Center" BorderBrush="Transparent">
+                                    <Image Source="/Drawable/Icons/icon_detail.png" Width="30" Height="30"/>
+                                </Button>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

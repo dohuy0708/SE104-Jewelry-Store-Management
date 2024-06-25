@@ -19,8 +19,8 @@
         <!-- Header -->
         <Border Background="AliceBlue" Grid.Row="0" Padding="10" BorderBrush="Gray" BorderThickness="0,0,0,1">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Thêm Sản Phẩm" FontSize="24" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Left"/>
-                <TextBlock Margin="630,0,10,0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontFamily="Gigi" FontWeight="Bold" FontStyle="Italic">H-Jewelry</TextBlock>
+                <TextBlock Text="Nhập hàng" FontSize="24" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Left"/>
+                <TextBlock Margin="650,0,10,0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontFamily="Gigi" FontWeight="Bold" FontStyle="Italic">H-Jewelry</TextBlock>
                 <Border Height="30" Width="45" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Image Source="/Drawable/Images/Logo.png" Margin="0,0,0,0"/>
                 </Border>
@@ -69,9 +69,9 @@
             </TextBox>
 
             <!-- Nút thêm sản phẩm -->
-            <Button Width="140" Height="40" Style="{StaticResource MaterialDesignRaisedButton}" Margin="170 0 0 0"
-          md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="AliceBlue"  Background="Aqua"  Command="{Binding  AddProCommand}"
-          Foreground="White" Content="Thêm sản phẩm" />
+            <Button Width="120" Height="40" Style="{StaticResource MaterialDesignRaisedButton}" Margin="170 0 0 0"
+          md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="AliceBlue"  Background="Aqua"  Command="{Binding  PurchaseProCommand}"
+          Foreground="White" Content="Nhập hàng" />
         </StackPanel>
 
         <!-- DataGrid -->
@@ -79,19 +79,16 @@
             <DataGrid x:Name="AddproDataGrid" AutoGenerateColumns="False" CanUserAddRows="False"
                       ItemsSource="{Binding AddproEntries}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Tên sản phẩm"   Binding="{Binding ProductName}" Width="*" IsReadOnly="True"  />
+                    <DataGridTextColumn Header="Mã đơn hàng nhập" Binding="{Binding PurchaseID }" Width="*" IsReadOnly="True" />
                     <DataGridTextColumn Header="Tên nhà cung cấp" Binding="{Binding SupplierName}" Width="*" IsReadOnly="True" />
-                    <DataGridTextColumn Header="Ngày nhập" Binding="{Binding AddDate}" Width="*" IsReadOnly="True" />
-                    <DataGridTextColumn Header="Số lượng" Binding="{Binding Amount}" Width="*" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Ngày nhập" Binding="{Binding DatePurchase}" Width="*" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Số lượng" Binding="{Binding TotalPrice}" Width="*" IsReadOnly="True" />
                     <DataGridTemplateColumn Header="">
                         <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Image Source="{Binding StatusImage}" Width="20" Height="20" Margin="5" />
-                                    <Button Width="30" Height="30" Margin="5" Background="Transparent">
-                                        <Image Source="/Drawable/Icons/icon_detail.png" Width="20" Height="20" />
-                                    </Button>
-                                </StackPanel>
+                            <DataTemplate  >
+                                <Button  Background="Transparent" HorizontalAlignment="Center" BorderBrush="Transparent">
+                                    <Image Source="/Drawable/Icons/icon_detail.png" Width="30" Height="30"/>
+                                </Button>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

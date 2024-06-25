@@ -72,7 +72,7 @@
             <!--Nút thêm dịch vụ-->
             <Button Width="140" Height="40" Style="{StaticResource MaterialDesignRaisedButton}" Margin="170 0 0 0"
           md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="AliceBlue"  Background="Aqua" 
-          Foreground="White" Content="Thêm dịch vụ" />
+          Foreground="White" Content="Thêm dịch vụ" Command="{Binding AddServiceCommand}"/>
         </StackPanel>
 
         <!-- DataGrid -->
@@ -81,21 +81,18 @@
                       ItemsSource="{Binding ServiceEntries}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Mã dịch vụ" Binding="{Binding ServiceID}" Width="*" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Tên dịch vụ" Binding="{Binding ServiceName}" Width="*" IsReadOnly="True" />
+
                     <DataGridTextColumn Header="Tên khách hàng" Binding="{Binding CustomerName}" Width="*" IsReadOnly="True" />
                     <DataGridTextColumn Header="Ngày nhận đơn" Binding="{Binding DateOrder}" Width="*" IsReadOnly="True" />
-                    <DataGridTextColumn Header="Tổng tiền" Binding="{Binding Cost}" Width="*" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Tổng tiền" Binding="{Binding TotalPrice}" Width="*" IsReadOnly="True" />
                     <DataGridTextColumn Header="Tình trạng" Binding="{Binding Status}" Width="*" IsReadOnly="True" />
                     <DataGridTemplateColumn Header="">
                         <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Image Source="{Binding statusImage}" Width="20" Height="20" Margin="5" />
-                                    <Button Width="30" Height="30" Background="Transparent" Command="{Binding ViewCommand}">
-                                        <Button.Content>
-                                            <Image Source="/Drawable/Icons/icon_detail.png" Width="30" Height="30"/>
-                                        </Button.Content>
-                                    </Button>
-                                </StackPanel>
+                            <DataTemplate  >
+                                <Button  Background="Transparent" HorizontalAlignment="Center" BorderBrush="Transparent">
+                                    <Image Source="/Drawable/Icons/icon_detail.png" Width="30" Height="30"/>
+                                </Button>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
