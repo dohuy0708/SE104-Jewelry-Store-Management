@@ -11,6 +11,7 @@ using Jewelry_store_management.HELPER;
 using Jewelry_store_management.MODELS;
 using Jewelry_store_management.VIEW;
 
+
 namespace Jewelry_store_management.VIEWMODEL
 {
     public class scrOrderViewModel : BaseViewModel
@@ -31,7 +32,16 @@ namespace Jewelry_store_management.VIEWMODEL
             }
         }
 
-     
+        private string searchText;
+        public string SearchText 
+        {
+            get { return searchText; }
+            set
+            {
+                searchText = value;
+                OnPropertyChanged();
+            }
+        }
 
         public scrOrderViewModel()
         {
@@ -71,7 +81,7 @@ namespace Jewelry_store_management.VIEWMODEL
 
         private void Search(object parameter)
         {
-            // Thực hiện logic tìm kiếm ở đây
+
         }
        
     }

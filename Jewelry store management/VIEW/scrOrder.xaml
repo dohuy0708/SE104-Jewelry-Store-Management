@@ -5,6 +5,7 @@
               xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Jewelry_store_management.GUI"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="1000">
     <Grid Background="SkyBlue">
@@ -27,8 +28,19 @@
         </Border>
 
         <!-- Search Box -->
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0">
-            <TextBox Width="600" HorizontalAlignment="Left" Margin="10" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}">
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10,10,10,0">
+            <!-- Nút Search -->
+            <Button Width="50" Height="30" Style="{StaticResource MaterialDesignFlatButton}" Margin="0,0,10,0"
+                    md:ButtonAssist.CornerRadius="5" BorderThickness="1" BorderBrush="Gray" Background="White"
+                    Command="{Binding SearchCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Drawable/Icons/icon_search.png" Width="20" Height="20"/>
+                    <TextBlock Text="Search" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                </StackPanel>
+            </Button>
+
+            <!-- Ô nhập thông tin tìm kiếm -->
+            <TextBox Width="600" HorizontalAlignment="Left" Margin="0" VerticalContentAlignment="Center" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}">
                 <TextBox.Style>
                     <Style TargetType="TextBox">
                         <Setter Property="Template">
@@ -37,30 +49,31 @@
                                     <Grid>
                                         <Border Background="White" BorderBrush="Gray" BorderThickness="1" CornerRadius="5">
                                             <Grid Margin="0,0,-1,2">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="Auto" />
-                                                    <ColumnDefinition Width="*" />
-                                                </Grid.ColumnDefinitions>
-                                                
-                                                <Button Margin="5,0,0,0" Background="Transparent" BorderBrush="AliceBlue"
-                                                       Command="{Binding SearchCommand}" Grid.Column="0">
-                                                    <Image Source="/Drawable/Icons/icon_search.png" Width="20" Height="20" />
-                                                </Button>
-
-
                                                 <ScrollViewer x:Name="PART_ContentHost" Margin="5,0,0,0" />
-                                                <TextBlock  Grid.Column="1"
-                                                    x:Name="Placeholder" Text="Tìm kiếm" Margin="5,0,0,0" 
-                                                           Foreground="Gray" IsHitTestVisible="False" ></TextBlock>
-                                               
-
+                                                <TextBlock x:Name="Placeholder" Text="Tìm kiếm" Margin="10,0,0,0"
+                                                           Foreground="Gray" IsHitTestVisible="False" VerticalAlignment="Center" />
                                             </Grid>
                                         </Border>
                                     </Grid>
                                     <ControlTemplate.Triggers>
                                         <Trigger Property="Text" Value="">
+                                            <Setter TargetName="Placeholder" Property="Visibility" Value="Hidden" />
+                                        </Trigger>
+                                        <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
                                             <Setter TargetName="Placeholder" Property="Visibility" Value="Visible" />
                                         </Trigger>
+                                        <Trigger Property="Text" Value="{x:Null}">
+                                            <Setter TargetName="Placeholder" Property="Visibility" Value="Visible" />
+                                        </Trigger>
+                                        <!--<Trigger Property="Text" Value="">
+                                            <Setter TargetName="Placeholder" Property="Visibility" Value="Collapsed" />
+                                        </Trigger>
+                                        <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                            <Setter TargetName="Placeholder" Property="Visibility" Value="Collapsed" />
+                                        </Trigger>
+                                        <Trigger Property="Text" Value="{x:Null}">
+                                            <Setter TargetName="Placeholder" Property="Visibility" Value="Collapsed" />
+                                        </Trigger>-->
                                     </ControlTemplate.Triggers>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -68,13 +81,11 @@
                     </Style>
                 </TextBox.Style>
             </TextBox>
-            
-            
-            
-            <!--Nút thêm sản phẩm--> 
-            <Button Width="140" Height="40" Style="{StaticResource MaterialDesignRaisedButton}" Margin="170 0 0 0"
-          md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="AliceBlue"  Background="Aqua" 
-          Foreground="White" Content="Thêm đơn hàng" Command="{Binding AddOrderCommand}" />
+
+            <!-- Nút thêm sản phẩm -->
+            <Button Width="140" Height="40" Style="{StaticResource MaterialDesignRaisedButton}" Margin="130,0,0,0"
+                    md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="AliceBlue" Background="Aqua" 
+                    Foreground="White" Content="Thêm đơn hàng" Command="{Binding AddOrderCommand}" />
         </StackPanel>
 
         <!-- DataGrid -->

@@ -112,7 +112,7 @@
                         </lvc:Axis>
                     </lvc:CartesianChart.AxisX>
                     <lvc:CartesianChart.AxisY>
-                        <lvc:Axis Title="Doanh thu (triệu đồng)" Foreground="{StaticResource ChartTextColor}">
+                        <lvc:Axis Title="Doanh thu (triệu đồng)"    Foreground="{StaticResource ChartTextColor}">
                         </lvc:Axis>
                     </lvc:CartesianChart.AxisY>
                 </lvc:CartesianChart>
