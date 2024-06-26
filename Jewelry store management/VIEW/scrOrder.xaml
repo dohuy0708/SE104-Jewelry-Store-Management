@@ -6,6 +6,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Jewelry_store_management.GUI"
              mc:Ignorable="d" 
+             x:Name="scrOrderControl"
              d:DesignHeight="700" d:DesignWidth="1000">
     <Grid Background="SkyBlue">
         <!-- Define Row Definitions -->
@@ -79,19 +80,35 @@
 
         <!-- DataGrid -->
         <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" Margin="10">
-            <DataGrid x:Name="OrderDataGrid" AutoGenerateColumns="False" CanUserAddRows="False"
+            <DataGrid x:Name="OrderDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" SelectedItem="{Binding SelectedSaleOrder}"
                       ItemsSource="{Binding OrderEntries}"  >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Mã đơn" Binding="{Binding SaleId}" Width="*" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Tên khách hàng" Binding="{Binding CustomerName}" Width="*" IsReadOnly="True" />
                     <DataGridTextColumn Header="Ngày xuất" Binding="{Binding DateSale}" Width="*" IsReadOnly="True" />
                     <DataGridTextColumn Header="Tổng tiền" Binding="{Binding TotalPrice}" Width="*" IsReadOnly="True" />
-                    <DataGridTemplateColumn Header="">
+                    <DataGridTemplateColumn Header="" >
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate  >
-                                <Button  Background="Transparent" HorizontalAlignment="Center" BorderBrush="Transparent">
-                                    <Image Source="/Drawable/Icons/icon_detail.png" Width="30" Height="30"/>
-                                </Button>
+                                <StackPanel Orientation="Horizontal" >
+                                    <Button x:Name="EditButton" Command="{Binding DataContext.ShowDetailCommand, ElementName=scrOrderControl}"
+                                       CommandParameter="{Binding}" 
+                               Background="Transparent" 
+                           HorizontalAlignment="Center" 
+                          BorderBrush="Transparent">
+
+                                        <Image Source="/Drawable/Icons/icon_edit.png" Stretch="UniformToFill"/>
+                                    </Button>
+                                    <Button x:Name="DeleteButton" Command="{Binding DataContext.DeleteRowCommand, ElementName=scrOrderControl}"
+                               CommandParameter="{Binding}" 
+                               Background="Transparent" 
+                               HorizontalAlignment="Center" 
+                               BorderBrush="Transparent">
+
+                                        <Image Source="/Drawable/Icons/icon_delete.png" Stretch="UniformToFill"/>
+                                    </Button>
+                                </StackPanel>
+
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

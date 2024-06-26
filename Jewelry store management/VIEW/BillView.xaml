@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Jewelry_store_management.VIEW"
+        x:Name="scrBillView"
         mc:Ignorable="d"
        Icon="\Drawable\Images\Logo.png"
         Title="H-Jewelry"
@@ -87,7 +88,7 @@
 
             <Button Margin="60 20 60 10" Content="Thêm sản phẩm" Command="{Binding AddProductCommand}"></Button>
 
-            <DataGrid ItemsSource="{Binding ListProduct}" AutoGenerateColumns="False" CanUserAddRows="False" Background="AliceBlue" Margin="50 0 50 0" Height="240">
+            <DataGrid ItemsSource="{Binding ListProduct}" AutoGenerateColumns="False" CanUserAddRows="False" Background="AliceBlue" Margin="30 0 30 0" Height="240" Width="660">
                 <DataGrid.Columns>
                     <DataGridTextColumn FontSize="14"  Header="Mã sản phẩm" Binding="{Binding PID}"/>
 
@@ -96,6 +97,23 @@
                     <DataGridTextColumn FontSize="14"  Header="Size" Binding="{Binding Size}"/>
                     <DataGridTextColumn FontSize="14"  Header="Số lượng" Binding="{Binding Quantity}"/>
                     <DataGridTextColumn FontSize="14"  Header="Đơn Giá" Binding="{Binding SalePrice}"/>
+                    <DataGridTemplateColumn Header="" >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate  >
+                                <StackPanel Orientation="Horizontal" >
+                                    <Button x:Name="DeleteButton" Command="{Binding DataContext.DeleteRowCommand, ElementName=scrBillView}"
+                           CommandParameter="{Binding}" 
+                           Background="Transparent" 
+                           HorizontalAlignment="Center" 
+                           BorderBrush="Transparent">
+
+                                        <Image Source="/Drawable/Icons/icon_delete.png" Stretch="UniformToFill"/>
+                                    </Button>
+                                </StackPanel>
+
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
            
