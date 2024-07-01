@@ -148,7 +148,9 @@ namespace Jewelry_store_management.VIEWMODEL
             MenuSupplierCommand = new RelayCommand(async _ => await MenuSupplierClick());
             MenuAccountCommand = new RelayCommand(async _ => await MenuAccountClick());
 
-           
+
+            MenuHomeBackground = Brushes.SkyBlue;
+
 
 
 

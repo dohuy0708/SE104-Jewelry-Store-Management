@@ -86,7 +86,8 @@
 
             </StackPanel>
 
-            <Button Margin="60 20 60 10" Content="Thêm sản phẩm" Command="{Binding AddProductCommand}"></Button>
+            <Button Margin="60 20 60 10" Content="Thêm sản phẩm" Command="{Binding AddProductCommand}"  Width="200"
+                     md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="Aqua"  Background="Aqua" Foreground="White"  Style="{StaticResource MaterialDesignFlatButton}"></Button>
 
             <DataGrid ItemsSource="{Binding ListProduct}" AutoGenerateColumns="False" CanUserAddRows="False" Background="AliceBlue" Margin="30 0 30 0" Height="240" Width="660">
                 <DataGrid.Columns>
@@ -120,8 +121,8 @@
             <StackPanel Orientation="Horizontal" Margin="0 0 0 0"  >
                 <TextBlock Text="Tổng giá trị (VND):" FontWeight="DemiBold" FontSize="16" Margin="30 0 10 0"  VerticalAlignment="Center"></TextBlock>
                 <TextBlock Text="{Binding TotalPrice}" FontSize="16" VerticalAlignment="Center" Width="200"></TextBlock>
-                <Button Margin="100 20 0 30" Width="140" Style="{StaticResource MaterialDesignFlatButton}"  Command="{Binding AddOrderCommand}"
-          md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="Aqua"  Background="Aqua" Foreground="White" Content="THANH TOÁN"></Button>
+                <Button Margin="100 20 0 30" Width="140" Command="{Binding AddOrderCommand}"
+          md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="Aqua"  Background="Aqua" Foreground="White"  Style="{StaticResource MaterialDesignFlatButton}"  Content="THANH TOÁN" ></Button>
             </StackPanel>
 
         </StackPanel>
