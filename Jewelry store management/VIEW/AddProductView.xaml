@@ -72,7 +72,7 @@
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Margin="30 10 0 0">
                         <Label Content="LOẠI"></Label>
-                        <ComboBox Width="169" Style="{StaticResource MaterialDesignComboBox}" ItemsSource="{Binding ProductTypes}" Background="AliceBlue"/>
+                        <ComboBox Width="169" Style="{StaticResource MaterialDesignComboBox}" ItemsSource="{Binding ProductTypes}" SelectedItem="{Binding SelectedType}" Background="AliceBlue"/>
 
                       
                     </StackPanel>
@@ -92,7 +92,7 @@
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Margin="30 10 30 0">
                         <Label Content="CHẤT LIỆU"></Label>
-                        <ComboBox Width="169" Style="{StaticResource MaterialDesignComboBox}"  ItemsSource="{Binding   MaterialTypes}"  Background="AliceBlue"/>
+                        <ComboBox Width="169" Style="{StaticResource MaterialDesignComboBox}"  ItemsSource="{Binding   MaterialTypes}"  SelectedItem="{Binding SelectedMaterial}" Background="AliceBlue"/>
 
                     </StackPanel>
                     <StackPanel Margin="0 10 30 0">

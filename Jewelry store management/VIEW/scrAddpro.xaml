@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:Jewelry_store_management.GUI"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             x:Name="scrAddProControl"
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="1000">
     <Grid Background="SkyBlue">
@@ -76,19 +77,35 @@
 
         <!-- DataGrid -->
         <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" Margin="10">
-            <DataGrid x:Name="AddproDataGrid" AutoGenerateColumns="False" CanUserAddRows="False"
+            <DataGrid x:Name="AddproDataGrid" AutoGenerateColumns="False" CanUserAddRows="False"  SelectedItem="{Binding SelectedAddProOrder}"
                       ItemsSource="{Binding AddproEntries}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Mã đơn hàng nhập" Binding="{Binding PurchaseID }" Width="*" IsReadOnly="True" />
                     <DataGridTextColumn Header="Tên nhà cung cấp" Binding="{Binding SupplierName}" Width="*" IsReadOnly="True" />
                     <DataGridTextColumn Header="Ngày nhập" Binding="{Binding DatePurchase}" Width="*" IsReadOnly="True" />
-                    <DataGridTextColumn Header="Số lượng" Binding="{Binding TotalPrice}" Width="*" IsReadOnly="True" />
-                    <DataGridTemplateColumn Header="">
+                    <DataGridTextColumn Header="Tổng tiền" Binding="{Binding TotalPrice}" Width="*" IsReadOnly="True" />
+                    <DataGridTemplateColumn Header="" >
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate  >
-                                <Button  Background="Transparent" HorizontalAlignment="Center" BorderBrush="Transparent">
-                                    <Image Source="/Drawable/Icons/icon_detail.png" Width="30" Height="30"/>
-                                </Button>
+                                <StackPanel Orientation="Horizontal" >
+                                    <Button x:Name="EditButton" Command="{Binding DataContext.ShowDetailCommand, ElementName=scrAddProControl}"
+                                   CommandParameter="{Binding}" 
+                           Background="Transparent" 
+                       HorizontalAlignment="Center" 
+                      BorderBrush="Transparent">
+
+                                        <Image Source="/Drawable/Icons/icon_edit.png" Stretch="UniformToFill"/>
+                                    </Button>
+                                    <Button x:Name="DeleteButton" Command="{Binding DataContext.DeleteRowCommand, ElementName=scrAddProControl}"
+                           CommandParameter="{Binding}" 
+                           Background="Transparent" 
+                           HorizontalAlignment="Center" 
+                           BorderBrush="Transparent">
+
+                                        <Image Source="/Drawable/Icons/icon_delete.png" Stretch="UniformToFill"/>
+                                    </Button>
+                                </StackPanel>
+
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

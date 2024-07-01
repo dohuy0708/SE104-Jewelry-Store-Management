@@ -44,6 +44,16 @@ namespace Jewelry_store_management.VIEWMODEL
                 OnPropertyChanged();
             }
         }
+        private String selectedType;
+        public String SelectedType
+        {
+            get { return selectedType; }
+            set
+            {
+                selectedType = value;
+                OnPropertyChanged();
+            }
+        }
 
         // danh mục chất liệu
         private ObservableCollection<string> materialTypes;
@@ -53,6 +63,16 @@ namespace Jewelry_store_management.VIEWMODEL
             set
             {
                 materialTypes = value;
+                OnPropertyChanged();
+            }
+        }
+        private String selectedMaterial;
+        public String SelectedMaterial
+        {
+            get { return selectedMaterial; }
+            set
+            {
+                selectedMaterial = value;
                 OnPropertyChanged();
             }
         }
@@ -285,10 +305,12 @@ namespace Jewelry_store_management.VIEWMODEL
                     Quantity = ProductQuantity,
                     PurchasePrice = PurchasePrice,
                     SalePrice = SalePrice,
-                    Type = MaterialType,
+                   
                     Weight = ProductWeight,
                     Description = ProductDescription,
                     SupplierName = SelectedSupplier,
+                    Type = SelectedType,
+                    Material = SelectedMaterial,
                     ImageURL = imagestring // Assign the image URL here
                 };
 

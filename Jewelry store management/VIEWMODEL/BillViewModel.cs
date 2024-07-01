@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Jewelry_store_management.VIEW;
 using System.Windows.Media;
+using System.Windows;
 
 namespace Jewelry_store_management.VIEWMODEL
 {
@@ -14,6 +15,7 @@ namespace Jewelry_store_management.VIEWMODEL
     {
         private readonly SaleOrderHelper _saleOrderHelper;
         private readonly ProductHelper _productHelper;
+        public ICommand DeleteRowCommand { get; set; }
 
         public BillViewModel()
         {
@@ -28,10 +30,36 @@ namespace Jewelry_store_management.VIEWMODEL
 
             AddProductCommand = new RelayCommand(async _ => await AddProduct());
             AddOrderCommand = new RelayCommand(async _ => await AddOrder());
+
+
+            DeleteRowCommand = new RelayCommand<Product>(async product => await DeleteRow(product));
         }
 
 
         // load lên combobox
+
+        private async Task DeleteRow(Product product)
+        {
+
+            if (product != null)
+            {
+                try
+                {
+
+                    // Xóa đơn dịch vụ khỏi danh sách trong ViewModel
+                    ListProduct.Remove(product);
+                    TotalPrice -= (double)product.SalePrice * product.Quantity;
+
+                }
+                catch (Exception ex)
+                {
+                    // Hiển thị thông báo lỗi nếu việc xóa gặp lỗi
+                    MessageBox.Show($"Error deleting service order: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+
+            }
+        }
+
         private async void LoadProducts()
         {
             var products = await _productHelper.GetAllProducts();

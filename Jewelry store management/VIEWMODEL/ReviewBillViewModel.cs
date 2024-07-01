@@ -15,6 +15,10 @@ namespace Jewelry_store_management.VIEWMODEL
 {
     public class ReviewBillViewModel : BaseViewModel
     {
+
+        private string _printContent;
+
+        public ICommand ExportBillCommand { get; set; }
         private SaleOrder bill { get; set; }
         public SaleOrder Bill
         {
@@ -25,30 +29,145 @@ namespace Jewelry_store_management.VIEWMODEL
                 OnPropertyChanged();
             }
         }
-        private ObservableCollection<Product> productlist { get; set; }
-        public ObservableCollection<Product> Productlist
+         
+        // Properties
+      
+        private ObservableCollection<Product> listProduct;
+        public ObservableCollection<Product> ListProduct
         {
-            get { return productlist; }
+            get { return listProduct; }
             set
             {
-                productlist = value;
+                listProduct = value;
                 OnPropertyChanged();
             }
         }
-        private string _printContent;
 
-        public ICommand ExportBillCommand { get; set; }
+        private Product selectedProduct;
+        public Product SelectedProduct
+        {
+            get { return selectedProduct; }
+            set
+            {
+                selectedProduct = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string billID;
+        public string BillID
+        {
+            get { return billID; }
+            set
+            {
+                billID = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string cusName;
+        public string CusName
+        {
+            get { return cusName; }
+            set
+            {
+                cusName = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string sdt;
+        public string SDT
+        {
+            get { return sdt; }
+            set
+            {
+                sdt = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string email;
+        public string Email
+        {
+            get { return email; }
+            set
+            {
+                email = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string address;
+        public string Address
+        {
+            get { return address; }
+            set
+            {
+                address = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string dateOrder;
+        public string DateOrder
+        {
+            get { return dateOrder; }
+            set
+            {
+                dateOrder = value;
+                OnPropertyChanged();
+            }
+        }
+
+        
+
+        private double totalPrice;
+        public double TotalPrice
+        {
+            get { return totalPrice; }
+            set
+            {
+                totalPrice = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+
+
+        // hàm chính 
 
         public ReviewBillViewModel()
         {
-            Productlist = new ObservableCollection<Product>();
-            List<Product> products = new List<Product>();
-            //dòng này để text
-            products.Add(new Product("abc", "aa", 256, "s", 25));
-            Bill = new SaleOrder(products);
+           
+        }
+
+        public ReviewBillViewModel(SaleOrder order)
+        {
+            
+            
             GetSaleOrder();
-            GetProductList();
+           
             ExportBillCommand=new RelayCommand<object>(ExportBill);
+            ListProduct = new ObservableCollection<Product>();
+
+            if (order != null)
+            {
+                BillID = order.SaleId;
+                CusName = order.CustomerName;
+                SDT = order.CPhone;
+                Email = order.CEmail;
+                Address = order.CAddress;
+                DateOrder = order.DateSale;
+                TotalPrice = order.TotalPrice;
+                foreach ( var orderitem in  order.ListSaleProduct)
+                {
+                    ListProduct.Add(orderitem);
+                }    
+
+
+            }
         }
         //Hàm xuất hóa đơn
         public void ExportBill(object obj)
@@ -68,12 +187,6 @@ namespace Jewelry_store_management.VIEWMODEL
 
         }
         //Hàm lấy danh sách sản phẩm
-        public void GetProductList()
-        {
-            foreach (var product in Bill.ListSaleProduct)
-            {
-                productlist.Add(product);
-            }
-        }
+       
     }
 }

@@ -80,7 +80,8 @@
 
         </StackPanel>
 
-        <Button Margin="60 20 60 10" Content="Thêm sản phẩm" Command="{Binding AddProductCommand}"></Button>
+        <Button Margin="60 20 60 10" Content="Thêm sản phẩm" Command="{Binding AddProductCommand}" Width="200"
+                 md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="Aqua"  Background="Aqua" Foreground="White"  Style="{StaticResource MaterialDesignFlatButton}"></Button>
         
         <DataGrid ItemsSource="{Binding ListPurChase}" AutoGenerateColumns="False" CanUserAddRows="False" Background="AliceBlue" Margin="50 0 50 0" Height="240">
             <DataGrid.Columns>
@@ -113,7 +114,7 @@
         <StackPanel Orientation="Horizontal" Margin="10 20 10 10">
             <TextBlock Text="Tổng giá trị (VND):" FontWeight="DemiBold" FontSize="18" Margin="30 0 10 0"></TextBlock>
             <TextBlock Text="{Binding TotalPrice}" FontSize="18"></TextBlock>
-            <Button Margin="450 0 60 0" Content="Nhập hàng" Command="{Binding ImportCommand}"  ></Button>
+            <Button Margin="450 0 60 0" Content="Nhập hàng" Command="{Binding ImportCommand}"  md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="Aqua"  Background="Aqua" Foreground="White"  Style="{StaticResource MaterialDesignFlatButton}" ></Button>
         </StackPanel>
     </StackPanel>
 </Window>

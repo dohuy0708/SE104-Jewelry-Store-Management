@@ -20,6 +20,7 @@ namespace Jewelry_store_management.VIEWMODEL
         // Khai báo command
         public ICommand SearchCommand { get; set; }
         public ICommand AddCommand { get; set; }
+        public ICommand ShowDetailCommand { get; set; }
 
         // Khai báo trường dữ liệu
         private ObservableCollection<Product> productEntries;
@@ -73,16 +74,8 @@ namespace Jewelry_store_management.VIEWMODEL
             }
         }
 
-        private string image;
-        public string Image
-        {
-            get { return image; }
-            set
-            {
-                image = value;
-                OnPropertyChanged();
-            }
-        }
+       
+        
 
 
         // Hàm chính    
@@ -95,10 +88,35 @@ namespace Jewelry_store_management.VIEWMODEL
 
             AddCommand = new RelayCommand(async _ => await AddClick()); // True để bật lệnh mặc định
             SearchCommand = new RelayCommand(Search);
-
+            ShowDetailCommand = new RelayCommand<Product>(ShowDetail);
             // Lấy tất cả sản phẩm khi khởi tạo ViewModel
             LoadAllProducts();
         }
+
+        private void ShowDetail(Product pro)
+        {
+            ProductEntries.Clear();
+
+            if (pro != null)
+            {
+                var addSerView = new ReviewAddProduct
+                {
+                    DataContext = new ReviewAddProductViewModel(pro)
+                };
+                addSerView.ShowDialog();
+               // SelectedServiceOrder = null;
+            }
+            else
+            {
+                MessageBox_Window.ShowDialog("Service order is null!", "Error", "\\Drawable\\Icons\\icon_error.png", MessageBox_Window.MessageBoxButton.OK);
+            }
+
+            LoadAllProducts();
+       }
+
+
+
+
 
         private async void LoadAllProducts()
         {

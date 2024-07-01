@@ -17,19 +17,19 @@
         </Label>
         <StackPanel Margin="70 10 0 0">
             <Label Content="MÃ NHÀ CUNG CẤP"></Label>
-            <TextBox Text="{Binding SupplierID}" Margin="0 0 60 0" FontSize="16"></TextBox>
+            <TextBox Text="{Binding SupplierID}" Margin="0 0 60 0" FontSize="16" IsReadOnly="True"></TextBox>
         </StackPanel>
         <StackPanel Margin="70 10 0 0">
             <Label Content="TÊN NHÀ CUNG CẤP"></Label>
-            <TextBox Text="{Binding SupplierName}" Margin="0 0 60 0" FontSize="16"></TextBox>
+            <TextBox Text="{Binding SupplierName}" Margin="0 0 60 0" FontSize="16" IsReadOnly="True"></TextBox>
         </StackPanel>
         <StackPanel Margin="70 10 0 0">
             <Label Content="SỐ ĐIỆN THOẠI"></Label>
-            <TextBox FontSize="16" Text="{Binding SupplierPhone}" Margin="0 0 60 0"  ></TextBox>
+            <TextBox FontSize="16" Text="{Binding SupplierPhone}" Margin="0 0 60 0" IsReadOnly="True" ></TextBox>
         </StackPanel>
         <StackPanel Margin="70 10 0 0">
             <Label Content="ĐỊA CHỈ"></Label>
-            <TextBox FontSize="16" Text="{Binding SupplierAddress}" Margin="0 0 60 0" ></TextBox>
+            <TextBox FontSize="16" Text="{Binding SupplierAddress}" Margin="0 0 60 0" IsReadOnly="True"></TextBox>
         </StackPanel>
         <Button Margin="70 40 60 0" Width="140" Content="CẬP NHẬT" Background="Aqua" BorderBrush="Transparent" Command="{Binding UpdateSupCommand}"></Button>
     </StackPanel>
