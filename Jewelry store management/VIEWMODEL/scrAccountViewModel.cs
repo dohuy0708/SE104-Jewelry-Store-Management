@@ -147,7 +147,8 @@ namespace Jewelry_store_management.VIEWMODEL
             {
                 var user = await _userHelper.GetUserByEmail(email);
 
-             
+
+                
 
                 if (user != null)
                 {
@@ -155,7 +156,16 @@ namespace Jewelry_store_management.VIEWMODEL
                     Username = user.Name;
                     Email = user.Email;
                     Address = "(Chưa cập nhật)";
-                    Phone ="(Chưa cập nhật)";
+
+                    if (user.Phone != null)
+                    {
+                        Phone =user.Phone;
+                    }
+                    else
+                    {
+                        Phone = "(Chưa cập nhật)";
+                    }    
+                   
                     PassWord = user.Password;
                 }
                 else
@@ -220,6 +230,8 @@ namespace Jewelry_store_management.VIEWMODEL
                     Email = Email,
                     Uid = UID,
                     Phone = Phone,
+                    
+
                     Password = PassWord,
                 };
 

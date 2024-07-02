@@ -60,7 +60,7 @@ namespace Jewelry_store_management.VIEWMODEL
                 new ColumnSeries
                 {
                     Title = "Doanh thu",
-                    Values = new ChartValues<double> { 400, 800, 650, 700, 600, 450, 750 }
+                    Values = new ChartValues<double> { 400, 800, 650, 700, 600, 450, 750,  650, 700, 600, 450, 750 }
                 }
             };
 

@@ -91,13 +91,13 @@
 
             <DataGrid ItemsSource="{Binding ListProduct}" AutoGenerateColumns="False" CanUserAddRows="False" Background="AliceBlue" Margin="30 0 30 0" Height="240" Width="660">
                 <DataGrid.Columns>
-                    <DataGridTextColumn FontSize="14"  Header="Mã sản phẩm" Binding="{Binding PID}"/>
+                    <DataGridTextColumn FontSize="14" IsReadOnly="True" Header="Mã sản phẩm" Binding="{Binding PID}"/>
 
-                    <DataGridTextColumn FontSize="14"  Header="Tên sản phẩm" Binding="{Binding Name}"/>
+                    <DataGridTextColumn FontSize="14" IsReadOnly="True" Header="Tên sản phẩm" Binding="{Binding Name}"/>
 
-                    <DataGridTextColumn FontSize="14"  Header="Size" Binding="{Binding Size}"/>
-                    <DataGridTextColumn FontSize="14"  Header="Số lượng" Binding="{Binding Quantity}"/>
-                    <DataGridTextColumn FontSize="14"  Header="Đơn Giá" Binding="{Binding SalePrice}"/>
+                    <DataGridTextColumn FontSize="14" IsReadOnly="True" Header="Size" Binding="{Binding Size}"/>
+                    <DataGridTextColumn FontSize="14" IsReadOnly="True" Header="Số lượng" Binding="{Binding Quantity}"/>
+                    <DataGridTextColumn FontSize="14" IsReadOnly="True" Header="Đơn Giá" Binding="{Binding SalePrice}"/>
                     <DataGridTemplateColumn Header="" >
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate  >
