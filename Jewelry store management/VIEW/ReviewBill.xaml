@@ -81,7 +81,7 @@
                 <TextBlock Text="Tổng giá trị (VND):" FontWeight="DemiBold" FontSize="16" Margin="30 0 10 0"  VerticalAlignment="Center"></TextBlock>
                 <TextBlock Text="{Binding TotalPrice}" FontSize="16" VerticalAlignment="Center" Width="200"></TextBlock>
                 <Button Margin="160 20 0 30" Width="120" Style="{StaticResource MaterialDesignFlatButton}"  Command="{Binding   ExportBillCommand}"
-          md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="Aqua"  Background="Aqua" Foreground="White" Content="IN ĐƠN"></Button>
+          md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="Aqua"  Background="Aqua" Foreground="White" Content="IN ĐƠN" Click="Button_Click"></Button>
             </StackPanel>
 
         </StackPanel>
