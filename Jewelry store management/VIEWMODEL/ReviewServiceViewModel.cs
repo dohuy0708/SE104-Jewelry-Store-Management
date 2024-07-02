@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Jewelry_store_management.VIEWMODEL
 {
@@ -16,6 +17,8 @@ namespace Jewelry_store_management.VIEWMODEL
     {
         public ICommand AddProCommand { get; set; }
         public ICommand AddServiceOrderCommand { get; set; }
+        public ICommand ExportBillCommand { get; set; }
+
 
         private readonly ServiceOrderHelper _serviceHelper;
 
@@ -50,6 +53,7 @@ namespace Jewelry_store_management.VIEWMODEL
 
             AddProCommand = new RelayCommand(async _ => await AddProduct());
             AddServiceOrderCommand = new RelayCommand(async _ => await AddServiceOrder());
+            ExportBillCommand = new RelayCommand<object>(ExportBill);
 
             // initial field
             if (serviceOrder != null)
@@ -337,7 +341,17 @@ namespace Jewelry_store_management.VIEWMODEL
             }
         }
 
-      
+        public void ExportBill(object obj)
+        {
+            System.Windows.Controls.PrintDialog printdialog = new System.Windows.Controls.PrintDialog();
+            if (printdialog.ShowDialog() == true)
+            {
+                if (obj is Visual visual)
+                {
+                    printdialog.PrintVisual(visual, "Invoice");
+                }
+            }
+        }
 
         // Helper methods to get service types and status types
 

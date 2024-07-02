@@ -14,22 +14,22 @@
           DataContext="{StaticResource ReviewBillVM}">
 
     <StackPanel Background="AliceBlue">
-        <StackPanel>
-            <Label Margin="60 10 60 0" Content="HÓA ĐƠN" FontSize="25" FontWeight="Bold" HorizontalAlignment="Center"></Label>
-            <TextBlock Text="THÔNG TIN HÓA ĐƠN: " FontWeight="DemiBold" FontSize="15 " Margin="20 0 60 0"></TextBlock>
+        <StackPanel x:Name="Bill">
+            <Label Margin="60 10 60 0" Content="HÓA ĐƠN" FontSize="25" FontWeight="Bold" HorizontalAlignment="Center"/>
+            <TextBlock Text="THÔNG TIN HÓA ĐƠN: " FontWeight="DemiBold" FontSize="15 " Margin="20 0 60 0"/>
             <StackPanel Orientation="Horizontal">
                 <StackPanel Margin="30 5 0 0"    Orientation="Horizontal">
-                    <Label Content="MÃ HÓA ĐƠN:"  HorizontalAlignment="Left"  ></Label>
-                    <TextBox FontSize="14" Text="{Binding BillID}" Width="80" IsReadOnly="True"  ></TextBox>
+                    <Label Content="MÃ HÓA ĐƠN:"  HorizontalAlignment="Left"  />
+                    <TextBox FontSize="14" Text="{Binding BillID}" Width="80" IsReadOnly="True"  />
                 </StackPanel>
                 <StackPanel Margin="30 5 0 0"  Orientation="Horizontal">
-                    <Label Content="TÊN KHÁCH HÀNG:"   ></Label>
-                    <TextBox  FontSize="14" Width="150" Text="{Binding CusName}" IsReadOnly="True"></TextBox>
+                    <Label Content="TÊN KHÁCH HÀNG:"   />
+                    <TextBox  FontSize="14" Width="150" Text="{Binding CusName}" IsReadOnly="True"/>
                 </StackPanel>
 
                 <StackPanel Margin="30 5 0 0"  Orientation="Horizontal">
-                    <Label Content="NGÀY LẬP:"  ></Label>
-                    <TextBox  FontSize="14" Width="120" Text="{Binding DateOrder}" IsReadOnly="True" ></TextBox>
+                    <Label Content="NGÀY LẬP:"  />
+                    <TextBox  FontSize="14" Width="120" Text="{Binding DateOrder}" IsReadOnly="True" />
 
                 </StackPanel>
 
@@ -39,12 +39,12 @@
             <StackPanel Orientation="Horizontal" >
 
                 <StackPanel Margin="30 5 0 0"  Orientation="Horizontal">
-                    <Label Content="SDT:"></Label>
-                    <TextBox  FontSize="14" Text="{Binding SDT}" IsReadOnly="True" Width="110"></TextBox>
+                    <Label Content="SDT:"/>
+                    <TextBox  FontSize="14" Text="{Binding SDT}" IsReadOnly="True" Width="110"/>
                 </StackPanel>
                 <StackPanel Margin="20 5 0 0"  Orientation="Horizontal">
-                    <Label Content="EMAIL:"  ></Label>
-                    <TextBox  FontSize="14" Width="160" Text="{Binding Email}" IsReadOnly="True" ></TextBox>
+                    <Label Content="EMAIL:"  />
+                    <TextBox  FontSize="14" Width="160" Text="{Binding Email}" IsReadOnly="True" />
                 </StackPanel>
 
                 <StackPanel Margin="20 5 0 0"  Orientation="Horizontal">
@@ -54,17 +54,17 @@
             </StackPanel>
 
 
-            <TextBlock Text="THÔNG TIN SẢN PHẨM: " FontWeight="DemiBold" FontSize="16 " Margin="20 10 60 0"></TextBlock>
-
-           
+            <TextBlock Text="THÔNG TIN SẢN PHẨM: " FontWeight="DemiBold" FontSize="16 " Margin="20 10 60 0"/>
 
 
-              
 
 
-           
 
-            
+
+
+
+
+
             <DataGrid ItemsSource="{Binding ListProduct}" AutoGenerateColumns="False" CanUserAddRows="False" Background="AliceBlue" Margin="50 10 50 0" Height="260">
                 <DataGrid.Columns>
                     <DataGridTextColumn FontSize="14"  Header="Mã sản phẩm" Binding="{Binding PID}" IsReadOnly="True"/>
@@ -78,12 +78,15 @@
             </DataGrid>
 
             <StackPanel Orientation="Horizontal" Margin="0 0 0 0"  >
-                <TextBlock Text="Tổng giá trị (VND):" FontWeight="DemiBold" FontSize="16" Margin="30 0 10 0"  VerticalAlignment="Center"></TextBlock>
-                <TextBlock Text="{Binding TotalPrice}" FontSize="16" VerticalAlignment="Center" Width="200"></TextBlock>
-                <Button Margin="160 20 0 30" Width="120" Style="{StaticResource MaterialDesignFlatButton}"  Command="{Binding   ExportBillCommand}"
-          md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="Aqua"  Background="Aqua" Foreground="White" Content="IN ĐƠN" Click="Button_Click"></Button>
+                <TextBlock Text="Tổng giá trị (VND):" FontWeight="DemiBold" FontSize="16" Margin="30 0 10 0"  VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding TotalPrice}" FontSize="16" VerticalAlignment="Center" Width="200"/>
+
             </StackPanel>
 
+        </StackPanel>
+        <StackPanel>
+            <Button Margin="350 0 0 0" Width="120" Style="{StaticResource MaterialDesignFlatButton}"  Command="{Binding ExportBillCommand}" CommandParameter="{Binding ElementName=Bill}"
+            md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="Aqua"  Background="Aqua" Foreground="White" Content="IN ĐƠN"/>
         </StackPanel>
     </StackPanel>
 </Window>

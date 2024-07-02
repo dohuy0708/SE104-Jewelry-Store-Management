@@ -15,7 +15,7 @@
     
     
     <StackPanel Background="AliceBlue">
-        <StackPanel>
+        <StackPanel x:Name="Bill">
             <Label Margin="60 10 60 0" Content="CHI TIẾT ĐƠN DỊCH VỤ" FontSize="25" FontWeight="Bold" HorizontalAlignment="Center"></Label>
             <TextBlock Text="THÔNG TIN DỊCH VỤ: " FontWeight="DemiBold" FontSize="15 " Margin="20 0 60 0"></TextBlock>
             <StackPanel Orientation="Horizontal">
@@ -86,10 +86,14 @@
             <StackPanel Orientation="Horizontal" Margin="0 0 0 0"  >
                 <TextBlock Text="Tổng giá trị (VND):" FontWeight="DemiBold" FontSize="16" Margin="30 0 10 0"  VerticalAlignment="Center"></TextBlock>
                 <TextBlock Text="{Binding TotalPrice}" FontSize="16" VerticalAlignment="Center" Width="200"></TextBlock>
-                <Button Margin="140 20 0 30" Width="140" Style="{StaticResource MaterialDesignFlatButton}"  Command="{Binding AddServiceOrderCommand}"
-          md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="Aqua"  Background="Aqua" Foreground="White" Content="CẬP NHẬT"></Button>
-            </StackPanel>
-
+                
+            </StackPanel>            
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Button Margin="300 20 0 30" Width="140" Style="{StaticResource MaterialDesignFlatButton}"  Command="{Binding AddServiceOrderCommand}"
+            md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="Aqua"  Background="Aqua" Foreground="White" Content="CẬP NHẬT"></Button>
+            <Button Margin="60 20 0 30" Width="140" Style="{StaticResource MaterialDesignFlatButton}"  Command="{Binding ExportBillCommand}" CommandParameter="{Binding ElementName=Bill}"
+            md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="Aqua"  Background="Aqua" Foreground="White" Content="IN ĐƠN"></Button>
         </StackPanel>
     </StackPanel>
 </Window>

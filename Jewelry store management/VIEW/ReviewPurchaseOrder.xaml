@@ -16,6 +16,7 @@
 
 
     <StackPanel Background="AliceBlue" >
+        <StackPanel x:Name="Bill">
         <TextBlock TextAlignment="Center" Text="CHI TIẾT ĐƠN HÀNG NHẬP" FontSize="36" Margin="40 20 60 10"></TextBlock>
         <TextBlock Text="THÔNG TIN ĐƠN HÀNG: " FontWeight="DemiBold" FontSize="16 " Margin="20 10 60 0"></TextBlock>
 
@@ -60,7 +61,8 @@
         <StackPanel Orientation="Horizontal" Margin="10 20 10 10">
             <TextBlock Text="Tổng giá trị (VND):" FontWeight="DemiBold" FontSize="18" Margin="30 0 10 0"></TextBlock>
             <TextBlock Text="{Binding TotalPrice}" FontSize="18" Width="200"></TextBlock>
-            <Button Margin="350 0 60 0" Content="IN ĐƠN" Command="{Binding ImportCommand}"  md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="Aqua"  Background="Aqua" Foreground="White"  Style="{StaticResource MaterialDesignFlatButton}" Width="100" ></Button>
         </StackPanel>
+    </StackPanel>
+        <Button Margin="550 0 60 0" Content="IN ĐƠN" Command="{Binding ExportBillCommand}" CommandParameter="{Binding ElementName=Bill}"  md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="Aqua"  Background="Aqua" Foreground="White"  Style="{StaticResource MaterialDesignFlatButton}" Width="100" ></Button>
     </StackPanel>
 </Window>

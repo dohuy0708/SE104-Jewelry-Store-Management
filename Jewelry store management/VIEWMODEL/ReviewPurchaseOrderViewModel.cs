@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
+using System.Windows.Media;
 
 namespace Jewelry_store_management.VIEWMODEL
 {
@@ -16,9 +17,9 @@ namespace Jewelry_store_management.VIEWMODEL
    
     public class ReviewPurchaseOrderViewModel :BaseViewModel
     {
-   
-        public ICommand PrintCommand { get; set; }
-   
+
+        public ICommand ExportBillCommand { get; set; }
+
         private readonly PurchaseOrderHelper _purchaseOrderHelper;
 
         
@@ -102,11 +103,8 @@ namespace Jewelry_store_management.VIEWMODEL
             _purchaseOrderHelper = new PurchaseOrderHelper();
 
             ListPurChase = new ObservableCollection<Product>();
-          
-             
-       
-            PrintCommand = new RelayCommand(async _ => await PrintClick());
 
+            ExportBillCommand = new RelayCommand<object>(ExportBill);
 
             // innitial
             if (purchaseOrder != null)
@@ -124,12 +122,19 @@ namespace Jewelry_store_management.VIEWMODEL
 
 
         // In hóa đơn 
-        private async Task PrintClick()
+        public void ExportBill(object obj)
         {
-            
+            System.Windows.Controls.PrintDialog printdialog = new System.Windows.Controls.PrintDialog();
+            if (printdialog.ShowDialog() == true)
+            {
+                if (obj is Visual visual)
+                {
+                    printdialog.PrintVisual(visual, "Invoice");
+                }
+            }
         }
 
- 
+
 
     }
 
