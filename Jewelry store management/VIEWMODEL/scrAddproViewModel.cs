@@ -2,6 +2,7 @@
 using Jewelry_store_management.MODELS;
 using Jewelry_store_management.VIEW;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -164,9 +165,90 @@ namespace Jewelry_store_management.VIEWMODEL
 
         }
 
-        private void Search(object parameter)
+        private string searchText;
+        public string SearchText
         {
-            // Thực hiện logic tìm kiếm ở đây
+            get { return searchText; }
+            set
+            {
+                searchText = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private List<PurchaseOrder> allPurchaseOrders;
+
+
+        public string RemoveVietnameseDiacritics(string text)
+        {
+            string[] vietnameseChars = new string[]
+            {
+            "áàảãạâấầẩẫậăắằẳẵặ",
+            "éèẻẽẹêếềểễệ",
+            "íìỉĩị",
+            "óòỏõọôốồổỗộơớờởỡợ",
+            "úùủũụưứừửữự",
+            "ýỳỷỹỵ",
+            "đ",
+            "ÁÀẢÃẠÂẤẦẨẪẬĂẮẰẲẴẶ",
+            "ÉÈẺẼẸÊẾỀỂỄỆ",
+            "ÍÌỈĨỊ",
+            "ÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢ",
+            "ÚÙỦŨỤƯỨỪỬỮỰ",
+            "ÝỲỶỸỴ",
+            "Đ"
+            };
+
+            char[] replaceChars = new char[]
+            {
+            'a', 'e', 'i', 'o', 'u', 'y', 'd',
+            'A', 'E', 'I', 'O', 'U', 'Y', 'D'
+            };
+
+            for (int i = 0; i < vietnameseChars.Length; i++)
+            {
+                foreach (char c in vietnameseChars[i])
+                {
+                    text = text.Replace(c, replaceChars[i]);
+                }
+            }
+
+            return text;
+        }
+
+        private async void Search(object parameter)
+        {
+            allPurchaseOrders= await _purchaseOrderHelper.GetAllPurchaseOrders();
+            if (string.IsNullOrWhiteSpace(SearchText))
+            {
+                AddproEntries.Clear();
+                foreach (var purchaseOrder in allPurchaseOrders)
+                {
+                    AddproEntries.Add(purchaseOrder);
+                }
+            }
+            else
+            {
+                var lowerSearchText = RemoveVietnameseDiacritics(SearchText.ToLower());
+                var filteredOrders = allPurchaseOrders.Where(o =>
+                    (o.PurchaseID != null && RemoveVietnameseDiacritics(o.PurchaseID.ToLower()).Contains(lowerSearchText)) ||
+                    (o.SupplierName != null && RemoveVietnameseDiacritics(o.SupplierName.ToLower()).Contains(lowerSearchText)) ||
+                    (o.DatePurchase.ToString().ToLower().Contains(lowerSearchText)) ||
+
+
+                    (o.PurchaseID != null && RemoveVietnameseDiacritics(o.PurchaseID.ToLower()) == lowerSearchText.ToLower()) ||
+                    (o.SupplierName != null && RemoveVietnameseDiacritics(o.SupplierName.ToLower()) == lowerSearchText.ToLower()) ||
+                    (o.DatePurchase.ToString().ToLower() == lowerSearchText.ToLower()) ||
+                    (o.TotalPrice.ToString().ToLower() == lowerSearchText.ToLower())
+
+                ).ToList();
+
+                AddproEntries.Clear();
+                foreach (var order in filteredOrders)
+                {
+                    AddproEntries.Add(order);
+                }
+            }
         }   
 
        

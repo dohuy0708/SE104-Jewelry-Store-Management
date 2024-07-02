@@ -154,9 +154,91 @@ namespace Jewelry_store_management.VIEWMODEL
             LoadServiceEntries();
         }
 
-        private void Search(object parameter)
+
+        private string searchText;
+        public string SearchText
         {
-            // Thực hiện logic tìm kiếm ở đây
+            get { return searchText; }
+            set
+            {
+                searchText = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private List<ServiceOrder> allServiceOrders;
+
+        public string RemoveVietnameseDiacritics(string text)
+        {
+            string[] vietnameseChars = new string[]
+            {
+            "áàảãạâấầẩẫậăắằẳẵặ",
+            "éèẻẽẹêếềểễệ",
+            "íìỉĩị",
+            "óòỏõọôốồổỗộơớờởỡợ",
+            "úùủũụưứừửữự",
+            "ýỳỷỹỵ",
+            "đ",
+            "ÁÀẢÃẠÂẤẦẨẪẬĂẮẰẲẴẶ",
+            "ÉÈẺẼẸÊẾỀỂỄỆ",
+            "ÍÌỈĨỊ",
+            "ÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢ",
+            "ÚÙỦŨỤƯỨỪỬỮỰ",
+            "ÝỲỶỸỴ",
+            "Đ"
+            };
+
+            char[] replaceChars = new char[]
+            {
+            'a', 'e', 'i', 'o', 'u', 'y', 'd',
+            'A', 'E', 'I', 'O', 'U', 'Y', 'D'
+            };
+
+            for (int i = 0; i < vietnameseChars.Length; i++)
+            {
+                foreach (char c in vietnameseChars[i])
+                {
+                    text = text.Replace(c, replaceChars[i]);
+                }
+            }
+
+            return text;
+        }
+        private async void Search(object parameter)
+        {
+            allServiceOrders= await _serviceOrderHelper.GetAllServiceOrders();
+            if (string.IsNullOrWhiteSpace(SearchText))
+            {
+                ServiceEntries.Clear();
+                foreach (var serviceOrder in allServiceOrders)
+                {
+                    ServiceEntries.Add(serviceOrder);
+                }
+            }
+            else
+            {
+                var lowerSearchText = RemoveVietnameseDiacritics(SearchText.ToLower());
+                var filteredOrders = allServiceOrders.Where(o =>
+                    (o.ServiceID != null && RemoveVietnameseDiacritics(o.ServiceID.ToLower()).Contains(lowerSearchText)) ||
+                    (o.CustomerName != null && RemoveVietnameseDiacritics(o.CustomerName.ToLower()).Contains(lowerSearchText)) ||
+                    (o.ServiceName != null && RemoveVietnameseDiacritics(o.ServiceName.ToLower()).Contains(lowerSearchText)) ||
+                    (o.DateOrder.ToString().ToLower().Contains(lowerSearchText)) ||
+                    (o.Status !=  null && RemoveVietnameseDiacritics(o.Status.ToString().ToLower()).Contains(lowerSearchText)) ||
+                    
+                    (o.ServiceID != null && RemoveVietnameseDiacritics(o.ServiceID.ToLower()) == lowerSearchText.ToLower()) ||
+                    (o.ServiceName != null && RemoveVietnameseDiacritics(o.ServiceName.ToLower()) == lowerSearchText.ToLower()) ||
+                    (o.CustomerName != null && RemoveVietnameseDiacritics(o.CustomerName.ToLower()) == lowerSearchText.ToLower()) ||
+                    (o.Status != null && RemoveVietnameseDiacritics(o.Status.ToLower()) == lowerSearchText.ToLower()) ||
+                    (o.DateOrder.ToString().ToLower() == lowerSearchText.ToLower())||
+                    (o.TotalPrice.ToString().ToLower() == lowerSearchText.ToLower())
+                ).ToList();
+
+                ServiceEntries.Clear();
+                foreach (var order in filteredOrders)
+                {
+                    ServiceEntries.Add(order);
+                }
+            }
         }
        
     }
