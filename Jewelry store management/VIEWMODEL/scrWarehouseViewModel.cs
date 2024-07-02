@@ -11,6 +11,8 @@ using Jewelry_store_management.MODELS;
 using Jewelry_store_management.HELPER;
 using Jewelry_store_management.VIEW;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc.Filters;
+using System.Windows.Data;
 
 namespace Jewelry_store_management.VIEWMODEL
 {
@@ -21,6 +23,8 @@ namespace Jewelry_store_management.VIEWMODEL
         // Khai báo command
         public ICommand SearchCommand { get; set; }
         public ICommand AddCommand { get; set; }
+        public ICommand FilterCommand { get; set; }
+
         public ICommand ShowDetailCommand { get; set; }
 
         // Khai báo trường dữ liệu
@@ -34,14 +38,27 @@ namespace Jewelry_store_management.VIEWMODEL
                 OnPropertyChanged();
             }
         }
-        public ObservableCollection<String> CategoryList;
+        private Visibility isFilter;
+        public Visibility IsFilter
+        {
+            get { return isFilter; }
+            set
+            {
+                isFilter = value;
+                OnPropertyChanged();
+            }
+        }
+        //Danh sách các loại sản phẩm
         public ObservableCollection<String> TypeList;
+        //Danh sách các loại đã chọn filter
+        public ObservableCollection<Filter> TypeFilterList { get; set; }
+        //Danh sách các nguyên liệu
         public ObservableCollection<String> MaterialList;
-       // public ObservableCollection<Filter> CategoryFilterList;
-        public ICollectionView CategoryFilteredItems { get; set; }
+        //Danh sách các nguyên liệu đã chọn filter
+        public ObservableCollection<Filter> MaterialFilterList { get; set; }
 
-
-      
+        //Danh sách các Sản phẩm sau khi Filter
+        public ICollectionView FilteredProductList { get; set; }
 
         // Các thuộc tính cho sản phẩm
         private string pid;
@@ -66,23 +83,88 @@ namespace Jewelry_store_management.VIEWMODEL
             }
         }
 
-       
-        
+        private double _priceRange;
+        public double PriceRange
+        {
+            get { return _priceRange; }
+            set
+            {
+                _priceRange = value;
+                OnPropertyChanged();
+                FilteredProductList.Refresh();
+            }
+        }
+
+        private double? _minPrice;
+        public double? MinPrice
+        {
+            get { return _minPrice; }
+            set
+            {
+                if (_minPrice != value)
+                {
+                    _minPrice = value;
+                    OnPropertyChanged();
+                    if(FilteredProductList!=null)
+                    FilteredProductList.Refresh();
+                }
+            }
+        }
+        private double? _maxPrice;
+        public double? MaxPrice
+        {
+            get { return _maxPrice; }
+            set
+            {
+                if (_maxPrice != value)
+                {
+                    _maxPrice = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
 
 
         // Hàm chính    
         public scrWarehouseViewModel()
         {
+            IsFilter = Visibility.Collapsed;
             _productHelper = new ProductHelper();
+            //
 
             // Khởi tạo danh sách product
             ProductEntries = new ObservableCollection<Product>();
+            //Khởi tạo danh sách loại
+            TypeList = new ObservableCollection<String> { "Nhẫn", "Bông tai", "Dây chuyền", "Vòng tay", "Thần tài" };
+            //Khởi tạo danh sách nguyên liệu
+            MaterialList = new ObservableCollection<string> { "Vàng 9999", "Vàng 24k", "Vàng Trắng", "Vàng Tây", "Vàng Ý", "Bạc" };
+            //Lấy danh sách Type Filter đã được chọn
+            TypeFilterList = new ObservableCollection<Filter>(TypeList.Select(t => new Filter { FilterName = t }));
+            //Lấy danh sách Material Filter đã được chọn
+            MaterialFilterList = new ObservableCollection<Filter>(MaterialList.Select(m => new Filter { FilterName = m }));
 
+            foreach (var filter in TypeFilterList)
+            {
+                filter.PropertyChanged += FilterOption_PropertyChanged;
+            }
+            foreach (var filter in MaterialFilterList)
+            {
+                filter.PropertyChanged += FilterOption_PropertyChanged;
+            }
+            MinPrice = 0;
+            MaxPrice = 10000000;
+
+            LoadAllProducts();
+            //Lấy danh sách sản phẩm phù hợp với các filter
+            FilteredProductList = CollectionViewSource.GetDefaultView(ProductEntries);
+            FilteredProductList.Filter = FilterItems;
+            FilteredProductList.Refresh();
+            FilterCommand = new RelayCommand(_ => filter());
             AddCommand = new RelayCommand(async _ => await AddClick()); // True để bật lệnh mặc định
             SearchCommand = new RelayCommand(Search);
             ShowDetailCommand = new RelayCommand<Product>(ShowDetail);
             // Lấy tất cả sản phẩm khi khởi tạo ViewModel
-            LoadAllProducts();
         }
 
         private void ShowDetail(Product pro)
@@ -106,9 +188,34 @@ namespace Jewelry_store_management.VIEWMODEL
             LoadAllProducts();
        }
 
+        private void FilterOption_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Filter.IsSelected))
+            {
+                FilteredProductList.Refresh();
+            }
+        }
 
+        private bool FilterItems(object product)
+        {
+            if (product is Product currentProduct)
+            {
+                bool typeSelected = TypeFilterList.Any(f => f.IsSelected);
+                bool materialSelected = MaterialFilterList.Any(f => f.IsSelected);
 
+                bool typeMatch = !typeSelected || TypeFilterList.Any(f => f.IsSelected && f.FilterName == currentProduct.Type);
+                bool materialMatch = !materialSelected || MaterialFilterList.Any(f => f.IsSelected && f.FilterName == currentProduct.Material);
+                bool priceMatch = true;
 
+                if (MinPrice.HasValue)
+                {
+                    priceMatch = (double)currentProduct.SalePrice >= MinPrice.Value;
+                }
+
+                return typeMatch && materialMatch && priceMatch;
+            }
+            return false;
+        }
 
         private async void LoadAllProducts()
         {
@@ -246,5 +353,43 @@ namespace Jewelry_store_management.VIEWMODEL
             }
 
         }
+        private void filter()
+        {
+            if (IsFilter == Visibility.Collapsed)
+            {
+                IsFilter = Visibility.Visible;
+            }
+
+            else
+            {
+                IsFilter = Visibility.Collapsed;
+            }
+        }
+        private void UpdateMinPrice()
+        {
+            double range = PriceRange / 1000; // Chia cho 1000 vì Slider có Maximum là 1000
+            MaxPrice = (double)ProductEntries.Max(product => product.SalePrice);
+            MinPrice = (double)ProductEntries.Max(product => product.SalePrice) * range;
+        }
     }
+    //Định nghĩa class Filter
+    public class Filter : BaseViewModel
+    {
+        private bool isSelected;
+        public string FilterName { get; set; }
+
+        public bool IsSelected
+        {
+            get => isSelected;
+            set
+            {
+                if (isSelected != value)
+                {
+                    isSelected = value;
+                    OnPropertyChanged(nameof(IsSelected));
+                }
+            }
+        }
+    }
+
 }

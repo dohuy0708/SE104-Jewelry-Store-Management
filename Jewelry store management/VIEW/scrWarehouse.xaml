@@ -19,6 +19,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -75,13 +76,64 @@
             </TextBox>
 
             <!-- Nút thêm sản phẩm -->
-            <Button Width="140" Height="40" Style="{StaticResource MaterialDesignRaisedButton}" Margin="130 0 0 0"
-          md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="AliceBlue"  Background="Aqua" 
-          Foreground="White" Content="Thêm sản phẩm"  Command="{Binding AddCommand}"/>
-        </StackPanel>
+            <Button   Margin="10 0 0 0"                    
+  md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="AliceBlue"  Background="Aqua" 
+  Foreground="White"   Command="{Binding FilterCommand}">
+                <Image Source="/Drawable/Icons/icon_filter.png"></Image>
+            </Button>
+            <!-- Nút thêm sản phẩm -->
+            <Button Width="140" Height="40" Style="{StaticResource MaterialDesignRaisedButton}" Margin="80 0 0 0"
+md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="AliceBlue"  Background="Aqua" 
+Foreground="White" Content="Thêm sản phẩm"  Command="{Binding AddCommand}"/>
 
+        </StackPanel>
+        <StackPanel Grid.Row="2" Visibility="{Binding IsFilter}" Orientation="Horizontal">
+            <StackPanel>
+                <StackPanel Margin="20 0 0 0" Orientation="Horizontal">
+                    <TextBlock Text="Loại:" FontWeight="Bold" Margin="10"/>
+                    <ItemsControl ItemsSource="{Binding TypeFilterList}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox Content="{Binding FilterName}" IsChecked="{Binding IsSelected, Mode=TwoWay}" Margin="0 0 10 0"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+                <StackPanel Margin="20 0 0 0" Orientation="Horizontal">
+                    <TextBlock Text="Chất liệu:" FontWeight="Bold" Margin="10"/>
+                    <ItemsControl ItemsSource="{Binding MaterialFilterList}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox Content="{Binding FilterName}" IsChecked="{Binding IsSelected, Mode=TwoWay}" Margin="0 0 10 0"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="20 0 0 0">
+                <TextBlock Text="Giá:" FontWeight="Bold" Margin="0 0 5 0"/>
+                <StackPanel Orientation="Horizontal" Margin="0 0 10 0">
+                    <TextBox Text="{Binding MinPrice, StringFormat=N2, UpdateSourceTrigger=LostFocus}" Width="70" Margin="0 0 5 5"/>
+                    <TextBlock Text="-" VerticalAlignment="Center" Margin="0 0 5 0"/>
+                    <TextBox Text="{Binding MaxPrice}" Width="70" Margin="5 0 0 5" IsReadOnly="True"/>
+                </StackPanel>
+                <Slider Width="150" Minimum="0" Maximum="1000" TickPlacement="BottomRight" TickFrequency="50" IsMoveToPointEnabled="False"
+    Value="{Binding PriceRange, Mode=TwoWay}" Margin="0 0 10 0"/>
+            </StackPanel>
+        </StackPanel>
         <!-- ItemsControl -->
-        <Border  Grid.Row="2" Background="AliceBlue" CornerRadius="15" Padding="10" Margin="10">
+        <Border  Grid.Row="3" Background="AliceBlue" CornerRadius="15" Padding="10" Margin="10">
             <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Visible" Margin="0"  >
                 <ItemsControl ItemsSource="{Binding ProductEntries}"   >
                     <ItemsControl.ItemsPanel>
