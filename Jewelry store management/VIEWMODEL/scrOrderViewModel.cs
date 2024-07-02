@@ -151,11 +151,93 @@ namespace Jewelry_store_management.VIEWMODEL
             LoadAllSaleOrders();
 
         }
+        
 
-        private void Search(object parameter)
+        private string searchText;
+        public string SearchText
         {
-
+            get { return searchText; }
+            set
+            {
+                searchText = value;
+                OnPropertyChanged();
+            }
         }
-       
+
+        private List<SaleOrder> allSaleOrders;
+
+        public string RemoveVietnameseDiacritics(string text)
+        {
+            string[] vietnameseChars = new string[]
+            {
+            "áàảãạâấầẩẫậăắằẳẵặ",
+            "éèẻẽẹêếềểễệ",
+            "íìỉĩị",
+            "óòỏõọôốồổỗộơớờởỡợ",
+            "úùủũụưứừửữự",
+            "ýỳỷỹỵ",
+            "đ",
+            "ÁÀẢÃẠÂẤẦẨẪẬĂẮẰẲẴẶ",
+            "ÉÈẺẼẸÊẾỀỂỄỆ",
+            "ÍÌỈĨỊ",
+            "ÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢ",
+            "ÚÙỦŨỤƯỨỪỬỮỰ",
+            "ÝỲỶỸỴ",
+            "Đ"
+            };
+
+            char[] replaceChars = new char[]
+            {
+            'a', 'e', 'i', 'o', 'u', 'y', 'd',
+            'A', 'E', 'I', 'O', 'U', 'Y', 'D'
+            };
+
+            for (int i = 0; i < vietnameseChars.Length; i++)
+            {
+                foreach (char c in vietnameseChars[i])
+                {
+                    text = text.Replace(c, replaceChars[i]);
+                }
+            }
+
+            return text;
+        }
+
+        private async void Search(object parameter)
+        {
+            allSaleOrders=await _saleOrderHelper.GetAllSaleOrders();
+            if (string.IsNullOrWhiteSpace(SearchText))
+            {
+                OrderEntries.Clear();
+                foreach (var saleOrder in allSaleOrders)
+                {
+                    OrderEntries.Add(saleOrder);
+                }
+            }
+            else
+            {
+                var lowerSearchText = RemoveVietnameseDiacritics(SearchText.ToLower());
+                var filteredOrders = allSaleOrders.Where(o =>
+                    (o.SaleId != null && RemoveVietnameseDiacritics(o.SaleId.ToLower()).Contains(lowerSearchText)) ||
+                    (o.CustomerName != null && RemoveVietnameseDiacritics(o.CustomerName.ToLower()).Contains(lowerSearchText)) ||
+                    (o.DateSale.ToString().ToLower().Contains(lowerSearchText)) ||
+                   
+
+                    (o.SaleId != null && RemoveVietnameseDiacritics(o.SaleId.ToLower()) ==lowerSearchText.ToLower())||
+                    (o.CustomerName != null && RemoveVietnameseDiacritics(o.CustomerName.ToLower()) == lowerSearchText.ToLower())||
+                    (o.DateSale.ToString().ToLower()== lowerSearchText.ToLower())||
+                    (o.TotalPrice.ToString().ToLower()== lowerSearchText.ToLower())
+
+                ).ToList();
+
+                OrderEntries.Clear();
+                foreach (var order in filteredOrders)
+                {
+                    OrderEntries.Add(order);
+                }
+            }
+        }
+        
+
     }
 }

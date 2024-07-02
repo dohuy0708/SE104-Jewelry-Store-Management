@@ -10,6 +10,7 @@ using System.Windows.Input;
 using Jewelry_store_management.MODELS;
 using Jewelry_store_management.HELPER;
 using Jewelry_store_management.VIEW;
+using System.Collections.Generic;
 
 namespace Jewelry_store_management.VIEWMODEL
 {
@@ -40,16 +41,7 @@ namespace Jewelry_store_management.VIEWMODEL
         public ICollectionView CategoryFilteredItems { get; set; }
 
 
-        private string searchText;
-        public string SearchText
-        {
-            get { return searchText; }
-            set
-            {
-                searchText = value;
-                OnPropertyChanged();
-            }
-        }
+      
 
         // Các thuộc tính cho sản phẩm
         private string pid;
@@ -169,10 +161,90 @@ namespace Jewelry_store_management.VIEWMODEL
             }
         }
 
-        private void Search(object parameter)
+        private string searchText;
+        public string SearchText
         {
-            // Thực hiện logic tìm kiếm sản phẩm theo tên
-           
+            get { return searchText; }
+            set
+            {
+                searchText = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private List<Product> allProducts;
+
+        public string RemoveVietnameseDiacritics(string text)
+        {
+            string[] vietnameseChars = new string[]
+            {
+            "áàảãạâấầẩẫậăắằẳẵặ",
+            "éèẻẽẹêếềểễệ",
+            "íìỉĩị",
+            "óòỏõọôốồổỗộơớờởỡợ",
+            "úùủũụưứừửữự",
+            "ýỳỷỹỵ",
+            "đ",
+            "ÁÀẢÃẠÂẤẦẨẪẬĂẮẰẲẴẶ",
+            "ÉÈẺẼẸÊẾỀỂỄỆ",
+            "ÍÌỈĨỊ",
+            "ÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢ",
+            "ÚÙỦŨỤƯỨỪỬỮỰ",
+            "ÝỲỶỸỴ",
+            "Đ"
+            };
+
+            char[] replaceChars = new char[]
+            {
+            'a', 'e', 'i', 'o', 'u', 'y', 'd',
+            'A', 'E', 'I', 'O', 'U', 'Y', 'D'
+            };
+
+            for (int i = 0; i < vietnameseChars.Length; i++)
+            {
+                foreach (char c in vietnameseChars[i])
+                {
+                    text = text.Replace(c, replaceChars[i]);
+                }
+            }
+
+            return text;
+        }
+
+        private async void Search(object parameter) //ma sp, ten, gia, size
+        {
+            allProducts= await _productHelper.GetAllProducts();
+            if (string.IsNullOrWhiteSpace(SearchText))
+            {
+                ProductEntries.Clear();
+                foreach (var product in allProducts)
+                {
+                    ProductEntries.Add(product);
+                }
+            }
+            else
+            {
+                var lowerSearchText = RemoveVietnameseDiacritics(SearchText.ToLower());
+                var filteredProduct = allProducts.Where(o =>
+                    (o.PID != null && RemoveVietnameseDiacritics(o.PID.ToLower()).Contains(lowerSearchText)) ||
+                    (o.Name != null && RemoveVietnameseDiacritics(o.Name.ToLower()).Contains(lowerSearchText)) ||
+                    (o.Size != null && o.Size.ToLower().Contains(lowerSearchText)) ||
+
+
+                    (o.PID != null && RemoveVietnameseDiacritics(o.PID.ToLower()) == lowerSearchText.ToLower()) ||
+                    (o.Name != null && RemoveVietnameseDiacritics(o.Name.ToLower()) == lowerSearchText.ToLower()) ||
+                    (o.Size != null && o.Size.ToLower() == lowerSearchText.ToLower()) ||
+                    (o.SalePrice.ToString().ToLower() == lowerSearchText.ToLower())
+
+                ).ToList();
+
+                ProductEntries.Clear();
+                foreach (var product in filteredProduct)
+                {
+                    ProductEntries.Add(product);
+                }
+            }
+
         }
     }
 }

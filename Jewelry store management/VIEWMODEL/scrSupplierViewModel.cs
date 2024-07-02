@@ -156,10 +156,91 @@ namespace Jewelry_store_management.VIEWMODEL
             }
         }
 
-        // hàm chức năng
-        private void Search(object parameter)
+
+        private string searchText;
+        public string SearchText
         {
-            // Thực hiện logic tìm kiếm ở đây
+            get { return searchText; }
+            set
+            {
+                searchText = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private List<Supplier> allSuppliers;
+
+
+        public string RemoveVietnameseDiacritics(string text)
+        {
+            string[] vietnameseChars = new string[]
+            {
+            "áàảãạâấầẩẫậăắằẳẵặ",
+            "éèẻẽẹêếềểễệ",
+            "íìỉĩị",
+            "óòỏõọôốồổỗộơớờởỡợ",
+            "úùủũụưứừửữự",
+            "ýỳỷỹỵ",
+            "đ",
+            "ÁÀẢÃẠÂẤẦẨẪẬĂẮẰẲẴẶ",
+            "ÉÈẺẼẸÊẾỀỂỄỆ",
+            "ÍÌỈĨỊ",
+            "ÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢ",
+            "ÚÙỦŨỤƯỨỪỬỮỰ",
+            "ÝỲỶỸỴ",
+            "Đ"
+            };
+
+            char[] replaceChars = new char[]
+            {
+            'a', 'e', 'i', 'o', 'u', 'y', 'd',
+            'A', 'E', 'I', 'O', 'U', 'Y', 'D'
+            };
+
+            for (int i = 0; i < vietnameseChars.Length; i++)
+            {
+                foreach (char c in vietnameseChars[i])
+                {
+                    text = text.Replace(c, replaceChars[i]);
+                }
+            }
+
+            return text;
+        }
+
+        // hàm chức năng
+        private async void Search(object parameter)
+        {
+           allSuppliers= await _supplierHelper.GetAllSuppliers();
+            if (string.IsNullOrWhiteSpace(SearchText))
+            {
+                SupplierEntries.Clear();
+                foreach (var supplier in allSuppliers)
+                {
+                    SupplierEntries.Add(supplier);
+                }
+            }
+            else
+            {
+                var lowerSearchText = RemoveVietnameseDiacritics(SearchText.ToLower());
+                var filteredSuppliers = allSuppliers.Where(o =>
+                    (o.SID != null && RemoveVietnameseDiacritics(o.SID.ToLower()).Contains(lowerSearchText)) ||
+                    (o.Name != null && RemoveVietnameseDiacritics(o.Name.ToLower()).Contains(lowerSearchText)) ||
+                    (o.Address != null && RemoveVietnameseDiacritics(o.Address.ToLower()).Contains(lowerSearchText)) ||
+
+
+                    (o.SID != null && RemoveVietnameseDiacritics(o.SID.ToLower()) == lowerSearchText.ToLower()) ||
+                    (o.Name != null && RemoveVietnameseDiacritics(o.Name.ToLower()) == lowerSearchText.ToLower()) ||
+                    (o.Address != null && RemoveVietnameseDiacritics(o.Address.ToLower()) == lowerSearchText.ToLower())
+
+                ).ToList();
+
+                SupplierEntries.Clear();
+                foreach (var order in filteredSuppliers)
+                {
+                    SupplierEntries.Add(order);
+                }
+            }
         }
     }
 }

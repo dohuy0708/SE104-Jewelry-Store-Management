@@ -597,6 +597,7 @@
     <Compile Include="HELPER\PasswordHelper.cs" />
     <Compile Include="HELPER\ProductHelper.cs" />
     <Compile Include="HELPER\PurchaseOrderHelper.cs" />
+    <Compile Include="VIEWMODEL\RemoveDiacritics.cs" />
     <Compile Include="HELPER\SaleOrderHelper.cs" />
     <Compile Include="HELPER\ServiceOrderHelper.cs" />
     <Compile Include="HELPER\SupplierHelper.cs" />

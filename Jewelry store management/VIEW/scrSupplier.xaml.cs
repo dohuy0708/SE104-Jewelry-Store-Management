@@ -26,5 +26,6 @@ namespace Jewelry_store_management.GUI
             InitializeComponent();
             DataContext = new scrSupplierViewModel();
         }
+
     }
 }
