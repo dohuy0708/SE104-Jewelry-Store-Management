@@ -129,7 +129,7 @@ Foreground="White" Content="Thêm sản phẩm"  Command="{Binding AddCommand}"/
                     <TextBox Text="{Binding MaxPrice}" Width="70" Margin="5 0 0 5" IsReadOnly="True"/>
                 </StackPanel>
                 <Slider Width="150" Minimum="0" Maximum="1000" TickPlacement="BottomRight" TickFrequency="50" IsMoveToPointEnabled="False"
-    Value="{Binding PriceRange, Mode=TwoWay}" Margin="0 0 10 0"/>
+                Value="{Binding PriceRange, Mode=TwoWay}" Margin="0 0 10 0"/>
             </StackPanel>
         </StackPanel>
         <!-- ItemsControl -->

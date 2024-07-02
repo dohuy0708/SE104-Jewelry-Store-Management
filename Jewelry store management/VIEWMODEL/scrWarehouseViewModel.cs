@@ -91,6 +91,7 @@ namespace Jewelry_store_management.VIEWMODEL
             {
                 _priceRange = value;
                 OnPropertyChanged();
+                UpdateMinPrice();
                 FilteredProductList.Refresh();
             }
         }
@@ -153,7 +154,7 @@ namespace Jewelry_store_management.VIEWMODEL
                 filter.PropertyChanged += FilterOption_PropertyChanged;
             }
             MinPrice = 0;
-            MaxPrice = 10000000;
+            MaxPrice = 0;
 
             LoadAllProducts();
             //Lấy danh sách sản phẩm phù hợp với các filter
