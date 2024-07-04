@@ -41,7 +41,11 @@
                 <!-- Avatar and Change Button -->
                 <Border Grid.Row="0" Grid.ColumnSpan="2" Margin="10 30 10 10" HorizontalAlignment="Center">
                     <StackPanel>
-                        <Image Source="/Drawable/Icons/icon_avatar.png" Width="120" Height="120" Margin="0,0,0,20"/>
+                        <Ellipse Width="120" Height="120" Margin="0,0,0,20">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="{Binding Image, TargetNullValue='Drawable\Icons\icon_admin.png'}" Stretch="UniformToFill"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
                         <Button Command="{Binding ChangeImageCommand}" Content="Thay đổi ảnh" Width="150" Height="30" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Border>

@@ -312,37 +312,44 @@ namespace Jewelry_store_management.VIEWMODEL
         {
             if (!string.IsNullOrEmpty(CusName) && !string.IsNullOrEmpty(SDT) && Productlist.Any())
             {
-                var newServiceOrder = new ServiceOrder
+                if (InitialDate <= DeliveryDate)
                 {
-                    ServiceID =  SerID,
-                    CustomerName = CusName,
-                    CPhone = SDT,
-                    CEmail = Email,
-                    CAddress = Address,
-                    DateOrder = InitialDate.HasValue ? InitialDate.Value.ToString("yyyy-MM-dd") : DateTime.Now.ToString("yyyy-MM-dd"),
-                    DateDelivery = DeliveryDate.HasValue ? DeliveryDate.Value.ToString("yyyy-MM-dd") : DateTime.Now.AddDays(7).ToString("yyyy-MM-dd"),
-                    ServiceName = SelectedServiceName,
-                    Status = SelectedStatus,
-                    TotalPrice = (double)TotalPrice,
-                    ListServiceProduct = Productlist.ToList()
-                };
+                    var newServiceOrder = new ServiceOrder
+                    {
+                        ServiceID = SerID,
+                        CustomerName = CusName,
+                        CPhone = SDT,
+                        CEmail = Email,
+                        CAddress = Address,
+                        DateOrder = InitialDate.HasValue ? InitialDate.Value.ToString("yyyy-MM-dd") : DateTime.Now.ToString("yyyy-MM-dd"),
+                        DateDelivery = DeliveryDate.HasValue ? DeliveryDate.Value.ToString("yyyy-MM-dd") : DateTime.Now.AddDays(7).ToString("yyyy-MM-dd"),
+                        ServiceName = SelectedServiceName,
+                        Status = SelectedStatus,
+                        TotalPrice = (double)TotalPrice,
+                        ListServiceProduct = Productlist.ToList()
+                    };
 
-                // Add the service order to the database
-                await _serviceHelper.AddServiceOrder(newServiceOrder);
+                    // Add the service order to the database
+                    await _serviceHelper.AddServiceOrder(newServiceOrder);
 
-                // Reset fields after successful addition
-                CusName = string.Empty;
-                SDT = string.Empty;
-                Email = string.Empty;
-                Address = string.Empty;
-                InitialDate = DateTime.Now;
-                DeliveryDate = DateTime.Now.AddDays(7);
-                SelectedServiceName = null;
-                SelectedStatus = null;
-                Productlist.Clear();
-                TotalPrice = 0;
+                    // Reset fields after successful addition
+                    CusName = string.Empty;
+                    SDT = string.Empty;
+                    Email = string.Empty;
+                    Address = string.Empty;
+                    InitialDate = DateTime.Now;
+                    DeliveryDate = DateTime.Now.AddDays(7);
+                    SelectedServiceName = null;
+                    SelectedStatus = null;
+                    Productlist.Clear();
+                    TotalPrice = 0;
 
-                MessageBox_Window.ShowDialog("Thêm dịch vụ thành công!", "Thành công", "\\Drawable\\Icons\\icon_success.png", MessageBox_Window.MessageBoxButton.OK);
+                    MessageBox_Window.ShowDialog("Thêm dịch vụ thành công!", "Thành công", "\\Drawable\\Icons\\icon_success.png", MessageBox_Window.MessageBoxButton.OK);
+                }
+                else
+                {
+                    MessageBox_Window.ShowDialog("Ngày giao hàng phải sau ngày tạo đơn!", "Chú ý", "\\Drawable\\Icons\\icon_error.png", MessageBox_Window.MessageBoxButton.OK);
+                }
             }
             else
             {
@@ -352,6 +359,6 @@ namespace Jewelry_store_management.VIEWMODEL
 
         // Helper methods to get service types and status types
 
-       
+
     }
 }

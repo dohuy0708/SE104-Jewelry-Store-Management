@@ -63,5 +63,31 @@ namespace Jewelry_store_management.HELPER
         {
             return await GetServiceOrder(serviceOrderId);
         }
+        public async Task<double> GetTotalOrderValue(DateTime selectedDate)
+        {
+            string selectedDateString = selectedDate.ToString("yyyy-MM-dd"); // Chuyển DateTime sang string theo định dạng yyyy-MM-dd
+            List<ServiceOrder> allServiceOrders = await GetAllServiceOrders();
+            double totalValue = allServiceOrders
+                .Where(so => so.DateOrder == selectedDateString) // So sánh với selectedDateString
+                .Sum(so => so.TotalPrice);
+            return totalValue;
+        }
+
+        public async Task<double> GetTotalOrderValue(  int month)
+        {
+            List<ServiceOrder> allServiceOrders = await GetAllServiceOrders();
+            double totalValue = allServiceOrders
+                .Where(so =>
+                {
+                    DateTime dateOrder;
+                    if (DateTime.TryParse(so.DateOrder, out dateOrder))
+                    {
+                        return   dateOrder.Month == month;
+                    }
+                    return false;
+                })
+                .Sum(so => so.TotalPrice);
+            return totalValue;
+        }
     }
 }

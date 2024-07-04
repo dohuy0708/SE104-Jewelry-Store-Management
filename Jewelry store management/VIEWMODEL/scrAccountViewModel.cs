@@ -2,8 +2,11 @@
 using Jewelry_store_management.HELPER;
 using Jewelry_store_management.MODELS;
 using Jewelry_store_management.VIEW;
+using Microsoft.Win32;
+using Newtonsoft.Json;
 using System;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -117,8 +120,18 @@ namespace Jewelry_store_management.VIEWMODEL
                 OnPropertyChanged(nameof(Phone));
             }
         }
+        // List hình ảnh
+        private BitmapImage image { get; set; }
+        public BitmapImage Image
+        {
+            get { return image; }
+            set
+            {
+                image = value;
+                OnPropertyChanged();
+            }
+        }
 
-         
 
         // Constructor
         public scrAccountViewModel()
@@ -155,7 +168,7 @@ namespace Jewelry_store_management.VIEWMODEL
                     UID = user.Uid;
                     Username = user.Name;
                     Email = user.Email;
-                    Address = "(Chưa cập nhật)";
+              
 
                     if (user.Phone != null)
                     {
@@ -164,9 +177,25 @@ namespace Jewelry_store_management.VIEWMODEL
                     else
                     {
                         Phone = "(Chưa cập nhật)";
-                    }    
-                   
+                    }
+                    if (user.Address != null)
+                    {
+                        Address =user.Address;
+                    }
+                    else
+                    {
+                        Address= "(Chưa cập nhật)";
+                    }
+
                     PassWord = user.Password;
+
+
+
+                    if (user.ImageURL != null || user.ImageURL.Length<20)
+                    {
+                        Image = ConvertBase64ToBitmapImage(user.ImageURL);
+                    }
+                    
                 }
                 else
                 {
@@ -219,23 +248,37 @@ namespace Jewelry_store_management.VIEWMODEL
 
         private async Task ChangeInformation()
         {
-            
+            string imagestring = null;
+            string preview = null;
+            if (Image!=null)
+            {
+                imagestring = ConvertBitmapImageToBase64(Image);
+                 preview = imagestring.Substring(0, 10);
+              
+
+            }
             if (!IsEditingMode)
             { 
 
                 
-                var updatedUser = new User
+               User updatedUser = new User
                 {
                     Name = Username,
                     Email = Email,
                     Uid = UID,
                     Phone = Phone,
                     
-
+                    Address = Address,
                     Password = PassWord,
-                };
+                    ImageURL = imagestring
 
-                    await _userHelper.UpdateUser(updatedUser);
+                };
+                // Serialize and log the user object to JSON
+                string jsonString = JsonConvert.SerializeObject(updatedUser);
+                MessageBox.Show("Serialized User JSON: " + jsonString);
+
+
+                await _userHelper.UpdateUser(updatedUser);
 
                     MessageBox_Window.ShowDialog("Cập nhật thông tin thành công!", "Thành công", "\\Drawable\\Icons\\icon_success.png", MessageBox_Window.MessageBoxButton.OK);
 
@@ -248,16 +291,77 @@ namespace Jewelry_store_management.VIEWMODEL
             else
             {
                 // Enable editing mode
-                IsEditingMode = false;
-                ButtonName="Cập nhật thông tin";
+                    IsEditingMode = false;
+                    ButtonName="Cập nhật thông tin";
             }
         }
 
         private async Task ChangeImage()
         {
-            
-        }
-      
+            IsEditingMode = false;
+            ButtonName="Cập nhật thông tin";
 
+
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "Image Files (*.bmp;*.jpg;*.png)|*.bmp;*.jpg;*.png|All files (*.*)|*.*",
+                Multiselect = false
+            };
+            if (openFileDialog.ShowDialog() == true)
+            {
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.UriSource = new Uri(openFileDialog.FileName, UriKind.Absolute);
+                bitmap.EndInit();
+
+                Image = bitmap;
+                
+            }
+
+        }
+        private string ConvertBitmapImageToBase64(BitmapImage bitmapImage)
+        {
+
+
+            try
+            {
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    BitmapEncoder encoder = new PngBitmapEncoder();
+                    encoder.Frames.Add(BitmapFrame.Create(bitmapImage));
+                    encoder.Save(memoryStream);
+                    byte[] imageBytes = memoryStream.ToArray();
+                    return Convert.ToBase64String(imageBytes);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi chuyển đổi hình ảnh: {ex.Message}");
+                return null;
+            }
+        }
+
+        private BitmapImage ConvertBase64ToBitmapImage(string base64String)
+        {
+            try
+            {
+                byte[] imageBytes = Convert.FromBase64String(base64String);
+                using (MemoryStream memoryStream = new MemoryStream(imageBytes))
+                {
+                    BitmapImage bitmapImage = new BitmapImage();
+                    bitmapImage.BeginInit();
+                    bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                    bitmapImage.StreamSource = memoryStream;
+                    bitmapImage.EndInit();
+                    bitmapImage.Freeze(); // Optional: Freeze to make it cross-thread accessible
+                    return bitmapImage;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi chuyển đổi chuỗi Base64 thành hình ảnh: {ex.Message}");
+                return null;
+            }
+        }
     }
 }
