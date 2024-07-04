@@ -84,7 +84,21 @@ namespace Jewelry_store_management.HELPER
                 return   imageUrl;
             }
         }
-        private string ConvertBitmapImageToBase64(BitmapImage bitmapImage)
+
+        // Giảm số lượng sản phẩm
+        public async Task DecreaseProductQuantity(string productId, int quantity)
+        {
+            var product = await GetProduct(productId);
+            if (product != null)
+            {
+                // Giảm số lượng sản phẩm
+                product.Quantity -= quantity;
+                // Cập nhật lại thông tin sản phẩm trong Firebase
+                await UpdateProduct(product);
+            }
+        }
+    
+    private string ConvertBitmapImageToBase64(BitmapImage bitmapImage)
         {
             if (bitmapImage == null)
                 throw new ArgumentNullException(nameof(bitmapImage));
