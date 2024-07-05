@@ -252,7 +252,8 @@ namespace Jewelry_store_management.VIEWMODEL
                   MessageBox_Window.ShowDialog("Thêm đơn hàng thành công!\n Bạn có muốn xuất hóa đơn?", "Thành công", "\\Drawable\\Icons\\icon_success.png", MessageBox_Window.MessageBoxButton.OkCancel);
                 if (MessageBox_Window.buttonResultClicked == MessageBox_Window.ButtonResult.OK)
                 {
-                    // Nếu OK thì xuất hóa đơn 
+                      // Nếu Ok thì xuất hóa đơn 
+                    
                 }
 
                 // giảm số lượng sản phẩm đã mua xuống 

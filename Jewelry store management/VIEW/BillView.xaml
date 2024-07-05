@@ -89,15 +89,15 @@
             <Button Margin="60 20 60 10" Content="Thêm sản phẩm" Command="{Binding AddProductCommand}"  Width="200"
                      md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="Aqua"  Background="Aqua" Foreground="White"  Style="{StaticResource MaterialDesignFlatButton}"></Button>
 
-            <DataGrid ItemsSource="{Binding ListProduct}" AutoGenerateColumns="False" CanUserAddRows="False" Background="AliceBlue" Margin="30 0 30 0" Height="240" Width="660">
+            <DataGrid ItemsSource="{Binding ListProduct}" AutoGenerateColumns="False" CanUserAddRows="False" Background="AliceBlue" Margin="20 0 20 0" Height="240" Width="680">
                 <DataGrid.Columns>
-                    <DataGridTextColumn FontSize="14" IsReadOnly="True" Header="Mã sản phẩm" Binding="{Binding PID}"/>
+                    <DataGridTextColumn IsReadOnly="True" Header="Mã sản phẩm" Binding="{Binding PID}"/>
 
-                    <DataGridTextColumn FontSize="14" IsReadOnly="True" Header="Tên sản phẩm" Binding="{Binding Name}"/>
+                    <DataGridTextColumn  IsReadOnly="True" Header="Tên sản phẩm" Binding="{Binding Name}"/>
 
-                    <DataGridTextColumn FontSize="14" IsReadOnly="True" Header="Size" Binding="{Binding Size}"/>
-                    <DataGridTextColumn FontSize="14" IsReadOnly="True" Header="Số lượng" Binding="{Binding Quantity}"/>
-                    <DataGridTextColumn FontSize="14" IsReadOnly="True" Header="Đơn Giá" Binding="{Binding SalePrice}"/>
+                    <DataGridTextColumn   IsReadOnly="True" Header="Size" Binding="{Binding Size}"/>
+                    <DataGridTextColumn   IsReadOnly="True" Header="Số lượng" Binding="{Binding Quantity}"/>
+                    <DataGridTextColumn   IsReadOnly="True" Header="Đơn Giá" Binding="{Binding SalePrice}"/>
                     <DataGridTemplateColumn Header="" >
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate  >
