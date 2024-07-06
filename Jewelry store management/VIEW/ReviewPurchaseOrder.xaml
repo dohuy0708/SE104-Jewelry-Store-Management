@@ -6,7 +6,6 @@
          xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Jewelry_store_management.VIEW"
         mc:Ignorable="d"
-        
         WindowStartupLocation="CenterScreen"
         Height="600"   Width="900" ResizeMode="NoResize"
         Icon="\Drawable\Images\Logo.png"
@@ -39,7 +38,6 @@
                 <Label Content="NGÀY NHẬP:" FontSize="14" VerticalAlignment="Center"></Label>
                 <TextBox Text="{Binding EntryDate}" FontSize="14"   Width="120" IsReadOnly="True"></TextBox>
             </StackPanel>
-
         </StackPanel>
 
         <Separator Margin="30,20,30,20" Height="2" Background="Gray"/>
