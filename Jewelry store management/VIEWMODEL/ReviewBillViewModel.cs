@@ -216,9 +216,9 @@ namespace Jewelry_store_management.VIEWMODEL
             productTable.BorderThickness = new Thickness(1);
             doc.Blocks.Add(productTable);
             productTable.Columns.Add(new TableColumn() { Width = new GridLength(120) }); // Mã sản phẩm
-            productTable.Columns.Add(new TableColumn() { Width = new GridLength(240) }); // Tên sản phẩm
+            productTable.Columns.Add(new TableColumn() { Width = new GridLength(200) }); // Tên sản phẩm
             productTable.Columns.Add(new TableColumn() { Width = new GridLength(60) });  // Size
-            productTable.Columns.Add(new TableColumn() { Width = new GridLength(60) });  // Số lượng
+            productTable.Columns.Add(new TableColumn() { Width = new GridLength(100) });  // Số lượng
             productTable.Columns.Add(new TableColumn() { Width = new GridLength(120) }); // Giá
 
             TableRowGroup headerGroup = new TableRowGroup();
@@ -239,7 +239,7 @@ namespace Jewelry_store_management.VIEWMODEL
                 row.Cells.Add(new TableCell(new Paragraph(new Run(product.Name))));
                 row.Cells.Add(new TableCell(new Paragraph(new Run(product.Size))));
                 row.Cells.Add(new TableCell(new Paragraph(new Run(product.Quantity.ToString()))));
-                row.Cells.Add(new TableCell(new Paragraph(new Run(product.PurchasePrice.ToString("N0")))));
+                row.Cells.Add(new TableCell(new Paragraph(new Run(product.SalePrice.ToString("N0")))));
                 bodyGroup.Rows.Add(row);
             }
             productTable.RowGroups.Add(bodyGroup);
@@ -252,7 +252,6 @@ namespace Jewelry_store_management.VIEWMODEL
 
             return doc;
         }
-        //Hàm lấy bill
         public void GetSaleOrder()
         {
 

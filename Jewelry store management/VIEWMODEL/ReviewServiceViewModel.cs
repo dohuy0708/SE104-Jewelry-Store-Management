@@ -392,8 +392,8 @@ namespace Jewelry_store_management.VIEWMODEL
             doc.Blocks.Add(productTable);
             productTable.Columns.Add(new TableColumn() { Width = new GridLength(200) }); // Tên sản phẩm
             productTable.Columns.Add(new TableColumn() { Width = new GridLength(100) });  // Số lượng
-            productTable.Columns.Add(new TableColumn() { Width = new GridLength(60) });  // Giá
-            productTable.Columns.Add(new TableColumn() { Width = new GridLength(260) }); // Mô tả
+            productTable.Columns.Add(new TableColumn() { Width = new GridLength(120) });  // Giá
+            productTable.Columns.Add(new TableColumn() { Width = new GridLength(200) }); // Mô tả
 
             TableRowGroup headerGroup = new TableRowGroup();
             TableRow headerRow = new TableRow();
@@ -410,7 +410,7 @@ namespace Jewelry_store_management.VIEWMODEL
                 TableRow row = new TableRow();
                 row.Cells.Add(new TableCell(new Paragraph(new Run(product.Name))));
                 row.Cells.Add(new TableCell(new Paragraph(new Run(product.Quantity.ToString()))));
-                row.Cells.Add(new TableCell(new Paragraph(new Run(product.PurchasePrice.ToString("N0")))));
+                row.Cells.Add(new TableCell(new Paragraph(new Run(product.SalePrice.ToString("N0")))));
                 row.Cells.Add(new TableCell(new Paragraph(new Run(product.Description.ToString()))));
                 bodyGroup.Rows.Add(row);
             }
