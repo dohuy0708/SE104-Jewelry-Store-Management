@@ -103,7 +103,10 @@ namespace Jewelry_store_management.VIEWMODEL
                     Uid = GenerateId(),
                     Name = UserName,
                     Password = Password,
-                    Email = Email
+                    Email = Email,
+                    Address= null,
+                    Phone = null,
+                    ImageURL = null
 
                 };
 

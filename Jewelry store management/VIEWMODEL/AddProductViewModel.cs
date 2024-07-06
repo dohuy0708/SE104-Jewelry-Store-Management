@@ -269,11 +269,19 @@ namespace Jewelry_store_management.VIEWMODEL
             {
                 // Kiểm tra các trường bắt buộc
                 if (string.IsNullOrEmpty(ProductID) ||
-                    string.IsNullOrEmpty(ProductName) ||
-                    string.IsNullOrEmpty(SelectedSupplier)
-                   )
+                        string.IsNullOrEmpty(ProductName) ||
+                       string.IsNullOrEmpty(SelectedSupplier) ||
+                       string.IsNullOrEmpty(ProductSize) ||
+                      string.IsNullOrEmpty(ProductQuantity.ToString()) ||
+                      string.IsNullOrEmpty(PurchasePrice.ToString()) ||
+                      string.IsNullOrEmpty(SalePrice.ToString()) ||
+                      string.IsNullOrEmpty(ProductWeight.ToString()) ||
+                      string.IsNullOrEmpty(ProductDescription) ||
+                      string.IsNullOrEmpty(SelectedType) ||
+                      string.IsNullOrEmpty(SelectedMaterial))
                 {
-                    MessageBox_Window.ShowDialog("Vui lòng nhập đầy đủ thông tin!(ID, Tên, Nhà cung cấp)", "Chú ý", "\\Drawable\\Icons\\icon_attention.png", MessageBox_Window.MessageBoxButton.OK);
+                    
+                    MessageBox_Window.ShowDialog("Vui lòng nhập đầy đủ thông tin! ", "Chú ý", "\\Drawable\\Icons\\icon_attention.png", MessageBox_Window.MessageBoxButton.OK);
 
                     return;
                 }
@@ -283,6 +291,13 @@ namespace Jewelry_store_management.VIEWMODEL
                 if (existingProduct != null)
                 {
                     MessageBox_Window.ShowDialog("Mã sản phẩm đã tồn tại trong hệ thống!", "Lỗi", "\\Drawable\\Icons\\icon_error.png", MessageBox_Window.MessageBoxButton.OK);
+                    return;
+                }
+
+                // Kiểm tra giá bán phải cao hơn giá nhập 
+                if ( SalePrice!=null && PurchasePrice!= null && SalePrice <= PurchasePrice)
+                {
+                    MessageBox_Window.ShowDialog("Giá bán phải cao hơn giá nhập!", "Chú ý", "\\Drawable\\Icons\\icon_attention.png", MessageBox_Window.MessageBoxButton.OK);
                     return;
                 }
 

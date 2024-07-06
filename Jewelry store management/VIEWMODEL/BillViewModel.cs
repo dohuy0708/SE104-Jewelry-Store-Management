@@ -198,7 +198,7 @@ namespace Jewelry_store_management.VIEWMODEL
         // Methods
         private async Task AddProduct()
         {
-            if (SelectedProduct != null && Quantity > 0)
+            if (SelectedProduct != null && SelectedProduct.Quantity - Quantity>=0 && Quantity > 0)
             {
                 var product = new Product
                 {
@@ -248,6 +248,22 @@ namespace Jewelry_store_management.VIEWMODEL
 
                 await _saleOrderHelper.AddSaleOrder(saleOrder);
 
+
+                  MessageBox_Window.ShowDialog("Thêm đơn hàng thành công!\n Bạn có muốn xuất hóa đơn?", "Thành công", "\\Drawable\\Icons\\icon_success.png", MessageBox_Window.MessageBoxButton.OkCancel);
+                if (MessageBox_Window.buttonResultClicked == MessageBox_Window.ButtonResult.OK)
+                {
+                      // Nếu Ok thì xuất hóa đơn 
+                    
+                }
+
+                // giảm số lượng sản phẩm đã mua xuống 
+                foreach (var product in ListProduct)
+                {
+                    // Decrease Quantity of each product in Firebase or perform necessary actions
+                    // Example:
+                    await _productHelper.DecreaseProductQuantity(product.PID, product.Quantity);
+                }
+
                 // Clear input fields after adding order
                 BillID = string.Empty;
                 CusName = string.Empty;
@@ -257,12 +273,6 @@ namespace Jewelry_store_management.VIEWMODEL
                 DateOrder = DateTime.Now;
                 ListProduct.Clear();
                 TotalPrice = 0;
-
-                  MessageBox_Window.ShowDialog("Thêm đơn hàng thành công!\n Bạn có muốn xuất hóa đơn?", "Thành công", "\\Drawable\\Icons\\icon_success.png", MessageBox_Window.MessageBoxButton.OkCancel);
-                if (MessageBox_Window.buttonResultClicked == MessageBox_Window.ButtonResult.OK)
-                {
-                    // Nếu OK thì xuất hóa đơn
-                }
             }
             else
             {

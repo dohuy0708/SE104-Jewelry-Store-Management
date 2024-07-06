@@ -51,18 +51,18 @@
                     <Label Content="TÊN KHÁCH HÀNG" Width="130" ></Label>
                     <TextBox  FontSize="14" Width="130" Text="{Binding CusName}" ></TextBox>
                 </StackPanel>
-                <StackPanel Margin="30 5 10 0" Width="100">
+                <StackPanel Margin="10 5 10 0" Width="100">
                     <Label Content="SỐ ĐIỆN THOẠI"></Label>
                     <TextBox  FontSize="14" Text="{Binding SDT}" ></TextBox>
                 </StackPanel>
-                <StackPanel Margin="30 5 10 0">
-                    <Label Content="EMAIL" Width="100"></Label>
-                    <TextBox  FontSize="14" Width="100" Text="{Binding Email}" ></TextBox>
+                <StackPanel Margin="10 5 10 0">
+                    <Label Content="EMAIL" Width="140"></Label>
+                    <TextBox  FontSize="14" Width="140" Text="{Binding Email}" ></TextBox>
                 </StackPanel>
 
-                <StackPanel Margin="30 5 30 0" Width="170">
-                    <Label Content="ĐỊA CHỈ" Width="170"/>
-                    <TextBox FontSize="14" Width="170" Text="{Binding Address}" />
+                <StackPanel Margin="10 5 30 0" Width="200">
+                    <Label Content="ĐỊA CHỈ" Width="200"/>
+                    <TextBox FontSize="14" Width="200" Text="{Binding Address}" />
                 </StackPanel>
             </StackPanel>
 

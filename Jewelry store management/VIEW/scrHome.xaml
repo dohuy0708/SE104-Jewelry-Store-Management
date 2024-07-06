@@ -101,21 +101,51 @@
                 </Button>
             </UniformGrid>
 
-            <!-- Chart -->
+
             <Border Grid.Row="1" CornerRadius="15" Background="AliceBlue" Margin="30 20 30 30">
-                <lvc:CartesianChart Series="{Binding SalesSeries}" Background="AliceBlue" Margin="0,0,340,0">
-                    <lvc:CartesianChart.AxisX>
-                        <lvc:Axis Labels="{Binding Weeks}" Foreground="{StaticResource ChartTextColor}">
-                            <lvc:Axis.Separator>
-                                <lvc:Separator Step="1" />
-                            </lvc:Axis.Separator>
-                        </lvc:Axis>
-                    </lvc:CartesianChart.AxisX>
-                    <lvc:CartesianChart.AxisY>
-                        <lvc:Axis Title="Doanh thu(triệu đồng)" Foreground="{StaticResource ChartTextColor}">
-                        </lvc:Axis>
-                    </lvc:CartesianChart.AxisY>
-                </lvc:CartesianChart>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="940" Height="457" VerticalAlignment="Center">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Margin="10 30 10 5"  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontFamily="Calibri" FontWeight="Bold">DOANH THU TRONG NĂM</TextBlock>
+                        <TextBlock Margin="10 0 10 10"  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="13" FontFamily="Calibri" >(Triệu đồng)</TextBlock>
+
+                        <lvc:CartesianChart  Series="{Binding SalesSeries}" Background="AliceBlue" Margin="20,10,30,10" Height="330" Width="565">
+                            <lvc:CartesianChart.AxisX>
+                                <lvc:Axis Labels="{Binding  Months}" Foreground="{StaticResource ChartTextColor}">
+                                    <lvc:Axis.Separator>
+                                        <lvc:Separator Step="1" />
+                                    </lvc:Axis.Separator>
+                                </lvc:Axis>
+                            </lvc:CartesianChart.AxisX>
+                            <!--  <lvc:CartesianChart.AxisY>
+                               <lvc:Axis Title="Doanh thu(triệu đồng)" Foreground="{StaticResource ChartTextColor}" Margin="10 10 10 10"> 
+                                </lvc:Axis>
+                            </lvc:CartesianChart.AxisY>-->
+                        </lvc:CartesianChart>
+                    </StackPanel>
+                    <!-- Line Chart -->
+                   
+
+                    <Border Background="Gray" Width="1" Margin="0 70 0 70" />
+
+
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Margin="10 30 10 5"  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontFamily="Calibri" FontWeight="Bold">DOANH THU TRONG NGÀY</TextBlock>
+                        <TextBlock Margin="10 0 10 10"  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="13" FontFamily="Calibri" >(Triệu đồng)</TextBlock>
+
+                        <StackPanel Margin="10 10 10 0"  Orientation="Horizontal" Height="40">
+                            <Label VerticalAlignment="Bottom"  Height="30" Width="60" FontSize="16" FontWeight="SemiBold"  >Ngày:</Label>
+                            <DatePicker FontSize="16" Height="30" Width="100"   SelectedDate="{Binding Date , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <Button Command="{Binding StatisticCommand}" Style="{StaticResource MaterialDesignRaisedButton}"  
+                                 md:ButtonAssist.CornerRadius="7" BorderThickness="1" BorderBrush="AliceBlue"  Background="DodgerBlue"  Margin="40 0 0 0">Thống kê</Button>
+                        </StackPanel>
+                        <!-- Pie Chart -->
+                        <lvc:PieChart Series="{Binding PieSeries}" Margin="0 30 0 0" LegendLocation="Bottom" Height="236" Width="330"/>
+
+                    </StackPanel>
+
+                </StackPanel>
+
             </Border>
         </Grid>
     </Grid>
