@@ -1,4 +1,5 @@
-﻿using Jewelry_store_management.HELPER;
+﻿using Google.Api;
+using Jewelry_store_management.HELPER;
 using Jewelry_store_management.MODELS;
 using Jewelry_store_management.VIEW;
 using System;
@@ -6,8 +7,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
+using System.Printing;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -53,7 +57,7 @@ namespace Jewelry_store_management.VIEWMODEL
 
             AddProCommand = new RelayCommand(async _ => await AddProduct());
             AddServiceOrderCommand = new RelayCommand(async _ => await AddServiceOrder());
-            ExportBillCommand = new RelayCommand<object>(ExportBill);
+            ExportBillCommand = new RelayCommand(_ => ExportBill());
 
             // initial field
             if (serviceOrder != null)
@@ -341,19 +345,85 @@ namespace Jewelry_store_management.VIEWMODEL
             }
         }
 
-        public void ExportBill(object obj)
+        public void ExportBill()
         {
-            System.Windows.Controls.PrintDialog printdialog = new System.Windows.Controls.PrintDialog();
-            if (printdialog.ShowDialog() == true)
+            System.Windows.Controls.PrintDialog printDialog = new System.Windows.Controls.PrintDialog();
+            if (printDialog.ShowDialog() == true)
             {
-                if (obj is Visual visual)
-                {
-                    printdialog.PrintVisual(visual, "Invoice");
-                }
+                FlowDocument doc = CreateFlowDocument();
+                IDocumentPaginatorSource idpSource = doc;
+                printDialog.PrintDocument(idpSource.DocumentPaginator, "Purchase Order");
             }
         }
 
-        // Helper methods to get service types and status types
+        private FlowDocument CreateFlowDocument()
+        {
+            FlowDocument doc = new FlowDocument();
+            doc.PagePadding = new Thickness(50);
+            doc.ColumnWidth = double.PositiveInfinity;
+
+            Paragraph header = new Paragraph(new Run("CHI TIẾT HÓA ĐƠN"));
+            header.FontSize = 36;
+            header.FontWeight = FontWeights.Bold;
+            header.TextAlignment = TextAlignment.Center;
+            doc.Blocks.Add(header);
+
+            Paragraph info = new Paragraph();
+            info.Inlines.Add(new Run($"MÃ DỊCH VỤ: {SerID}\n"));
+            info.Inlines.Add(new Run($"TÊN DỊCH VỤ: {ServiceNameType}\n"));
+            info.Inlines.Add(new Run($"TÊN KHÁCH HÀNG: {CusName}\n"));
+            info.Inlines.Add(new Run($"SỐ ĐIỆN THOẠI: {SDT}\n"));
+            info.Inlines.Add(new Run($"EMALI: {Email}\n"));
+            info.Inlines.Add(new Run($"ĐỊA CHỈ: {Address}\n"));
+            info.Inlines.Add(new Run($"NGÀY LẬP: {InitialDate}\n"));
+            info.Inlines.Add(new Run($"NGÀY GIAO: {DeliveryDate}\n"));
+            info.FontSize = 14;
+            doc.Blocks.Add(info);
+
+            Paragraph productHeader = new Paragraph(new Run("THÔNG TIN SẢN PHẨM:"));
+            productHeader.FontSize = 16;
+            productHeader.FontWeight = FontWeights.DemiBold;
+            doc.Blocks.Add(productHeader);
+
+            Table productTable = new Table();
+            productTable.CellSpacing = 20;
+            productTable.BorderBrush = Brushes.Black;
+            productTable.BorderThickness = new Thickness(1);
+            doc.Blocks.Add(productTable);
+            productTable.Columns.Add(new TableColumn() { Width = new GridLength(200) }); // Tên sản phẩm
+            productTable.Columns.Add(new TableColumn() { Width = new GridLength(100) });  // Số lượng
+            productTable.Columns.Add(new TableColumn() { Width = new GridLength(60) });  // Giá
+            productTable.Columns.Add(new TableColumn() { Width = new GridLength(260) }); // Mô tả
+
+            TableRowGroup headerGroup = new TableRowGroup();
+            TableRow headerRow = new TableRow();
+            headerRow.Cells.Add(new TableCell(new Paragraph(new Run("Tên sản phẩm"))) { FontWeight = FontWeights.Bold, FontSize = 14 });
+            headerRow.Cells.Add(new TableCell(new Paragraph(new Run("Số lượng"))) { FontWeight = FontWeights.Bold, FontSize = 14 });
+            headerRow.Cells.Add(new TableCell(new Paragraph(new Run("Giá"))) { FontWeight = FontWeights.Bold, FontSize = 14 });
+            headerRow.Cells.Add(new TableCell(new Paragraph(new Run("Mô tả"))) { FontWeight = FontWeights.Bold, FontSize = 14 });
+            headerGroup.Rows.Add(headerRow);
+            productTable.RowGroups.Add(headerGroup);
+
+            TableRowGroup bodyGroup = new TableRowGroup();
+            foreach (var product in Productlist)
+            {
+                TableRow row = new TableRow();
+                row.Cells.Add(new TableCell(new Paragraph(new Run(product.Name))));
+                row.Cells.Add(new TableCell(new Paragraph(new Run(product.Quantity.ToString()))));
+                row.Cells.Add(new TableCell(new Paragraph(new Run(product.PurchasePrice.ToString("N0")))));
+                row.Cells.Add(new TableCell(new Paragraph(new Run(product.Description.ToString()))));
+                bodyGroup.Rows.Add(row);
+            }
+            productTable.RowGroups.Add(bodyGroup);
+
+            Paragraph totalPrice = new Paragraph(new Run($"Tổng giá trị (VND): {TotalPrice.ToString("N0")}"));
+            totalPrice.FontSize = 16;
+            totalPrice.FontWeight = FontWeights.DemiBold;
+            totalPrice.Margin = new Thickness(30, 0, 10, 0);
+            doc.Blocks.Add(totalPrice);
+
+            return doc;
+        }
 
 
     }

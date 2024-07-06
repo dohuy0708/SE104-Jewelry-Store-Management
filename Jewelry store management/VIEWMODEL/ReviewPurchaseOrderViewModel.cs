@@ -1,32 +1,19 @@
 ﻿using Jewelry_store_management.HELPER;
 using Jewelry_store_management.MODELS;
-using Jewelry_store_management.VIEW;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using System.Windows;
+using System.Windows.Documents;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Jewelry_store_management.VIEWMODEL
 {
-    // hàm main
-   
-    public class ReviewPurchaseOrderViewModel :BaseViewModel
+    public class ReviewPurchaseOrderViewModel : BaseViewModel
     {
-
         public ICommand ExportBillCommand { get; set; }
 
         private readonly PurchaseOrderHelper _purchaseOrderHelper;
 
-        
-        
-
-
-        // date
         private string entryDate;
         public string EntryDate
         {
@@ -38,9 +25,6 @@ namespace Jewelry_store_management.VIEWMODEL
             }
         }
 
-
-
-        //  Danh sách các sản phẩm nhập hàng 
         private ObservableCollection<Product> _listpurchase;
         public ObservableCollection<Product> ListPurChase
         {
@@ -52,24 +36,19 @@ namespace Jewelry_store_management.VIEWMODEL
             }
         }
 
-
-        // tính tổng Giá trị đơn nhập 
         public decimal totalprice;
         public decimal TotalPrice
         {
-            get
-            {
-                return totalprice;
-            }
+            get { return totalprice; }
             set
             {
                 totalprice = value;
                 OnPropertyChanged(nameof(TotalPrice));
             }
         }
-        // mã đơn mua 
-        private String purchaseID;
-        public String PurchaseID
+
+        private string purchaseID;
+        public string PurchaseID
         {
             get { return purchaseID; }
             set
@@ -79,9 +58,8 @@ namespace Jewelry_store_management.VIEWMODEL
             }
         }
 
-        // nhà cung cấp
-        private String supplierName;
-        public String SupplierName
+        private string supplierName;
+        public string SupplierName
         {
             get { return supplierName; }
             set
@@ -91,22 +69,14 @@ namespace Jewelry_store_management.VIEWMODEL
             }
         }
 
-      
-  
-
-        // hàm chính
         public ReviewPurchaseOrderViewModel() { }
+
         public ReviewPurchaseOrderViewModel(PurchaseOrder purchaseOrder)
         {
-
-            
             _purchaseOrderHelper = new PurchaseOrderHelper();
-
             ListPurChase = new ObservableCollection<Product>();
+            ExportBillCommand = new RelayCommand(_ =>ExportBill());
 
-            ExportBillCommand = new RelayCommand<object>(ExportBill);
-
-            // innitial
             if (purchaseOrder != null)
             {
                 PurchaseID = purchaseOrder.PurchaseID;
@@ -116,28 +86,86 @@ namespace Jewelry_store_management.VIEWMODEL
                 {
                     ListPurChase.Add(product);
                 }
-                TotalPrice=(decimal)purchaseOrder.TotalPrice;
+                TotalPrice = (decimal)purchaseOrder.TotalPrice;
             }
         }
 
-
-        // In hóa đơn 
-        public void ExportBill(object obj)
+        public void ExportBill()
         {
-            System.Windows.Controls.PrintDialog printdialog = new System.Windows.Controls.PrintDialog();
-            if (printdialog.ShowDialog() == true)
+            System.Windows.Controls.PrintDialog printDialog = new System.Windows.Controls.PrintDialog();
+            if (printDialog.ShowDialog() == true)
             {
-                if (obj is Visual visual)
-                {
-                    printdialog.PrintVisual(visual, "Invoice");
-                }
+                FlowDocument doc = CreateFlowDocument();
+                IDocumentPaginatorSource idpSource = doc;
+                printDialog.PrintDocument(idpSource.DocumentPaginator, "Purchase Order");
             }
         }
 
+        private FlowDocument CreateFlowDocument()
+        {
+            FlowDocument doc = new FlowDocument();
+            doc.PagePadding = new Thickness(50);
+            doc.ColumnWidth = double.PositiveInfinity; 
 
+            Paragraph header = new Paragraph(new Run("CHI TIẾT ĐƠN NHẬP HÀNG"));
+            header.FontSize = 36;
+            header.FontWeight = FontWeights.Bold;
+            header.TextAlignment = TextAlignment.Center;
+            doc.Blocks.Add(header);
 
+            Paragraph info = new Paragraph();
+            info.Inlines.Add(new Run($"MÃ ĐƠN HÀNG: {PurchaseID}\n"));
+            info.Inlines.Add(new Run($"NHÀ CUNG CẤP: {SupplierName}\n"));
+            info.Inlines.Add(new Run($"NGÀY NHẬP: {EntryDate}\n"));
+            info.FontSize = 14;
+            doc.Blocks.Add(info);
+
+            Paragraph productHeader = new Paragraph(new Run("THÔNG TIN SẢN PHẨM:"));
+            productHeader.FontSize = 16;
+            productHeader.FontWeight = FontWeights.DemiBold;
+            doc.Blocks.Add(productHeader);
+
+            Table productTable = new Table();
+            productTable.CellSpacing = 20;
+            productTable.BorderBrush = Brushes.Black;
+            productTable.BorderThickness = new Thickness(1);
+            doc.Blocks.Add(productTable);
+            productTable.Columns.Add(new TableColumn() { Width = new GridLength(120) }); // Mã sản phẩm
+            productTable.Columns.Add(new TableColumn() { Width = new GridLength(240) }); // Tên sản phẩm
+            productTable.Columns.Add(new TableColumn() { Width = new GridLength(60) });  // Size
+            productTable.Columns.Add(new TableColumn() { Width = new GridLength(60) });  // Số lượng
+            productTable.Columns.Add(new TableColumn() { Width = new GridLength(120) }); // Giá
+
+            TableRowGroup headerGroup = new TableRowGroup();
+            TableRow headerRow = new TableRow();
+            headerRow.Cells.Add(new TableCell(new Paragraph(new Run("Mã sản phẩm"))) { FontWeight = FontWeights.Bold, FontSize = 14 });
+            headerRow.Cells.Add(new TableCell(new Paragraph(new Run("Tên sản phẩm"))) { FontWeight = FontWeights.Bold, FontSize = 14 });
+            headerRow.Cells.Add(new TableCell(new Paragraph(new Run("Size"))) { FontWeight = FontWeights.Bold, FontSize = 14 });
+            headerRow.Cells.Add(new TableCell(new Paragraph(new Run("Số lượng"))) { FontWeight = FontWeights.Bold, FontSize = 14 });
+            headerRow.Cells.Add(new TableCell(new Paragraph(new Run("Giá"))) { FontWeight = FontWeights.Bold, FontSize = 14 });
+            headerGroup.Rows.Add(headerRow);
+            productTable.RowGroups.Add(headerGroup);
+
+            TableRowGroup bodyGroup = new TableRowGroup();
+            foreach (var product in ListPurChase)
+            {
+                TableRow row = new TableRow();
+                row.Cells.Add(new TableCell(new Paragraph(new Run(product.PID))));
+                row.Cells.Add(new TableCell(new Paragraph(new Run(product.Name))));
+                row.Cells.Add(new TableCell(new Paragraph(new Run(product.Size))));
+                row.Cells.Add(new TableCell(new Paragraph(new Run(product.Quantity.ToString()))));
+                row.Cells.Add(new TableCell(new Paragraph(new Run(product.PurchasePrice.ToString("N0")))));
+                bodyGroup.Rows.Add(row);
+            }
+            productTable.RowGroups.Add(bodyGroup);
+
+            Paragraph totalPrice = new Paragraph(new Run($"Tổng giá trị (VND): {TotalPrice.ToString("N0")}"));
+            totalPrice.FontSize = 16;
+            totalPrice.FontWeight = FontWeights.DemiBold;
+            totalPrice.Margin = new Thickness(30, 0, 10, 0);
+            doc.Blocks.Add(totalPrice);
+
+            return doc;
+        }
     }
-
-
-
 }

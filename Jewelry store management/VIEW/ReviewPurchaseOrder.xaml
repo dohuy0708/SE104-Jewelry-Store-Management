@@ -3,64 +3,55 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Jewelry_store_management.VIEW"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Height="600"   Width="900" ResizeMode="NoResize"
-        Icon="\Drawable\Images\Logo.png"
-        Title="H-Jewelry"
-          DataContext="{StaticResource ReviewPurVM}">
+        Height="600" Width="900" ResizeMode="NoResize"
+        DataContext="{StaticResource ReviewPurVM}">
 
-
-
-    <StackPanel Background="AliceBlue" >
+    <StackPanel Background="AliceBlue">
         <StackPanel x:Name="Bill">
-        <TextBlock TextAlignment="Center" Text="CHI TIẾT ĐƠN HÀNG NHẬP" FontSize="36" Margin="40 20 60 10"></TextBlock>
-        <TextBlock Text="THÔNG TIN ĐƠN HÀNG: " FontWeight="DemiBold" FontSize="16 " Margin="20 10 60 0"></TextBlock>
+            <TextBlock TextAlignment="Center" Text="CHI TIẾT ĐƠN HÀNG NHẬP" FontSize="36" Margin="40 20 60 10"/>
+            <TextBlock Text="THÔNG TIN ĐƠN HÀNG: " FontWeight="DemiBold" FontSize="16" Margin="20 10 60 0"/>
 
-        <!-- THÔNG TIN ĐƠN HÀNG -->
-        <StackPanel Orientation="Horizontal" Margin="0 0 0 0" >
+            <!-- THÔNG TIN ĐƠN HÀNG -->
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 0">
+                <StackPanel Orientation="Horizontal" Margin="30 10 0 0">
+                    <Label Content="MÃ ĐƠN HÀNG:" FontSize="14" VerticalAlignment="Center"/>
+                    <TextBox Text="{Binding PurchaseID}" FontSize="14" Width="100" IsReadOnly="True"/>
+                </StackPanel>
 
-            <StackPanel Orientation="Horizontal"  Margin="30 10 0 0">
-                <Label Content="MÃ ĐƠN HÀNG:" FontSize="14"   VerticalAlignment="Center"></Label>
-                <TextBox Text="{Binding PurchaseID}" FontSize="14"   Width="100" IsReadOnly="True"></TextBox>
+                <StackPanel Orientation="Horizontal" Margin="30 10 0 0">
+                    <Label Content="NHÀ CUNG CẤP:" FontSize="14" VerticalAlignment="Center"/>
+                    <TextBox Text="{Binding SupplierName}" FontSize="14" Width="180" IsReadOnly="True"/>
+                </StackPanel>
+
+                <StackPanel Margin="30 10 0 0" Orientation="Horizontal">
+                    <Label Content="NGÀY NHẬP:" FontSize="14" VerticalAlignment="Center"/>
+                    <TextBox Text="{Binding EntryDate}" FontSize="14" Width="120" IsReadOnly="True"/>
+                </StackPanel>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Margin="30 10 0 0 ">
+            <Separator Margin="30,20,30,20" Height="2" Background="Gray"/>
+            <TextBlock Text="THÔNG TIN SẢN PHẨM: " FontWeight="DemiBold" FontSize="16" Margin="20 0 60 0"/>
 
-                <Label Content="NHÀ CUNG CẤP:" FontSize="14"   VerticalAlignment="Center"></Label>
-                <TextBox Text="{Binding SupplierName}" FontSize="14"   Width="180" IsReadOnly="True"></TextBox>
+            <DataGrid ItemsSource="{Binding ListPurChase}" AutoGenerateColumns="False" CanUserAddRows="False" Background="AliceBlue" Margin="50 10 50 0" Height="240">
+                <DataGrid.Columns>
+                    <DataGridTextColumn FontSize="14" Header="Mã sản phẩm" Binding="{Binding PID}" IsReadOnly="True"/>
+                    <DataGridTextColumn FontSize="14" Header="Tên sản phẩm" Binding="{Binding Name}" IsReadOnly="True"/>
+                    <DataGridTextColumn FontSize="14" Header="Size" Binding="{Binding Size}"/>
+                    <DataGridTextColumn FontSize="14" Header="Số lượng" Binding="{Binding Quantity}" IsReadOnly="True"/>
+                    <DataGridTextColumn FontSize="14" Header="Giá" Binding="{Binding PurchasePrice}" IsReadOnly="True"/>
+                </DataGrid.Columns>
+            </DataGrid>
 
-            </StackPanel>
-
-            <StackPanel Margin="30 10 0 0 "  Orientation="Horizontal">
-                <Label Content="NGÀY NHẬP:" FontSize="14" VerticalAlignment="Center"></Label>
-                <TextBox Text="{Binding EntryDate}" FontSize="14"   Width="120" IsReadOnly="True"></TextBox>
+            <StackPanel Orientation="Horizontal" Margin="10 20 10 10">
+                <TextBlock Text="Tổng giá trị (VND):" FontWeight="DemiBold" FontSize="18" Margin="30 0 10 0"/>
+                <TextBlock Text="{Binding TotalPrice}" FontSize="18" Width="200"/>
             </StackPanel>
         </StackPanel>
 
-        <Separator Margin="30,20,30,20" Height="2" Background="Gray"/>
-        <TextBlock Text="THÔNG TIN SẢN PHẨM: " FontWeight="DemiBold" FontSize="16 " Margin="20 0 60 0"></TextBlock>
-
-
-
-        <DataGrid ItemsSource="{Binding ListPurChase}" AutoGenerateColumns="False" CanUserAddRows="False" Background="AliceBlue" Margin="50 10 50 0" Height="240">
-            <DataGrid.Columns>
-                <DataGridTextColumn FontSize="14"  Header="Mã sản phẩm" Binding="{Binding PID}" IsReadOnly="True"/>
-
-                <DataGridTextColumn FontSize="14"  Header="Tên sản phẩm" Binding="{Binding Name}" IsReadOnly="True"/>
-
-                <DataGridTextColumn FontSize="14"  Header="Size" Binding="{Binding Size}"/>
-                <DataGridTextColumn FontSize="14"  Header="Số lượng" Binding="{Binding Quantity}" IsReadOnly="True"/>
-                <DataGridTextColumn FontSize="14"  Header="Giá" Binding="{Binding PurchasePrice}" IsReadOnly="True"/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <StackPanel Orientation="Horizontal" Margin="10 20 10 10">
-            <TextBlock Text="Tổng giá trị (VND):" FontWeight="DemiBold" FontSize="18" Margin="30 0 10 0"></TextBlock>
-            <TextBlock Text="{Binding TotalPrice}" FontSize="18" Width="200"></TextBlock>
-        </StackPanel>
-    </StackPanel>
-        <Button Margin="550 0 60 0" Content="IN ĐƠN" Command="{Binding ExportBillCommand}" CommandParameter="{Binding ElementName=Bill}"  md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="Aqua"  Background="Aqua" Foreground="White"  Style="{StaticResource MaterialDesignFlatButton}" Width="100" ></Button>
+        <Button Margin="550 0 60 0" Content="IN ĐƠN" Command="{Binding ExportBillCommand}" md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="Aqua" Background="Aqua" Foreground="White" Style="{StaticResource MaterialDesignFlatButton}" Width="100"/>
     </StackPanel>
 </Window>

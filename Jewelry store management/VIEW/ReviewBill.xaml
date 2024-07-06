@@ -85,7 +85,7 @@
 
         </StackPanel>
         <StackPanel>
-            <Button Margin="350 0 0 0" Width="120" Style="{StaticResource MaterialDesignFlatButton}"  Command="{Binding ExportBillCommand}" CommandParameter="{Binding ElementName=Bill}"
+            <Button Margin="350 0 0 0" Width="120" Style="{StaticResource MaterialDesignFlatButton}"  Command="{Binding ExportBillCommand}"
             md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="Aqua"  Background="Aqua" Foreground="White" Content="IN ĐƠN"/>
         </StackPanel>
     </StackPanel>

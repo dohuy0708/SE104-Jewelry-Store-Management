@@ -92,7 +92,7 @@
         <StackPanel Orientation="Horizontal">
             <Button Margin="300 20 0 30" Width="140" Style="{StaticResource MaterialDesignFlatButton}"  Command="{Binding AddServiceOrderCommand}"
             md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="Aqua"  Background="Aqua" Foreground="White" Content="CẬP NHẬT"></Button>
-            <Button Margin="60 20 0 30" Width="140" Style="{StaticResource MaterialDesignFlatButton}"  Command="{Binding ExportBillCommand}" CommandParameter="{Binding ElementName=Bill}"
+            <Button Margin="60 20 0 30" Width="140" Style="{StaticResource MaterialDesignFlatButton}"  Command="{Binding ExportBillCommand}"
             md:ButtonAssist.CornerRadius="10" BorderThickness="2" BorderBrush="Aqua"  Background="Aqua" Foreground="White" Content="IN ĐƠN"></Button>
         </StackPanel>
     </StackPanel>
