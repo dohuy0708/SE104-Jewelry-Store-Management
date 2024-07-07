@@ -97,8 +97,20 @@ namespace Jewelry_store_management.HELPER
                 await UpdateProduct(product);
             }
         }
-    
-    private string ConvertBitmapImageToBase64(BitmapImage bitmapImage)
+        // Tăng số lượng sản phẩm
+        public async Task IncreaseProductQuantity(string productId, int quantity)
+        {
+            var product = await GetProduct(productId);
+            if (product != null)
+            {
+                // Tăng số lượng sản phẩm
+                product.Quantity += quantity;
+                // Cập nhật lại thông tin sản phẩm trong Firebase
+                await UpdateProduct(product);
+            }
+        }
+
+        private string ConvertBitmapImageToBase64(BitmapImage bitmapImage)
         {
             if (bitmapImage == null)
                 throw new ArgumentNullException(nameof(bitmapImage));

@@ -304,6 +304,15 @@ namespace Jewelry_store_management.VIEWMODEL
                     // Add the purchase order to Firebase
                     await _purchaseOrderHelper.AddPurchaseOrder(newPurchaseOrder);
 
+                    // increase quantity product 
+                    // giảm số lượng sản phẩm đã mua xuống 
+                    foreach (var product in ListPurChase)
+                    {
+                        // Decrease Quantity of each product in Firebase or perform necessary actions
+                        // Example:
+                        await _productHelper.IncreaseProductQuantity(product.PID, product.Quantity);
+                    }
+
                     // Reset the fields after successful import
                     PurchaseID = string.Empty;
                     SupplierID = string.Empty;
