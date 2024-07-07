@@ -273,9 +273,7 @@ namespace Jewelry_store_management.VIEWMODEL
                     ImageURL = imagestring
 
                 };
-                // Serialize and log the user object to JSON
-                string jsonString = JsonConvert.SerializeObject(updatedUser);
-                MessageBox.Show("Serialized User JSON: " + jsonString);
+                 
 
 
                 await _userHelper.UpdateUser(updatedUser);
