@@ -191,7 +191,7 @@ namespace Jewelry_store_management.VIEWMODEL
 
 
 
-                    if (user.ImageURL != null || user.ImageURL.Length<20)
+                    if (user.ImageURL != null )
                     {
                         Image = ConvertBase64ToBitmapImage(user.ImageURL);
                     }
