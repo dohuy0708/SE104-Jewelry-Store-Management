@@ -13,14 +13,13 @@ Application development aims to support users in managing a jewelry store with t
 * Service management: add, search, filter, print bill
 * Supplier management: add, delete, edit, search
 ## Contributors:
-* Do Nguyen Hoang Huy (Leader) - 22520538
+* Do Nguyen Hoang Huy - 22520538 (Leader) 
 * Phan Tran Tien Hung - 22520523
 * Ngo Duy Hung - 22520511
 * Doan Quang Huy - 22520539
  
 ## Supervisors:
-* TS. Nguyen Thi Xuan Huong - Faculty of Software Engineering, University of Information Technology - ĐHQGHCM 
- 
+* TS. Nguyen Thi Xuan Huong - Faculty of Software Engineering, University of Information Technology 
 
 ## Description
 * Login
