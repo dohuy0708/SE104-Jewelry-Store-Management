@@ -13,13 +13,13 @@ Application development aims to support users in managing a jewelry store with t
 * Service management: add, search, filter, print bill
 * Supplier management: add, delete, edit, search
 ## Contributors:
-* Do Nguyen Hoang Huy (Leader) 
-* Phan Tran Tien Hung
-* Ngo Duy Hung
-* Doan Quang Huy
+* Do Nguyen Hoang Huy (Leader) - 22520538
+* Phan Tran Tien Hung - 22520523
+* Ngo Duy Hung - 22520511
+* Doan Quang Huy - 22520539
  
 ## Supervisors:
-* TS. Nguyen Thi Xuan Huong
+* TS. Nguyen Thi Xuan Huong - Faculty of Software Engineering, University of Information Technology - ĐHQGHCM 
  
 
 ## Description
@@ -38,6 +38,7 @@ Application development aims to support users in managing a jewelry store with t
 * Profile
 <img src= "https://github.com/dohuy0708/SE104-Jewelry-Store-Management/blob/master/Jewelry%20store%20management/Drawable/Images/profile.png" width="500"  />
 
+ ...
  
 ## Tools 
 <img src= "https://github.com/dohuy0708/SE104-Jewelry-Store-Management/blob/master/Jewelry%20store%20management/Drawable/Images/visuallogo.png" width="140" height="100"   /> <img src= "https://github.com/dohuy0708/SE104-Jewelry-Store-Management/blob/master/Jewelry%20store%20management/Drawable/Images/firebase.png" width="140"   height="100" /> <img src= "https://github.com/dohuy0708/SE104-Jewelry-Store-Management/blob/master/Jewelry%20store%20management/Drawable/Images/notion.png" width="100"   height="100" />  <img src= "https://github.com/dohuy0708/SE104-Jewelry-Store-Management/blob/master/Jewelry%20store%20management/Drawable/Images/Diagrams.net_Logo.png" width="100"   height="100" /> <img src= "https://github.com/dohuy0708/SE104-Jewelry-Store-Management/blob/master/Jewelry%20store%20management/Drawable/Images/github.png" width="100"   height="100" /> 
