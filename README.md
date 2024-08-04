@@ -23,7 +23,7 @@ Application development aims to support users in managing a jewelry store with t
 
 ## Description
 * Login
-<img src= "https://github.com/dohuy0708/SE104-Jewelry-Store-Management/blob/master/Jewelry%20store%20management/Drawable/Images/login.png" width="300"  />
+<img src= "https://github.com/dohuy0708/SE104-Jewelry-Store-Management/blob/master/Jewelry%20store%20management/Drawable/Images/login.png" width="400"  />
 
 * Home
 <img src= "https://github.com/dohuy0708/SE104-Jewelry-Store-Management/blob/master/Jewelry%20store%20management/Drawable/Images/home.png" width="500"  />
