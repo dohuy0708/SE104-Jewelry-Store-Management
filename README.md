@@ -5,28 +5,30 @@
 </p>
 
 ## About Jewelry Store Management: 
+Application development aims to support users in managing a jewelry store with the following main features:
 
+* Personal account management: create new, edit, forget password
+* Product management: add, delete, edit, search, filter
+* Order management: add, search, filter, print bill
+* Service management: add, search, filter, print bill
+* Supplier management: add, delete, edit, search
 ## Contributors:
-
+* Do Nguyen Hoang Huy (Leader) 
+* Phan Tran Tien Hung
+* Ngo Duy Hung
+* Doan Quang Huy
  
 ## Supervisors:
-
+* TS. Nguyen Thi Xuan Huong
  
 
 ## Description
 
- 
-
-## Video Demo
 
  
-## Technologies
+## Tools 
 
-The app is built with:
- 
- 
 
-## Additional information:
  
 
 ## License
